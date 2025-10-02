@@ -46,7 +46,7 @@ func TestServer_AuthenticateUser(t *testing.T) {
     })
 }
 
-func TestServer_HandleUsersCreate(t *testing.T) {
+func TestServer_HandleRegister(t *testing.T) {
     s := newServer(test_storage.NewSQLStorage(), []byte("secret_key"), 3600, 86400)
 	testCases := []struct{
 		name string
