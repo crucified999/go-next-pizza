@@ -1,0 +1,46 @@
+time=2025-10-02T20:07:23.381+03:00 level=INFO msg="started GET /private/whoami" remote_addr=[::1]:58281 request_id=fb035608-6092-45e4-9839-37c23717f21f
+time=2025-10-02T20:07:23.386+03:00 level=INFO msg="completed with 200 OK in 4.672708ms"
+time=2025-10-02T20:15:31.020+03:00 level=INFO msg="started GET /private/whoami" remote_addr=[::1]:59416 request_id=92c9a505-654a-4ef9-bc0c-61c418ab3975
+time=2025-10-02T20:15:31.021+03:00 level=INFO msg="completed with 401 Unauthorized in 238.167µs"
+time=2025-10-02T20:15:45.217+03:00 level=INFO msg="started POST /users" remote_addr=[::1]:59416 request_id=523f880c-26e8-492a-8061-025388779c46
+time=2025-10-02T20:15:45.228+03:00 level=INFO msg="completed with 201 Created in 11.295125ms"
+time=2025-10-02T20:20:50.509+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:60165 request_id=472afdb5-c405-45fa-9517-dc2abf4f1b7c
+time=2025-10-02T20:20:50.518+03:00 level=INFO msg="completed with 200 OK in 9.653833ms"
+time=2025-10-02T20:37:07.881+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:63045 request_id=ce2a3c3a-8c09-4ed0-917d-6b248074fbd1
+time=2025-10-02T20:37:08.033+03:00 level=INFO msg="completed with 200 OK in 151.956333ms"
+time=2025-10-02T20:37:14.225+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:63045 request_id=8a909867-b6c6-4c03-a5e9-8af294d22702
+time=2025-10-02T20:37:14.238+03:00 level=INFO msg="completed with 200 OK in 13.554542ms"
+time=2025-10-02T20:37:21.160+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:63045 request_id=bca0206b-585e-468e-99af-7a0f2513ddde
+time=2025-10-02T20:37:21.176+03:00 level=INFO msg="completed with 200 OK in 16.601666ms"
+time=2025-10-02T20:37:36.541+03:00 level=INFO msg="started POST /users" remote_addr=[::1]:63045 request_id=9031997a-2179-4e46-bdae-d63a0ff8a9f9
+time=2025-10-02T20:37:36.546+03:00 level=INFO msg="completed with 201 Created in 5.000459ms"
+time=2025-10-02T20:37:44.612+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:63045 request_id=81efbfe4-1478-413c-9a7d-99d050e1a72c
+time=2025-10-02T20:37:44.614+03:00 level=INFO msg="completed with 200 OK in 1.996459ms"
+time=2025-10-02T20:38:42.559+03:00 level=INFO msg="started POST /sessions/refresh" remote_addr=[::1]:63045 request_id=fa981c1f-22fa-4af5-addb-3f0c9c98dfba
+time=2025-10-02T20:38:42.560+03:00 level=INFO msg="completed with 400 Bad Request in 66.875µs"
+time=2025-10-02T20:39:35.986+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:63045 request_id=885f92ee-db4b-4c30-8135-230d53d12466
+time=2025-10-02T20:39:35.988+03:00 level=INFO msg="completed with 200 OK in 2.016041ms"
+time=2025-10-02T20:39:53.298+03:00 level=INFO msg="started POST /sessions/refresh" remote_addr=[::1]:63045 request_id=0545e838-08ac-4b02-9744-bb87ab15920f
+time=2025-10-02T20:39:53.299+03:00 level=INFO msg="completed with 401 Unauthorized in 122.375µs"
+time=2025-10-02T20:42:32.384+03:00 level=INFO msg="started POST /sessions/refresh" remote_addr=[::1]:63045 request_id=fc5cc9e6-cbf3-46e9-b949-6c9d852365c3
+time=2025-10-02T20:42:32.385+03:00 level=INFO msg="completed with 401 Unauthorized in 168.334µs"
+time=2025-10-02T20:43:06.110+03:00 level=INFO msg="started POST /users" remote_addr=[::1]:63045 request_id=5c4ffc9b-690e-49c2-9955-fc06d8ddff40
+time=2025-10-02T20:43:06.115+03:00 level=INFO msg="completed with 201 Created in 4.618333ms"
+time=2025-10-02T20:43:10.533+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:63045 request_id=7d203198-0f1b-409a-b91b-84fbe073e60e
+time=2025-10-02T20:43:10.535+03:00 level=INFO msg="completed with 200 OK in 1.769541ms"
+time=2025-10-02T20:43:29.480+03:00 level=INFO msg="started POST /sessions/refresh" remote_addr=[::1]:63045 request_id=1dc397e5-0b10-42d3-98aa-f8006ccd2138
+time=2025-10-02T20:43:29.481+03:00 level=INFO msg="completed with 401 Unauthorized in 169.209µs"
+time=2025-10-02T20:49:15.413+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:64553 request_id=2a094b3f-2838-4ffb-ab80-d5f3cd8f9f61
+time=2025-10-02T20:49:15.433+03:00 level=INFO msg="completed with 200 OK in 19.1375ms"
+time=2025-10-02T20:49:31.246+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:64553 request_id=0606e9b5-9dbe-4285-b1bc-aee23632dff1
+time=2025-10-02T20:49:31.248+03:00 level=INFO msg="completed with 200 OK in 1.678625ms"
+time=2025-10-02T20:49:49.681+03:00 level=INFO msg="started POST /sessions/refresh" remote_addr=[::1]:64553 request_id=c4f16732-735f-42c3-8776-634217ba4280
+time=2025-10-02T20:49:49.685+03:00 level=INFO msg="completed with 200 OK in 2.554708ms"
+time=2025-10-02T20:52:12.979+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:65273 request_id=1449ed47-1af8-43d4-bd65-5bd25400ad6b
+time=2025-10-02T20:52:12.997+03:00 level=INFO msg="completed with 200 OK in 15.017791ms"
+time=2025-10-02T20:52:33.000+03:00 level=INFO msg="started POST /sessions/refresh" remote_addr=[::1]:65273 request_id=aae42703-1169-408d-9373-166467a73aaf
+time=2025-10-02T20:52:33.009+03:00 level=INFO msg="completed with 200 OK in 7.925667ms"
+time=2025-10-02T20:52:55.970+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:65273 request_id=53e2f56e-2ce8-4152-af17-7db82c5a2e0a
+time=2025-10-02T20:52:55.989+03:00 level=INFO msg="completed with 200 OK in 18.183292ms"
+time=2025-10-02T20:53:15.928+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:65273 request_id=3fb8d8f9-2a8d-41df-8ba3-6ac4c9de9471
+time=2025-10-02T20:53:15.931+03:00 level=INFO msg="completed with 200 OK in 2.286208ms"

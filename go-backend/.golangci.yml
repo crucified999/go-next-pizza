@@ -1,0 +1,13 @@
+# .golangci.yml
+run:
+  timeout: 5m
+
+linters-settings:
+  errcheck:
+    check-blank: true
+
+linters:
+  enable-all: true # Or selectively enable linters
+  disable:
+    - gofmt # gofmt is usually handled by your editor or pre-commit hooks
+    - deadcode # Example of disabling a specific linter
