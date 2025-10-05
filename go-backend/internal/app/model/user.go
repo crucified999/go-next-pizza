@@ -10,6 +10,10 @@ type User struct {
 	Email string `json:"email" validate:"required,email"`
 	Password string `json:"password,omitempty" validate:"required_with_fallback=EncryptedPassword"`
 	EncryptedPassword string `json:"-"`
+	Name string `json:"name" validate:"required"`
+	Phone string `json:"phone" validate:"required,e164"`
+	Cart *Cart `json:"cart"`
+	Orders []*Order `json:"orders"`
 }
 
 func (u *User) Validate() error {

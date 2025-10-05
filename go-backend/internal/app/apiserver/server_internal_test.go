@@ -82,7 +82,7 @@ func TestServer_HandleRegister(t *testing.T) {
 
 			json.NewEncoder(b).Encode(tc.payload)
 
-			req, _ := http.NewRequest(http.MethodPost, "/users", b)
+			req, _ := http.NewRequest(http.MethodPost, "/register", b)
 
 			s.ServeHTTP(rec, req)
 			assert.Equal(t, tc.expectedCode, rec.Code)
@@ -94,7 +94,7 @@ func TestServer_HandleSessionCreate_And_Refresh(t *testing.T) {
 	u := model.TestUser(t)
 	storage := test_storage.NewSQLStorage()
 
-    s := newServer(storage, []byte("secret_key"), 3600, 86400)
+  s := newServer(storage, []byte("secret_key"), 3600, 86400)
 
 	storage.User().CreateUser(u)
 

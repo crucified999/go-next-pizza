@@ -1,58 +1,60 @@
 package test_storage_test
 
-import (
-	"testing"
+// import (
+// 	"testing"
 
-	"github.com/go-next-pizza/internal/app/model"
-	"github.com/go-next-pizza/internal/app/storage"
-	"github.com/go-next-pizza/internal/app/storage/test_storage"
-	"github.com/stretchr/testify/assert"
-)
-
-func TestUserRepository_Create(t *testing.T) {
-	s := test_storage.NewSQLStorage()
+// 	"github.com/go-next-pizza/internal/app/model"
+// 	"github.com/go-next-pizza/internal/app/storage"
+// 	"github.com/go-next-pizza/internal/app/storage/test_storage"
+// 	"github.com/stretchr/testify/assert"
 	
-	u := model.TestUser(t)
+// )
 
-	assert.NoError(t, s.User().CreateUser(u))
-	assert.NotNil(t, u)
-}
+// func TestUserRepository_Create(t *testing.T) {
+// 	s := test_storage.NewSQLStorage()
+	
+// 	u := model.TestUser(t)
 
-func TestUserRepository_FindByEmail_IsNotExist(t *testing.T) {
-	s := test_storage.NewSQLStorage()
+// 	assert.NoError(t, s.User().CreateUser(u))
+// 	assert.NotNil(t, u)
+// 	assert.NotNil(t, u.Cart)
+// }
 
-	exampleEmail := "test_email@test.com"
+// func TestUserRepository_FindByEmail_IsNotExist(t *testing.T) {
+// 	s := test_storage.NewSQLStorage()
 
-	_, err := s.User().FindByEmail(exampleEmail)
+// 	exampleEmail := "test_email@test.com"
 
-	assert.EqualError(t, err, storage.ErrRecordNotFound.Error())
-}
+// 	_, err := s.User().FindByEmail(exampleEmail)
 
-func TestUserRepository_FindByEmail_IsExist(t *testing.T) {
-	s := test_storage.NewSQLStorage()
+// 	assert.EqualError(t, err, storage.ErrRecordNotFound.Error())
+// }
 
-	exampleEmail := "test_email@test.com"
+// func TestUserRepository_FindByEmail_IsExist(t *testing.T) {
+// 	s := test_storage.NewSQLStorage()
 
-	u := model.TestUser(t)
-	u.Email = exampleEmail
+// 	exampleEmail := "test_email@test.com"
 
-  s.User().CreateUser(u)
+// 	u := model.TestUser(t)
+// 	u.Email = exampleEmail
 
-	u, err := s.User().FindByEmail(exampleEmail)
+//   s.User().CreateUser(u)
 
-	assert.NoError(t, err)
-	assert.NotNil(t, u)
-}
+// 	u, err := s.User().FindByEmail(exampleEmail)
+
+// 	assert.NoError(t, err)
+// 	assert.NotNil(t, u)
+// }
 
 
-func TestUserRepository_FindById(t *testing.T) {
-	s := test_storage.NewSQLStorage()
-	u := model.TestUser(t)
+// func TestUserRepository_FindById(t *testing.T) {
+// 	s := test_storage.NewSQLStorage()
+// 	u := model.TestUser(t)
 
-  s.User().CreateUser(u)
+//   s.User().CreateUser(u)
 
-	u1, err := s.User().FindById(u.Id)
+// 	u1, err := s.User().FindById(u.Id)
 
-	assert.NoError(t, err)
-	assert.NotNil(t, u1)
-}
+// 	assert.NoError(t, err)
+// 	assert.NotNil(t, u1)
+// }

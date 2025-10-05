@@ -16,6 +16,7 @@ func Start(config *Config) error {
 	}
 
 	defer db.Close()
+	
 
     storage := sql_storage.NewSQLStorage(db)
     s := newServer(

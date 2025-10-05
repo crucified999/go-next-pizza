@@ -44,3 +44,25 @@ time=2025-10-02T20:52:55.970+03:00 level=INFO msg="started POST /sessions" remot
 time=2025-10-02T20:52:55.989+03:00 level=INFO msg="completed with 200 OK in 18.183292ms"
 time=2025-10-02T20:53:15.928+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:65273 request_id=3fb8d8f9-2a8d-41df-8ba3-6ac4c9de9471
 time=2025-10-02T20:53:15.931+03:00 level=INFO msg="completed with 200 OK in 2.286208ms"
+time=2025-10-03T14:54:21.589+03:00 level=INFO msg="started POST /register" remote_addr=[::1]:58073 request_id=312f904c-756d-4da6-a9c5-9c6f3e9ba051
+time=2025-10-03T14:54:21.619+03:00 level=INFO msg="completed with 201 Created in 28.919041ms"
+time=2025-10-03T14:54:27.943+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:58073 request_id=82d8adf9-6c8c-4414-9782-93940fb78ba1
+time=2025-10-03T14:54:27.960+03:00 level=INFO msg="completed with 200 OK in 16.29725ms"
+time=2025-10-03T14:55:12.305+03:00 level=INFO msg="started POST /register" remote_addr=[::1]:58290 request_id=d999b0d7-ef71-4d1d-a144-be209d708045
+time=2025-10-03T14:55:12.312+03:00 level=INFO msg="completed with 422 Unprocessable Entity in 6.3405ms"
+time=2025-10-03T14:55:23.224+03:00 level=INFO msg="started POST /register" remote_addr=[::1]:58290 request_id=969140a0-73a8-45e0-9f55-b8f7b98bd95b
+time=2025-10-03T14:55:23.245+03:00 level=INFO msg="completed with 201 Created in 20.299416ms"
+time=2025-10-03T14:55:27.951+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:58290 request_id=5aa2c348-bd90-4807-b38b-a81ffc62875d
+time=2025-10-03T14:55:27.957+03:00 level=INFO msg="completed with 200 OK in 5.628834ms"
+time=2025-10-03T14:55:54.919+03:00 level=INFO msg="started POST /sessions/refresh" remote_addr=[::1]:58290 request_id=584e68e0-95b2-4649-958b-0d871e6ed437
+time=2025-10-03T14:55:54.921+03:00 level=INFO msg="completed with 200 OK in 1.299792ms"
+time=2025-10-03T14:56:13.486+03:00 level=INFO msg="started POST /sessions" remote_addr=[::1]:58290 request_id=e8e025b4-b4e2-4a3c-89fc-52d0ec3721bc
+time=2025-10-03T14:56:13.512+03:00 level=INFO msg="completed with 200 OK in 25.785209ms"
+time=2025-10-03T15:21:10.627+03:00 level=INFO msg="started GET /users" remote_addr=[::1]:62879 request_id=83387c4d-e94c-4f78-9a6e-3aa7e2ded9aa
+time=2025-10-03T15:21:24.365+03:00 level=INFO msg="started GET /users" remote_addr=[::1]:62934 request_id=300e19d8-6211-44d2-b49d-c221674a0824
+time=2025-10-03T15:25:04.826+03:00 level=INFO msg="started GET /users" remote_addr=[::1]:63406 request_id=817afb7d-5ce5-4db4-8e77-309382cc24b9
+time=2025-10-03T15:25:04.830+03:00 level=INFO msg="completed with 200 OK in 3.207ms"
+time=2025-10-03T15:48:30.819+03:00 level=INFO msg="started POST /register" remote_addr=[::1]:63406 request_id=d0947024-82bd-4a5f-8b0c-593315cbfac1
+time=2025-10-03T15:48:30.846+03:00 level=INFO msg="completed with 201 Created in 25.797417ms"
+time=2025-10-03T15:48:36.962+03:00 level=INFO msg="started GET /users" remote_addr=[::1]:63406 request_id=23972eed-0dcc-4290-8ec8-ce810f77d777
+time=2025-10-03T15:48:36.964+03:00 level=INFO msg="completed with 200 OK in 2.213667ms"

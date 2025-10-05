@@ -27,4 +27,4 @@ func TestDB(t *testing.T, databaseURL string) (*sql.DB, func(...string)) {
 
 		db.Close()
 	}
-} 
+}

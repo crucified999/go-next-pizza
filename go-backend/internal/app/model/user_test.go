@@ -108,6 +108,34 @@ func TestUser_Validate(t *testing.T) {
 			},
 			isValid: false,
 		},
+		{
+			name: "empty phone",
+			user: func() *model.User {
+				u := model.TestUser(t)
+				u.Phone = ""
+
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "invalid phone",
+			user: func() *model.User {
+				u := model.TestUser(t)
+				u.Phone = "1234567890"
+
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "valid phone",
+			user: func() *model.User {
+				u := model.TestUser(t)
+				return u
+			},
+			isValid: true,
+		},
 	}
 
 	for _, tc := range testCases {

@@ -3,7 +3,6 @@ package sql_storage_test
 import (
 	"os"
 	"testing"
-
 )
 
 var (

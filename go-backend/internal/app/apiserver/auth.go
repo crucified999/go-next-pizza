@@ -31,7 +31,7 @@ func (s *server) handleRegister() http.HandlerFunc {
 			Password: req.Password,
 		}
 
-		if err := s.storage.User().CreateUser(u); err != nil {
+		if _, err := s.storage.User().CreateUser(u); err != nil {
 			s.error(w, r, http.StatusUnprocessableEntity, err)
 			return
 		}

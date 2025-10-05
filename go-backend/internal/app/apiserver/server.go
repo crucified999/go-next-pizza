@@ -58,7 +58,7 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func setUpLogger() (*slog.Logger, error) {
-	file, err := os.OpenFile("apiserver_log.txt", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
+	file, err := os.OpenFile("apiserver_log.txt", os.O_CREATE | os.O_APPEND | os.O_WRONLY, 0666)
 
 	if err != nil {
 		return nil, err
@@ -75,7 +75,8 @@ func (s *server) configureRouter() {
 	s.router.Use(s.setRequestId)
 	s.router.Use(s.logRequest)
 	s.router.Use(handlers.CORS(handlers.AllowedOrigins([]string{"*"})))
-	s.router.HandleFunc("/register", s.handleRegister()).Methods("POST")
+
+  s.router.HandleFunc("/register", s.handleRegister()).Methods("POST")
 	s.router.HandleFunc("/sessions", s.handleSessionCreate()).Methods("POST")
 	s.router.HandleFunc("/sessions/refresh", s.handleSessionRefresh()).Methods("POST")
 
