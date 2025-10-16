@@ -1,4 +1,4 @@
-DROP TABLE pizza_sizes;
+DROP TABLE products_with_size;
 
-ALTER TABLE pizza_sizes
-DROP CONSTRAINT IF EXISTS pizza_product_id_fk;
+ALTER TABLE products_with_size
+DROP CONSTRAINT IF EXISTS product_with_size_product_id_fk;

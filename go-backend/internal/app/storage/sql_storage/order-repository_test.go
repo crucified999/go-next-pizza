@@ -22,7 +22,6 @@ func TestOrderRepository_CreateOrder(t *testing.T) {
 	cart, err := s.Cart().CreateCart(createdUser.Id, c)
 	assert.NoError(t, err)
 
-	// Создаем продукт в базе данных
 	var productId int
 	err = db.QueryRow("INSERT INTO products (title, price) VALUES ($1, $2) RETURNING id", "Test Product", 100).Scan(&productId)
 	assert.NoError(t, err)
@@ -32,13 +31,13 @@ func TestOrderRepository_CreateOrder(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Добавляем продукт в корзину
-	err = s.Cart().AddProduct(productId, cart)
+	err = s.Cart().AddProduct(productId, cart.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddProduct(productId, cart)
+	err = s.Cart().AddProduct(productId, cart.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddCombo(comboId, cart)
+	err = s.Cart().AddCombo(comboId, cart.Id)
 	assert.NoError(t, err)
 
 	order := model.TestOrder(createdUser.Id, t)

@@ -21,32 +21,33 @@ type Container struct {
 	Logger      *slog.Logger
 	Router      *mux.Router
 	
-	// Services
 	AuthService        *service.AuthService
 	CustomPizzaService *service.CustomPizzaService
-	
-	// Handlers
+	CartService        *service.CartService
+	ProductService     *service.ProductService
+
 	AuthHandler        *handler.AuthHandler
 	CustomPizzaHandler *handler.CustomPizzaHandler
-	
-	// Middleware
+	ProductHandler 		 *handler.ProductHandler
+	UserHandler 			 *handler.UserHandler
+	OrderHandler 			 *handler.OrderHandler
+	CartHandler 			 *handler.CartHandler
+	ComboHandler 			 *handler.ComboHandler
+	CategoryHandler 	 *handler.CategoryHandler	
 	AuthMiddleware *middleware.AuthMiddleware
 }
 
 func New(cfg *config.Config) (*Container, error) {
-	// Database
 	db, err := sql.Open("postgres", cfg.Database.URL)
+
 	if err != nil {
 		return nil, err
 	}
 
-	// Storage
 	storage := sql_storage.NewSQLStorage(db)
 
-	// Logger
 	logger := slog.New(slog.NewJSONHandler(nil, nil))
 
-	// Services
 	authService := service.NewAuthService(
 		storage.User(),
 		[]byte(cfg.JWT.Secret),
@@ -57,17 +58,29 @@ func New(cfg *config.Config) (*Container, error) {
 	customPizzaService := service.NewCustomPizzaService(
 		storage.CustomPizza(),
 		storage.Product(),
-		storage.Ingredient(),
+		storage.Ingredient(),	
 	)
 
-	// Handlers
+	productService := service.NewProductService(storage.Product())
+
+	cartService := service.NewCartService(
+		storage.Cart(),
+		storage.Product(),
+		storage.Combo(),
+	)
+
+	comboService := service.NewComboService(storage.Combo(), storage.Product())
+
 	authHandler := handler.NewAuthHandler(authService)
 	customPizzaHandler := handler.NewCustomPizzaHandler(customPizzaService)
-
-	// Middleware
+	productHandler := handler.NewProductHandler(productService)
+	userHandler := handler.NewUserHandler(storage.User())
+	orderHandler := handler.NewOrderHandler(storage.Order())
+	cartHandler := handler.NewCartHandler(cartService)
+	comboHandler := handler.NewComboHandler(comboService)
+	categoryHandler := handler.NewCategoryHandler(storage.Category())
 	authMiddleware := middleware.NewAuthMiddleware(authService)
 
-	// Router
 	router := mux.NewRouter()
 
 	return &Container{
@@ -78,26 +91,53 @@ func New(cfg *config.Config) (*Container, error) {
 		Router:             router,
 		AuthService:        authService,
 		CustomPizzaService: customPizzaService,
+		CartService:        cartService,
+		ProductService:     productService,
 		AuthHandler:        authHandler,
 		CustomPizzaHandler: customPizzaHandler,
+		ProductHandler:     productHandler,
+		UserHandler:				userHandler,
+		OrderHandler:			  orderHandler,
+		CartHandler:			  cartHandler,
+		ComboHandler:			  comboHandler,
+		CategoryHandler:  categoryHandler,
 		AuthMiddleware:     authMiddleware,
 	}, nil
 }
 
 func (c *Container) SetupRoutes() {
-	// Public routes
 	c.Router.HandleFunc("/api/auth/register", c.AuthHandler.Register).Methods("POST")
 	c.Router.HandleFunc("/api/auth/login", c.AuthHandler.Login).Methods("POST")
 
-	// Protected routes
+	c.Router.HandleFunc("/api/categories", c.CategoryHandler.GetCategories).Methods("GET")
+
 	protected := c.Router.PathPrefix("/api").Subrouter()
 	protected.Use(c.AuthMiddleware.RequireAuth)
+
+	protected.HandleFunc("/cart/{id}", c.CartHandler.GetCart).Methods("GET")
+	protected.HandleFunc("/cart/{id}/product", c.CartHandler.AddProduct).Methods("POST")
+	protected.HandleFunc("/cart/{id}/combo", c.CartHandler.AddCombo).Methods("POST")
+	protected.HandleFunc("/cart/{id}/product", c.CartHandler.DeleteProduct).Methods("DELETE")
+	protected.HandleFunc("/cart/{id}/combo", c.CartHandler.DeleteCombo).Methods("DELETE")
+	protected.HandleFunc("/cart/{id}/refresh", c.CartHandler.Refresh).Methods("PUT")
+
+	protected.HandleFunc("/orders", c.OrderHandler.CreateOrder).Methods("POST")
+
+	protected.HandleFunc("/users/{id}/orders", c.UserHandler.GetOrders).Methods("GET")
 
 	protected.HandleFunc("/custom-pizzas", c.CustomPizzaHandler.CreateCustomPizza).Methods("POST")
 	protected.HandleFunc("/custom-pizzas", c.CustomPizzaHandler.GetCustomPizzas).Methods("GET")
 	protected.HandleFunc("/custom-pizzas/{id}", c.CustomPizzaHandler.GetCustomPizza).Methods("GET")
 	protected.HandleFunc("/custom-pizzas/{id}", c.CustomPizzaHandler.UpdateCustomPizza).Methods("PUT")
 	protected.HandleFunc("/custom-pizzas/{id}", c.CustomPizzaHandler.DeleteCustomPizza).Methods("DELETE")
+
+	c.Router.HandleFunc("/api/products", c.ProductHandler.GetProducts).Methods("GET")
+	c.Router.HandleFunc("/api/products/{id}", c.ProductHandler.GetProductById).Methods("GET")
+	c.Router.HandleFunc("/api/products/category/{category}", c.ProductHandler.GetProdyctsByCategory).Methods("GET")
+
+	c.Router.HandleFunc("/api/combos", c.ComboHandler.GetCombos).Methods("GET")
+	c.Router.HandleFunc("/api/combos/{comboId}", c.ComboHandler.GetComboById).Methods("GET")
+	c.Router.HandleFunc("/api/combos/{comboId}/replace", c.ComboHandler.ReplaceProduct).Methods("PUT")
 }
 
 func (c *Container) Start() error {

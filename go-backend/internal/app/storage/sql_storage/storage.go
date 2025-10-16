@@ -15,6 +15,8 @@ type SQLStorage struct {
 	customPizzaRepository *CustomPizzaRepository
 	productRepository *ProductRepository
 	ingredientRepository *IngredientRepository
+	comboRepository *ComboRepository
+	categoryRepository *CategoryRepository
 }
 
 func NewSQLStorage(db *sql.DB) *SQLStorage {
@@ -83,6 +85,18 @@ func (s *SQLStorage) Product() storage.ProductRepository {
 	return s.productRepository
 }
 
+func (s *SQLStorage) Combo() storage.ComboRepository {
+	if s.comboRepository != nil {
+		return s.comboRepository
+	}
+
+	s.comboRepository = &ComboRepository{
+		storage: s,
+	}
+
+	return s.comboRepository
+}
+
 func (s *SQLStorage) Ingredient() storage.IngredientRepository {
 	if s.ingredientRepository != nil {
 		return s.ingredientRepository
@@ -93,4 +107,16 @@ func (s *SQLStorage) Ingredient() storage.IngredientRepository {
 	}
 
 	return s.ingredientRepository
+}
+
+func (s *SQLStorage) Category() storage.CategoryRepository {
+	if s.categoryRepository != nil {
+		return s.categoryRepository
+	}
+
+	s.categoryRepository = &CategoryRepository{
+		storage: s,
+	}
+
+	return s.categoryRepository
 }

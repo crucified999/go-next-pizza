@@ -1,11 +1,11 @@
-CREATE TABLE pizza_sizes (
-  pizza_id bigint not null,
-  dough_size int,
+CREATE TABLE products_with_size (
+  product_id bigint not null,
+  size varchar,
   dough_type int,
   image varchar,
   weight int,
   price int
 );
 
-ALTER TABLE pizza_sizes
-ADD CONSTRAINT pizza_product_id_fk FOREIGN KEY (pizza_id) REFERENCES products(id);
+ALTER TABLE products_with_size
+ADD CONSTRAINT product_with_size_product_id_fk FOREIGN KEY (product_id) REFERENCES products(id);

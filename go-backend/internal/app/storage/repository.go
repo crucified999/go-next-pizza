@@ -6,15 +6,19 @@ type UserRepository interface {
 	CreateUser(*model.User) (*model.User, error)
 	FindByEmail(string) (*model.User, error)
 	FindById(int) (*model.User, error)
+	GetOrders(int) ([]*model.Order, error)
 }
 
 type CartRepository interface {
 	CreateCart(int, *model.Cart) (*model.Cart, error)
-	AddProduct(int, *model.Cart) error 
-	AddCombo(int, *model.Cart) error
-	DeleteProduct(int, *model.Cart) error
-	DeleteCombo(int, *model.Cart) error
-	Refresh(*model.Cart) error
+	GetCartByUserId(int) (*model.Cart, error)
+	GetCartProducts(int) ([]*model.CartProduct, error)
+	GetCartCombos(int) ([]*model.CartCombo, error)
+	AddProduct(int, int) error 
+	AddCombo(int, int) error
+	DeleteProduct(int, int) error
+	DeleteCombo(int, int) error
+	Refresh(int) error
 }
 
 type OrderRepository interface {
@@ -22,7 +26,8 @@ type OrderRepository interface {
 	AddProduct(int, int, *model.Order) error
 	AddCombo(int, int, *model.Order) error
 	GetOrderById(int) (*model.Order, error)
-	GetOrdersByUserId(int) ([]*model.Order, error)
+	GetOrderProducts(int) ([]*model.Product, error)
+	GetOrderCombos(int) ([]*model.Combo, error)
 }
 
 type CustomPizzaRepository interface {
@@ -34,11 +39,27 @@ type CustomPizzaRepository interface {
 }
 
 type ProductRepository interface {
-	GetProductByID(int) (*model.Product, error)
 	GetProducts() ([]*model.Product, error)
+	GetProductById(int) (*model.Product, error)	
+	GetProductsByCategory(int) ([]*model.Product, error)
+	GetProductCategory(int) (string, error)
+	ConvertIdToCategory(int) string
+	ConvertCategorToId(string) int
+}
+
+type ComboRepository interface {
+	GetCombos() ([]*model.Combo, error)
+	GetComboById(int) (*model.Combo, error)
+	GetComboProducts(int) ([]*model.Product, error)
+	GetComboDefaultProducts(int) ([]*model.Product, error)
+	GetComboReplaces(int) (map[int][]int, error)
 }
 
 type IngredientRepository interface {
 	GetIngredientByID(int) (*model.Ingredient, error)
 	GetIngredients() ([]*model.Ingredient, error)
+}
+
+type CategoryRepository interface {
+	GetCategories() ([]*model.Category, error)
 }

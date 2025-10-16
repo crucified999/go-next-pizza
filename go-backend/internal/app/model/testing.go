@@ -19,8 +19,8 @@ func TestUser(t *testing.T) *User {
 
 func TestCart(t *testing.T) *Cart {
 	return &Cart{
-		Products: make(map[int]int),
-		Combos: make(map[int]int),
+		Products: []*Product{},
+		Combos: []*Combo{},
 	}
 }
 

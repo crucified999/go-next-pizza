@@ -46,10 +46,10 @@ func TestCartRepository_AddProduct(t *testing.T) {
 	err = db.QueryRow("INSERT INTO products (title, price) VALUES ($1, $2) RETURNING id", "Test Product", 100).Scan(&productId)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddProduct(productId, c)
+	err = s.Cart().AddProduct(productId, c.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddProduct(productId, c)
+	err = s.Cart().AddProduct(productId, c.Id)
 	assert.NoError(t, err)
 
 	var cnt int
@@ -78,10 +78,10 @@ func TestCartRepository_AddCombo(t *testing.T) {
 	err = db.QueryRow("INSERT INTO combos (title, description) VALUES ($1, $2) RETURNING id", "Test Combo", "Test Description").Scan(&comboId)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddCombo(comboId, c)
+	err = s.Cart().AddCombo(comboId, c.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddCombo(comboId, c)
+	err = s.Cart().AddCombo(comboId, c.Id)
 	assert.NoError(t, err)
 
 	var cnt int
@@ -110,10 +110,10 @@ func TestCartRepository_DeleteProduct(t *testing.T) {
 	err = db.QueryRow("INSERT INTO products (title, price) VALUES ($1, $2) RETURNING id", "Test Product", 100).Scan(&productId)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddProduct(productId, c)
+	err = s.Cart().AddProduct(productId, c.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().DeleteProduct(productId, c)
+	err = s.Cart().DeleteProduct(productId, c.Id)
 	assert.NoError(t, err)
 
 	var cnt int
@@ -122,13 +122,13 @@ func TestCartRepository_DeleteProduct(t *testing.T) {
 	assert.Error(t, err)
 	assert.Equal(t, 0, cnt)
 
-	err = s.Cart().AddProduct(productId, c)
+	err = s.Cart().AddProduct(productId, c.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddProduct(productId, c)
+	err = s.Cart().AddProduct(productId, c.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().DeleteProduct(productId, c)
+	err = s.Cart().DeleteProduct(productId, c.Id)
 	assert.NoError(t, err)
 
 	err = db.QueryRow("SELECT amount FROM products_in_cart WHERE cart_id = $1 AND product_id = $2", c.Id, productId).Scan(&cnt)
@@ -155,10 +155,10 @@ func TestCartRepository_DeleteCombo(t *testing.T) {
 	err = db.QueryRow("INSERT INTO combos (title, description) VALUES ($1, $2) RETURNING id", "Test Combo", "Test Description").Scan(&comboId)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddCombo(comboId, c)
+	err = s.Cart().AddCombo(comboId, c.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().DeleteCombo(comboId, c)
+	err = s.Cart().DeleteCombo(comboId, c.Id)
 	assert.NoError(t, err)
 
 	var cnt int
@@ -167,13 +167,13 @@ func TestCartRepository_DeleteCombo(t *testing.T) {
 	assert.Error(t, err)
 	assert.Equal(t, 0, cnt)
 
-	err = s.Cart().AddCombo(comboId, c)
+	err = s.Cart().AddCombo(comboId, c.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddCombo(comboId, c)
+	err = s.Cart().AddCombo(comboId, c.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().DeleteCombo(comboId, c)
+	err = s.Cart().DeleteCombo(comboId, c.Id)
 	assert.NoError(t, err)
 
 	err = db.QueryRow("SELECT amount FROM combos_in_cart WHERE cart_id = $1 AND combo_id = $2", c.Id, comboId).Scan(&cnt)
@@ -204,13 +204,13 @@ func TestCartRepository_Refresh(t *testing.T) {
 	err = db.QueryRow("INSERT INTO combos (title, description) VALUES ($1, $2) RETURNING id", "Test Combo", "Test Description").Scan(&comboId)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddProduct(productId, c)
+	err = s.Cart().AddProduct(productId, c.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddCombo(comboId, c)
+	err = s.Cart().AddCombo(comboId, c.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().Refresh(c)
+	err = s.Cart().Refresh(c.Id)
 	assert.NoError(t, err)
 
 	var productCount int

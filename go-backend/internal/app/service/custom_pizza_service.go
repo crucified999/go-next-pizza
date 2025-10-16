@@ -26,22 +26,25 @@ func NewCustomPizzaService(
 }
 
 func (cps *CustomPizzaService) CreateCustomPizza(userID int, req model.CreateCustomPizzaRequest) (*model.CustomPizza, error) {
-	// Получаем базовую пиццу
-	basePizza, err := cps.productRepo.GetProductByID(req.BasePizzaID)
+	basePizza, err := cps.productRepo.GetProductById(req.BasePizzaID)
+
 	if err != nil {
 		return nil, err
 	}
 
-	// Создаем кастомную пиццу
+	var basePrice float64
+	if basePizza.Price.Valid {
+		basePrice = float64(basePizza.Price.Int64)
+	}
+	
 	customPizza := &model.CustomPizza{
 		UserID:      userID,
 		BasePizzaID: req.BasePizzaID,
 		Name:        req.Name,
-		TotalPrice:  basePizza.Price,
+		TotalPrice:  basePrice,
 		Ingredients: []model.CustomPizzaIngredient{},
 	}
 
-	// Обрабатываем изменения ингредиентов
 	for _, ingredientReq := range req.Ingredients {
 		ingredient, err := cps.ingredientRepo.GetIngredientByID(ingredientReq.IngredientID)
 		if err != nil {
@@ -53,15 +56,12 @@ func (cps *CustomPizzaService) CreateCustomPizza(userID int, req model.CreateCus
 			IsAdded:      ingredientReq.Action == "add",
 		}
 
-		// Проверяем, является ли ингредиент стандартным для базовой пиццы
 		isStandard := cps.isStandardIngredient(req.BasePizzaID, ingredientReq.IngredientID)
 
 		if ingredientReq.Action == "add" {
-			// Добавляем ингредиент
 			customPizza.Ingredients = append(customPizza.Ingredients, customIngredient)
 			customPizza.TotalPrice += ingredient.Price
 		} else if ingredientReq.Action == "remove" {
-			// Удаляем стандартный ингредиент
 			if isStandard {
 				customPizza.Ingredients = append(customPizza.Ingredients, customIngredient)
 				customPizza.TotalPrice -= ingredient.Price
@@ -69,7 +69,6 @@ func (cps *CustomPizzaService) CreateCustomPizza(userID int, req model.CreateCus
 		}
 	}
 
-	// Сохраняем в базу данных
 	return cps.customPizzaRepo.CreateCustomPizza(customPizza)
 }
 
@@ -82,8 +81,8 @@ func (cps *CustomPizzaService) GetCustomPizzasByUserID(userID int) ([]*model.Cus
 }
 
 func (cps *CustomPizzaService) UpdateCustomPizza(id int, userID int, req model.UpdateCustomPizzaRequest) (*model.CustomPizza, error) {
-	// Проверяем, что кастомная пицца принадлежит пользователю
 	customPizza, err := cps.customPizzaRepo.GetCustomPizzaByID(id)
+
 	if err != nil {
 		return nil, err
 	}
@@ -92,18 +91,20 @@ func (cps *CustomPizzaService) UpdateCustomPizza(id int, userID int, req model.U
 		return nil, errors.New("custom pizza doesn't belong to user")
 	}
 
-	// Получаем базовую пиццу для пересчета цены
-	basePizza, err := cps.productRepo.GetProductByID(customPizza.BasePizzaID)
+	basePizza, err := cps.productRepo.GetProductById(customPizza.BasePizzaID)
 	if err != nil {
 		return nil, err
 	}
 
-	// Обновляем информацию
+	var basePrice float64
+	if basePizza.Price.Valid {
+		basePrice = float64(basePizza.Price.Int64)
+	}
+	
 	customPizza.Name = req.Name
-	customPizza.TotalPrice = basePizza.Price
+	customPizza.TotalPrice = basePrice
 	customPizza.Ingredients = []model.CustomPizzaIngredient{}
 
-	// Обрабатываем изменения ингредиентов
 	for _, ingredientReq := range req.Ingredients {
 		ingredient, err := cps.ingredientRepo.GetIngredientByID(ingredientReq.IngredientID)
 		if err != nil {
@@ -115,15 +116,12 @@ func (cps *CustomPizzaService) UpdateCustomPizza(id int, userID int, req model.U
 			IsAdded:      ingredientReq.Action == "add",
 		}
 
-		// Проверяем, является ли ингредиент стандартным для базовой пиццы
 		isStandard := cps.isStandardIngredient(customPizza.BasePizzaID, ingredientReq.IngredientID)
 
 		if ingredientReq.Action == "add" {
-			// Добавляем ингредиент
 			customPizza.Ingredients = append(customPizza.Ingredients, customIngredient)
 			customPizza.TotalPrice += ingredient.Price
 		} else if ingredientReq.Action == "remove" {
-			// Удаляем стандартный ингредиент
 			if isStandard {
 				customPizza.Ingredients = append(customPizza.Ingredients, customIngredient)
 				customPizza.TotalPrice -= ingredient.Price
@@ -131,13 +129,12 @@ func (cps *CustomPizzaService) UpdateCustomPizza(id int, userID int, req model.U
 		}
 	}
 
-	// Сохраняем изменения
 	return cps.customPizzaRepo.UpdateCustomPizza(customPizza)
 }
 
 func (cps *CustomPizzaService) DeleteCustomPizza(id int, userID int) error {
-	// Проверяем, что кастомная пицца принадлежит пользователю
 	customPizza, err := cps.customPizzaRepo.GetCustomPizzaByID(id)
+
 	if err != nil {
 		return err
 	}
@@ -150,8 +147,5 @@ func (cps *CustomPizzaService) DeleteCustomPizza(id int, userID int) error {
 }
 
 func (cps *CustomPizzaService) isStandardIngredient(pizzaID int, ingredientID int) bool {
-	// Здесь должна быть логика проверки, является ли ингредиент стандартным для пиццы
-	// Пока возвращаем false, так как у нас нет таблицы связи пицца-ингредиент
-	// В реальном проекте здесь был бы запрос к базе данных
 	return false
 }

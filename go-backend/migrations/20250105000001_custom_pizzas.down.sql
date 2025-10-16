@@ -1,2 +1,1 @@
-DROP TABLE IF EXISTS custom_pizza_ingredients;
-DROP TABLE IF EXISTS custom_pizzas;
+-- This migration has been moved to 20251004155000_custom_pizzas.down.sql

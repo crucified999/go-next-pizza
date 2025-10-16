@@ -12,12 +12,6 @@ type AuthHandler struct {
 	authService *service.AuthService
 }
 
-func NewAuthHandler(authService *service.AuthService) *AuthHandler {
-	return &AuthHandler{
-		authService: authService,
-	}
-}
-
 type RegisterRequest struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
@@ -28,6 +22,12 @@ type RegisterRequest struct {
 type LoginRequest struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
+}
+
+func NewAuthHandler(authService *service.AuthService) *AuthHandler {
+	return &AuthHandler{
+		authService: authService,
+	}
 }
 
 func (ah *AuthHandler) Register(w http.ResponseWriter, r *http.Request) {

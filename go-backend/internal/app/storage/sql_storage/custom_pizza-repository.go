@@ -12,7 +12,6 @@ type CustomPizzaRepository struct {
 }
 
 func (cpr *CustomPizzaRepository) CreateCustomPizza(cp *model.CustomPizza) (*model.CustomPizza, error) {
-	// Создаем кастомную пиццу
 	if err := cpr.storage.db.QueryRow(
 		"INSERT INTO custom_pizzas (user_id, base_pizza_id, name, total_price) VALUES ($1, $2, $3, $4) RETURNING id, created_at, updated_at",
 		cp.UserID, cp.BasePizzaID, cp.Name, cp.TotalPrice,
@@ -20,7 +19,6 @@ func (cpr *CustomPizzaRepository) CreateCustomPizza(cp *model.CustomPizza) (*mod
 		return nil, err
 	}
 
-	// Добавляем ингредиенты
 	for _, ingredient := range cp.Ingredients {
 		ingredient.CustomPizzaID = cp.ID
 		if err := cpr.addIngredient(&ingredient); err != nil {

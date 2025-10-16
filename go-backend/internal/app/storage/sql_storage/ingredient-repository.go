@@ -17,7 +17,7 @@ func (ir *IngredientRepository) GetIngredientByID(id int) (*model.Ingredient, er
 	if err := ir.storage.db.QueryRow(
 		"SELECT id, title, product_id, replacable FROM pizza_ingredients WHERE id = $1",
 		id,
-	).Scan(&ingredient.ID, &ingredient.Title, &ingredient.ProductID, &ingredient.Replacable); err != nil {
+	).Scan(&ingredient.Id, &ingredient.Title, &ingredient.ProductID, &ingredient.Replacable); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, storage.ErrRecordNotFound
 		}
@@ -47,11 +47,10 @@ func (ir *IngredientRepository) GetIngredients() ([]*model.Ingredient, error) {
 	var ingredients []*model.Ingredient
 	for rows.Next() {
 		ingredient := &model.Ingredient{}
-		if err := rows.Scan(&ingredient.ID, &ingredient.Title, &ingredient.ProductID, &ingredient.Replacable); err != nil {
+		if err := rows.Scan(&ingredient.Id, &ingredient.Title, &ingredient.ProductID, &ingredient.Replacable); err != nil {
 			return nil, err
 		}
 		
-		// Получаем цену ингредиента из связанного продукта
 		if err := ir.storage.db.QueryRow(
 			"SELECT price FROM products WHERE id = $1",
 			ingredient.ProductID,

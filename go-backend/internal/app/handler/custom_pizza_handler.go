@@ -28,8 +28,8 @@ func (cph *CustomPizzaHandler) CreateCustomPizza(w http.ResponseWriter, r *http.
 		return
 	}
 
-	// Получаем userID из контекста (должен быть установлен middleware аутентификации)
 	userID, ok := r.Context().Value("userID").(int)
+
 	if !ok {
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		return
@@ -45,16 +45,17 @@ func (cph *CustomPizzaHandler) CreateCustomPizza(w http.ResponseWriter, r *http.
 	json.NewEncoder(w).Encode(customPizza)
 }
 
-// GetCustomPizza получает кастомную пиццу по ID
 func (cph *CustomPizzaHandler) GetCustomPizza(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
+
 	if err != nil {
 		http.Error(w, "Invalid ID", http.StatusBadRequest)
 		return
 	}
 
 	customPizza, err := cph.customPizzaService.GetCustomPizzaByID(id)
+	
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
@@ -66,14 +67,15 @@ func (cph *CustomPizzaHandler) GetCustomPizza(w http.ResponseWriter, r *http.Req
 
 // GetCustomPizzas получает все кастомные пиццы пользователя
 func (cph *CustomPizzaHandler) GetCustomPizzas(w http.ResponseWriter, r *http.Request) {
-	// Получаем userID из контекста
 	userID, ok := r.Context().Value("userID").(int)
+
 	if !ok {
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		return
 	}
 
 	customPizzas, err := cph.customPizzaService.GetCustomPizzasByUserID(userID)
+	
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
