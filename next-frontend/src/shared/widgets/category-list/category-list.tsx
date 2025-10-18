@@ -35,9 +35,9 @@ export const CategoryList = () => {
   ];
 
   return (
-    <div className="py-10 grid">
+    <div className="pt-10 grid">
       <h2 className="font-[800] text-4xl leading-[100%]">Категории</h2>
-      <ul className="flex gap-5 p-4 px-0 rounded-2xl">
+      <ul className="flex gap-5 pt-4 px-0 rounded-2xl">
         {categories.map((category) => (
           <li className="hover:text-[#FE5F00] cursor-pointer transition-colors duration-150" key={category.id}>{category.name}</li>
         ))}

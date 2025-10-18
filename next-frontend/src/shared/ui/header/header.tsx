@@ -19,7 +19,7 @@ export const Header = () => {
 
         <div className="flex items-center gap-2">
           <ProfileButton />
-          <CartButton />
+          {/* <CartButton /> */}
         </div>
       </header>
       <hr className="absolute left-0 right-0 h-[1px] bg-[#E5E5E5]" />
