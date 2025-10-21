@@ -4,17 +4,28 @@ import { useAppDispatch, useAppSelector } from "@/app/store";
 import { fetchCombos } from "../../store/comboSlice";
 import { useEffect } from "react";
 import { ProductCard } from "@/entities/product/ui/product-card";
+import { Combo } from "../../model/combo";
+import { useInView } from "react-intersection-observer";
+import { setCurrentCategoryAutomatically } from "@/entities/category/store/categorySlice";
 
-export const ComboList = () => {
-  const combos = useAppSelector((state) => state.combos.combos);
+type ComboListProps = {
+  combos: Combo[];
+};
+
+export const ComboList = ({ combos }: ComboListProps) => {
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+  });
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchCombos());
-  }, [dispatch]);
+    if (inView) {
+      dispatch(setCurrentCategoryAutomatically("Комбо"));
+    }
+  }, [inView, dispatch]);
 
   return (
-    <div className="mt-8 pt-5">
+    <div className="mt-8 pt-5" id="Комбо" ref={ref}>
       <h2 className="font-[800] text-4xl leading-[100%]">Комбо</h2>
       <ul className="grid grid-cols-4 gap-25 py-20">
         {combos.map((combo) => (

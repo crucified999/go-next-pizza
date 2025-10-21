@@ -1,27 +1,43 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { fetchCategories } from "../../store/categorySlice";
+import {
+  fetchCategories,
+  setCurrentCategoryManually,
+} from "../../store/categorySlice";
 import { useEffect } from "react";
+import { cn } from "@/shared/lib/utils";
 
 export const CategoryList = () => {
   const categories = useAppSelector((state) => state.categories.categories);
+  const currentCategory = useAppSelector(
+    (state) => state.categories.currentCategory
+  );
   const dispatch = useAppDispatch();
+
+  const handleActiveCategory = (category: string) => {
+    dispatch(setCurrentCategoryManually(category));
+  };
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
   return (
-    <div className="pt-10 grid">
-      <h2 className="font-[800] text-4xl leading-[100%]">Категории</h2>
-      <ul className="flex gap-5 pt-4 px-0 rounded-2xl">
+    <div className="grid items-center">
+      <ul className="flex gap-5 px-0 rounded-2xl">
         {categories.map((category) => (
           <li
-            className="hover:text-[#FE5F00] cursor-pointer transition-colors duration-150"
+            className={cn(
+              "hover:text-[#FE5F00] cursor-pointer transition-colors duration-150",
+              currentCategory === category.title
+                ? "text-[#FE5F00]"
+                : "text-black"
+            )}
             key={category.id}
+            onClick={() => handleActiveCategory(category.title)}
           >
-            {category.title}
+            <a href={`#${category.title}`}>{category.title}</a>
           </li>
         ))}
       </ul>
