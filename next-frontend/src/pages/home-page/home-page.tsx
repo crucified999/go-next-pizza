@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Header } from "@/shared/ui/header";
 import { ProductCategoryList } from "@/entities/product/ui/product-category-list/product-category-list";
@@ -9,6 +9,8 @@ import { RootState, useAppDispatch, useAppSelector } from "@/app/store";
 import { fetchProducts } from "@/entities/product/store/productSlice";
 import { useEffect } from "react";
 import { fetchCombos } from "@/entities/combo/store/comboSlice";
+import { useRestoreCategory } from "@/shared/lib/hooks/useRestoreCategory";
+import { useScrollToCategory } from "@/shared/lib/hooks/useScrollToCategory";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -16,17 +18,38 @@ export const HomePage = () => {
     (state: RootState) => state.products.products
   );
   const combos = useAppSelector((state) => state.combos.combos);
+  const currentCategory = useAppSelector(
+    (state) => state.categories.currentCategory
+  );
+
+  useRestoreCategory();
+  useScrollToCategory();
 
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCombos());
+  }, [dispatch]);
+  
+  useEffect(() => {
+    if (currentCategory !== "Пиццы") {
+      setTimeout(() => {
+        document.getElementById(currentCategory)?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    }
   }, [dispatch]);
 
   return (
     <>
       <Header />
       <PostHeader />
-      <ProductCategoryList category="pizza" products={products}  />
+      <ProductCategoryList
+        category="pizza"
+        products={products}
+        isFirstCategory={true}
+      />
       <ComboList combos={combos} />
       <ProductCategoryList category="snack" products={products} />
       <ProductCategoryList category="shake" products={products} />

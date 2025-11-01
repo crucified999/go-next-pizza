@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ProductCard } from "@/entities/product/ui/product-card/product-card";
 import { getCategoryName } from "@/entities/product/lib/constants";
 import { useInView } from "react-intersection-observer";
@@ -14,22 +14,59 @@ import { useAppDispatch } from "@/app/store";
 type ProductCategoryListProps = {
   category: string;
   products: Product[];
+  isFirstCategory?: boolean;
 };
 
 export const ProductCategoryList: React.FC<ProductCategoryListProps> = ({
   category,
   products,
+  isFirstCategory = false,
 }) => {
   const dispatch = useAppDispatch();
+  const [isInitialized, setIsInitialized] = useState(false);
   const { ref, inView } = useInView({
     threshold: 0.1,
   });
 
   useEffect(() => {
-    if (inView) {
-      dispatch(setCurrentCategoryAutomatically(getCategoryName(category)));
-    }
-  }, [inView, category, dispatch]);
+    const timer = setTimeout(
+      () => {
+        setIsInitialized(true);
+      },
+      isFirstCategory ? 100 : 500
+    );
+    return () => clearTimeout(timer);
+  }, [isFirstCategory]);
+
+  useEffect(() => {
+    const timer = setTimeout(
+      () => {
+        if (isFirstCategory && isInitialized) {
+          dispatch(setCurrentCategoryAutomatically(getCategoryName(category)));
+          sessionStorage.setItem('category', getCategoryName(category));
+        }
+      },
+      200
+    );
+
+    return () => clearTimeout(timer);
+    
+  }, [isFirstCategory, isInitialized, category, dispatch]);
+
+  useEffect(() => {
+    const timer = setTimeout(
+      () => {
+        if (isInitialized && inView) {
+          dispatch(setCurrentCategoryAutomatically(getCategoryName(category)));
+          sessionStorage.setItem('category', getCategoryName(category));
+        }
+      },
+      200
+    )
+
+    return () => clearTimeout(timer);
+    
+  }, [inView, category, dispatch, isInitialized]);
 
   useEffect(() => {
     if (inView) {

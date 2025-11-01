@@ -5,14 +5,34 @@ export type Product = {
   price: number;
   image: string;
   category: string;
+  amount: number;
   variants?: Variant[];
+  ingredients?: PizzaIngredient[];
+  toppings?: Topping[];
 };
+
+export type Pizza = Product & {
+  ingredients: PizzaIngredient[];
+}
 
 export type Variant = {
   productId: number;
-  doughType?: string;
+  doughType?: number;
   price: number;
   size: string;
   image: string;
   weight: number;
+}
+
+export type PizzaIngredient = {
+  id: number;
+  title: string;
+  replacable: boolean;
+}
+
+export type Topping = {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
 }
