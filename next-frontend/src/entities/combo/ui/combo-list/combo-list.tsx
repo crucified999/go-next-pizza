@@ -2,10 +2,10 @@
 
 import { useAppDispatch } from "@/app/store";
 import { useEffect, useState } from "react";
-import { ProductCard } from "@/entities/product/ui/product-card";
-import { Combo } from "../../model/combo";
+import { Combo } from "../../model/types";
 import { useInView } from "react-intersection-observer";
 import { setCurrentCategoryAutomatically } from "@/entities/category/store/categorySlice";
+import { ComboCard } from "../combo-card";
 
 type ComboListProps = {
   combos: Combo[];
@@ -26,18 +26,14 @@ export const ComboList = ({ combos }: ComboListProps) => {
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(
-      () => {
-        if (isInitialized && inView) {
-          dispatch(setCurrentCategoryAutomatically("Комбо"));
-          localStorage.setItem('category', 'Комбо');
-        }
-      },
-      200
-    );
+    const timer = setTimeout(() => {
+      if (isInitialized && inView) {
+        dispatch(setCurrentCategoryAutomatically("Комбо"));
+        sessionStorage.setItem("category", "Комбо");
+      }
+    }, 200);
 
     return () => clearTimeout(timer);
-    
   }, [inView, dispatch, isInitialized]);
 
   return (
@@ -46,16 +42,12 @@ export const ComboList = ({ combos }: ComboListProps) => {
       <ul className="grid grid-cols-4 gap-25 py-20">
         {combos.map((combo) => (
           <li key={combo.id}>
-            <ProductCard
+            <ComboCard
               id={combo.id}
               title={combo.title}
               description={combo.description}
               price={combo.price}
               image={combo.image}
-              variants={combo.products
-                .map((product) => product.variants)
-                .flat()
-                .filter((variant) => variant !== undefined)}
             />
           </li>
         ))}

@@ -1,1 +1,1 @@
-export * from "./combo";
+export * from "./types";
