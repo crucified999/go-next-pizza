@@ -6,6 +6,7 @@ export type Product = {
   image: string;
   category: string;
   amount: number;
+  weight: number;
   variants?: Variant[];
   ingredients?: PizzaIngredient[];
   toppings?: Topping[];

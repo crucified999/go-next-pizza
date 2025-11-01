@@ -6,6 +6,7 @@ import { ToppingsList } from "../toppings-list";
 import { Button } from "@/shared/ui/button";
 import { Variants } from "../variants/variants";
 import { ReactNode, useEffect, useMemo, useState } from "react";
+import { useToppings } from "@/shared/lib/hooks/useToppings";
 
 type VariantOption = {
   value: string;
@@ -46,7 +47,7 @@ export const BaseProductModal = ({
     }
   }, [activeSize, onSizeChange]);
 
-  const [selectedToppings, setSelectedToppings] = useState<number[]>([]);
+  const { selectedToppings, toggleTopping } = useToppings([]);
 
   const activeVariant = useMemo(() => {
     return getActiveVariant(activeSize);
@@ -65,13 +66,13 @@ export const BaseProductModal = ({
     return basePrice + toppingsPrice;
   }, [activeVariant?.price, getBasePrice, selectedToppings, product.toppings]);
 
-  const toggleTopping = (toppingId: number) => {
-    setSelectedToppings((prev) =>
-      prev.includes(toppingId)
-        ? prev.filter((id) => id !== toppingId)
-        : [...prev, toppingId]
-    );
-  };
+    // const toggleTopping = (toppingId: number) => {
+    //   setSelectedToppings((prev) =>
+    //     prev.includes(toppingId)
+    //       ? prev.filter((id) => id !== toppingId)
+    //       : [...prev, toppingId]
+    //   );
+    // };
 
   return (
     <Modal className="grid grid-cols-[2fr_1.5fr] z-100">

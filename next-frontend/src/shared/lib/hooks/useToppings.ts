@@ -1,16 +1,16 @@
 import { Topping } from "@/entities/product/model/types";
 import { useState } from "react";
 
-export const useToppings = () => {
-  const [selectedToppings, setSelectedToppings] = useState<Topping[]>([]);
+export const useToppings = (initialToppings: Topping[]) => {
+  const [selectedToppings, setSelectedToppings] = useState<number[]>(initialToppings.map((t) => t.id));
 
-  const toggleTopping = (topping: Topping) => {
-    if (selectedToppings.includes(topping)) {
-      setSelectedToppings(selectedToppings.filter((t) => t.id !== topping.id));
-    } else {
-      setSelectedToppings([...selectedToppings, topping]);
-    }
-  }
+  const toggleTopping = (toppingId: number) => {
+    setSelectedToppings((prev) =>
+      prev.includes(toppingId)
+        ? prev.filter((id) => id !== toppingId)
+        : [...prev, toppingId]
+    );
+  };
 
   return {
     selectedToppings,
