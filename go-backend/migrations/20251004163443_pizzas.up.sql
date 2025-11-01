@@ -30,118 +30,118 @@ INSERT INTO products (title, description, price, image, amount, weight)
         -- 26
 VALUES ('Креветки терияки', 'Цельные креветки в хрустящей панировке с соусом терияки', 379, 'https://media.dodostatic.net/image/r:1875x1875/0198556badcf772484ba8ef325c9f09f.avif', 5, 80),
         -- 27
-       ('Креветки терияки', 'Цельные креветки в хрустящей панировке с соусом терияки', 639, 'https://media.dodostatic.net/image/r:1875x1875/0198556bb50b74009740b7a4a1b3f7ae.avif', 9, 140),
-        -- 28
+--        ('Креветки терияки', 'Цельные креветки в хрустящей панировке с соусом терияки', 639, 'https://media.dodostatic.net/image/r:1875x1875/0198556bb50b74009740b7a4a1b3f7ae.avif', 9, 140),
+        -- 28 / 27
        ('Хашбрауны', 'Картофельные оладушки из печи. Отличная закуска для завтрака или перекуса в любое время дня', 139, 'https://media.dodostatic.net/image/r:1875x1875/01981875a1c1762893de32cb1e0cf197.avif', 2, 80),
        -- 29
-       ('Хашбрауны', 'Картофельные оладушки из печи. Отличная закуска для завтрака или перекуса в любое время дня', 189, 'https://media.dodostatic.net/image/r:1875x1875/01981875a7d7761981860bad1e849e26.avif', 3, 120),
+--        ('Хашбрауны', 'Картофельные оладушки из печи. Отличная закуска для завтрака или перекуса в любое время дня', 189, 'https://media.dodostatic.net/image/r:1875x1875/01981875a7d7761981860bad1e849e26.avif', 3, 120),
        -- 30
-       ('Хашбрауны', 'Картофельные оладушки из печи. Отличная закуска для завтрака или перекуса в любое время дня', 239, 'https://media.dodostatic.net/image/r:1875x1875/01981875ae8e75239a409d63775530d8.avif', 4, 160), 
-        -- 31
+--        ('Хашбрауны', 'Картофельные оладушки из печи. Отличная закуска для завтрака или перекуса в любое время дня', 239, 'https://media.dodostatic.net/image/r:1875x1875/01981875ae8e75239a409d63775530d8.avif', 4, 160), 
+        -- 31 / 28
        ('Чикен ролл (холодный)', 'Холодная закуска для легкого перекуса: ролл с цыпленком, свежим салатом, томатами, чеддером и пармезаном с соусом ранч', 239, 'https://media.dodostatic.net/image/r:1875x1875/01980e8a432071ca863e03212730c399.avif', 1, 150),
-        -- 32
+        -- 32 / 29 
        ('Паста Креветка и песто', 'Паста из печи с соусом песто, креветками, томатами, моцареллой и фирменным соусом альфредо', 409, 'https://media.dodostatic.net/image/r:1875x1875/0198e2f708ea73ed9b0f96052ddbbcca.avif', 1, 290),
-        -- 33
+        -- 33 / 30
        ('Салат Овощной микс', 'Хрустящий салат айсберг, сочные томаты черри, перец, кубики брынзы, соус бальзамик и итальянские травы', 295, 'https://media.dodostatic.net/image/r:1875x1875/0198bebb115a7714b22c48a4acb9e12c.avif', 1, 150),
-       -- 34
+       -- 34 / 31
        ('Додстер Чилл Грилл', 'Горячая закуска с цыпленком и соусом гриль с луком, маринованными огурчиками и моцареллой в тонкой пшеничной лепешке', 259, 'https://media.dodostatic.net/image/r:1875x1875/01980cb84cfb7023b6eca978780d30c5.avif', 1, 180),
-       -- 35
+       -- 35 / 32
        ('Острый Додстер', 'Горячая закуска с цыпленком, перчиком халапеньо, маринованными огурчиками, томатами, моцареллой и соусом барбекю в тонкой пшеничной лепешке', 279, 'https://media.dodostatic.net/image/r:1875x1875/01980cbb11e677738af9e254a413763f.avif', 1, 190),
-       -- 36
+       -- 36 / 33
        ('Креветки', 'Цельные креветки в хрустящей панировке', 229, 'https://media.dodostatic.net/image/r:1875x1875/01980e9151ba7805945d99e607b80ad8.avif', 3, 40),
        -- 37
-       ('Креветки', 'Цельные креветки в хрустящей панировке', 359, 'https://media.dodostatic.net/image/r:1875x1875/01980e9159aa74ca93e7daaa7db3e9fd.avif', 5, 70),
+--        ('Креветки', 'Цельные креветки в хрустящей панировке', 359, 'https://media.dodostatic.net/image/r:1875x1875/01980e9159aa74ca93e7daaa7db3e9fd.avif', 5, 70),
        -- 38
-       ('Креветки', 'Цельные креветки в хрустящей панировке', 609, 'https://media.dodostatic.net/image/r:1875x1875/01980e916510756482c2125234dd0359.avif', 9, 140),
-       -- 39
+--        ('Креветки', 'Цельные креветки в хрустящей панировке', 609, 'https://media.dodostatic.net/image/r:1875x1875/01980e916510756482c2125234dd0359.avif', 9, 140),
+       -- 39 / 34
        ('Омлет с томатами в пите', 'Легкий и питательный завтрак: омлет из печи с томатами и моцареллой в пшеничной пите. Удобно брать с собой', 189, 'https://media.dodostatic.net/image/r:1875x1875/019860554d1474818d8cd5982dae2144.avif', 1, 160),
-       -- 40
+       -- 40 / 35
        ('Омлет с ветчиной и грибами в пите', 'Горячий сытный омлет с поджаристой корочкой, ветчина, шампиньоны и моцарелла в пшеничной пите. Удобно взять с собой', 239, 'https://media.dodostatic.net/image/r:1875x1875/019860510daa726fa023e04a1ae06a87.avif', 1, 170),
-       -- 41
+       -- 41 / 36
        ('Омлет с беконом в пите', 'Горячий сытный омлет с поджаристой корочкой, бекон, моцарелла и томаты в пшеничной пите. Удобно взять с собой', 239, 'https://media.dodostatic.net/image/r:1875x1875/0198604c583a7487a958608727edca10.avif', 1, 160),
-       -- 42
+       -- 42 / 37
        ('Омлет с пепперони в пите', 'Для тех, кто не пропускает завтраки — омлет с поджаристой корочкой, пикантная пепперони, томаты и моцарелла в пшеничной пите. Удобно взять с собой', 239, 'https://media.dodostatic.net/image/r:1875x1875/0198605864fc73b8a8259cbfa18e95c8.avif', 1, 150),
-       --
+       -- 43 / 38
        ('Персиковый молочный коктейль', 'Сочный, спелый персик и приятная свежесть мороженого', 269, 'https://media.dodostatic.net/image/r:1875x1875/0199864e07967186b27287dc88685579.avif', 0.3, 310),  
        -- 44
-       ('Персиковый молочный коктейль', 'Сочный, спелый персик и приятная свежесть мороженого', 439, 'https://media.dodostatic.net/image/r:1875x1875/0199864e144778c3a7332fdeaa32838a.avif', 0.6, 500),
-       -- 45
+--        ('Персиковый молочный коктейль', 'Сочный, спелый персик и приятная свежесть мороженого', 439, 'https://media.dodostatic.net/image/r:1875x1875/0199864e144778c3a7332fdeaa32838a.avif', 0.6, 500),
+       -- 45 / 39
        ('Молочный коктейль Фисташка', 'Сочетание нежности, сливочной текстуры и тонкого вкуса фисташки', 269, 'https://media.dodostatic.net/image/r:1875x1875/0199864a65a871ebade4be4d862a7c20.avif', 0.3, 320),
        -- 46
-       ('Молочный коктейль Фисташка', 'Сочетание нежности, сливочной текстуры и тонкого вкуса фисташки', 439, 'https://media.dodostatic.net/image/r:1875x1875/0199864a722c71b8bf8c7c9626f942b5.avif', 0.6, 500),
-       -- 47
+--        ('Молочный коктейль Фисташка', 'Сочетание нежности, сливочной текстуры и тонкого вкуса фисташки', 439, 'https://media.dodostatic.net/image/r:1875x1875/0199864a722c71b8bf8c7c9626f942b5.avif', 0.6, 500),
+       -- 47 / 40
        ('Молочный коктейль с печеньем Орео', 'Как вкуснее есть печенье? Его лучше пить! Попробуйте молочный коктейль с мороженым и дробленым печеньем «Орео»', 269, 'https://media.dodostatic.net/image/r:1875x1875/019986494294739e9e1edf44accf8dcc.avif', 0.3, 320),
        -- 48
-       ('Молочный коктейль с печеньем Орео', 'Как вкуснее есть печенье? Его лучше пить! Попробуйте молочный коктейль с мороженым и дробленым печеньем «Орео»', 439, 'https://media.dodostatic.net/image/r:1875x1875/0199864950b471fdbd119c1a400e2809.avif', 0.6, 510),
-       -- 49
+--        ('Молочный коктейль с печеньем Орео', 'Как вкуснее есть печенье? Его лучше пить! Попробуйте молочный коктейль с мороженым и дробленым печеньем «Орео»', 439, 'https://media.dodostatic.net/image/r:1875x1875/0199864950b471fdbd119c1a400e2809.avif', 0.6, 510),
+       -- 49 / 41
        ('Классический молочный коктейль', 'Это классика: молоко, мороженое и ничего лишнего', 225, 'https://media.dodostatic.net/image/r:1875x1875/0198227af30a72b3b2614e9da1d277a3.avif', 0.3, 270),
        -- 50
-       ('Классический молочный коктейль', 'Это классика: молоко, мороженое и ничего лишнего', 329, 'https://media.dodostatic.net/image/r:1875x1875/0198080d4afc7630942ccf26ed1c509e.avif', 0.6, 430),
-       -- 51
+--        ('Классический молочный коктейль', 'Это классика: молоко, мороженое и ничего лишнего', 329, 'https://media.dodostatic.net/image/r:1875x1875/0198080d4afc7630942ccf26ed1c509e.avif', 0.6, 430),
+       -- 51 / 42
        ('Клубничный молочный коктейль', 'Не важно, какое время года на улице, этот коктейль с клубничным сиропом вернет вас в лето с одного глотка', 269, 'https://media.dodostatic.net/image/r:1875x1875/0199ae7135777528bca136648af27fb4.avif', 0.3, 310),
        -- 52
-       ('Клубничный молочный коктейль', 'Не важно, какое время года на улице, этот коктейль с клубничным сиропом вернет вас в лето с одного глотка', 439, 'https://media.dodostatic.net/image/r:1875x1875/0199ae71513970ebb5dadb1d7949b1e3.avif', 0.6, 480),
-       -- 53
+--        ('Клубничный молочный коктейль', 'Не важно, какое время года на улице, этот коктейль с клубничным сиропом вернет вас в лето с одного глотка', 439, 'https://media.dodostatic.net/image/r:1875x1875/0199ae71513970ebb5dadb1d7949b1e3.avif', 0.6, 480),
+       -- 53 / 43
        ('Латте Темный лес', 'Вишня, шоколад и мягкий кофе — вкус, как у знаменитого пирожного', 169, 'https://media.dodostatic.net/image/r:1875x1875/01995c21fa247222a0e435d8924a73f6.avif', 0.3, 300),
-       -- 54
+       -- 54 / 44
        ('Кофе Карамельный капучино', 'Классический капучино с молочной пенкой и карамельным сиропом', 169, 'https://media.dodostatic.net/image/r:1875x1875/01998643d08072eb8dec77eeca378a50.avif', 0.3, 230),
-       -- 55
+       -- 55 / 45
        ('Кофе Кокосовый латте', 'Горячий латте с кокосовым сиропом', 169, 'https://media.dodostatic.net/image/r:1875x1875/0199864186a476df9937a053d065344b.avif', 0.3, 300),
-       -- 56
+       -- 56 / 46
        ('Кофе Ореховый латте', 'Горячий латте с сиропом со вкусом фундука', 169, 'https://media.dodostatic.net/image/r:1875x1875/01998642911c798ca1235e655ad191d0.avif', 0.3, 240),
-       -- 57
+       -- 57 / 47
        ('Кофе Капучино', 'Легендарный рецепт кофе: эспрессо, горячее молоко и плотная молочная пенка', 179, 'https://media.dodostatic.net/image/r:1875x1875/019840b6488170018dd640026aea9961.avif', 0.4, 240),
-       -- 58
+       -- 58 / 48
        ('Кофе Американо', 'Горячий кофе для ценителей чистого вкуса', 119, 'https://media.dodostatic.net/image/r:1875x1875/0198227e7648741ead340c4c96da45a4.avif', 0.3, 310),
-       -- 59
+       -- 59 / 49
        ('Тарт лимонный', 'Песочная тарталетка с насыщенным цитрусовым вкусом и приятной кислинкой', 199, 'https://media.dodostatic.net/image/r:1875x1875/019888711809770cbe00dbdf9ced5022.avif', 1, 90),
-       -- 60
+       -- 60 / 50
        ('Чизкейк Дубайский', 'Мягкий чизкейк с насыщенным фисташковым вкусом и глазурью. Вдохновлён десертом, о котором говорят все — и не зря Название вымышленное. Чизкейк и ингредиенты в составе не из Дубая', 249, 'https://media.dodostatic.net/image/r:1875x1875/019999d8979e720182482f757c95fb35.avif', 1, 100),
-       -- 61
+       -- 61 / 51
        ('Пирожное Муравьешки', 'Сметанное печенье, вареная сгущенка и мед — просто и вкусно, как в детстве. В упаковке три шарика', 169, 'https://media.dodostatic.net/image/r:1875x1875/01980d4299eb70c2ac5b0203c228851f.avif', 1, 60),
-       -- 62
+       -- 62 / 52
        ('Додобоны', 'Когда сливочное встречается с пряным, получаются горячие булочки с корицей в фирменном пломбирном соусе', 129, 'https://media.dodostatic.net/image/r:1875x1875/0198ae6dbbee77e4900b92245d450a6c.avif', 8, 130),
-       -- 63
+       -- 63 / 53
        ('Фондан', 'Французский шоколадный десерт с хрустящей корочкой и жидкой начинкой', 459, 'https://media.dodostatic.net/image/r:1875x1875/01980cbfded078cab79c5e29d1d55357.avif', 2, 160),
-       -- 64
+       -- 64 / 54
        ('Тысяча островов', 'Фирменный соус с нотками томата и пряностей для горячих закусок и бортиков пиццы', 49, 'https://media.dodostatic.net/image/r:1875x1875/01980cbdbaef76e1b1aec6df48c66b64.avif', 1, 25),
-       -- 65
+       -- 65 / 55
        ('Сырный', 'Фирменный соус со вкусом расплавленного сыра для бортиков пиццы и горячих закусок', 49, 'https://media.dodostatic.net/image/r:1875x1875/0197f86ac30a734eb384d710bb1789f3.avif', 1, 25),
-       -- 66
+       -- 66 / 56
        ('Чесночный', 'Фирменный соус с чесночным вкусом для бортиков пиццы и горячих закусок', 49, 'https://media.dodostatic.net/image/r:1875x1875/0197f86b0d7d744992dae61761c9ba0d.avif', 1, 25),
-       -- 67
+       -- 67 / 57
        ('Барбекю', 'Фирменный соус с дымным ароматом для бортиков пиццы и горячих закусок', 49, 'https://media.dodostatic.net/image/r:1875x1875/0197f86a9e7a7766a15028ff1fa74e4b.avif', 1, 25),
-       -- 68
+       -- 68 / 58
        ('Малиновое варенье', 'Идеально к сырникам', 45, 'https://media.dodostatic.net/image/r:1875x1875/0197f86a743777209156e78285b05bef.avif', 1, 25);
 
 
 INSERT INTO products (title, price, image, amount)
-        -- 69
+        -- 69 / 59
 VALUES ('Добрый Кола', 155, 'https://media.dodostatic.net/image/r:1875x1875/01980e8d35af7157a519bd92cabda4f7.avif', 0.5),
-        -- 70
+        -- 70 / 60
        ('Добрый Кола без сахара', 155, 'https://media.dodostatic.net/image/r:1875x1875/0197f8650cad733baf4fcfeb53fb32e4.avif', 0.5),
-       -- 71
+       -- 71 / 61
        ('Добрый Кола Ледяной Лимон', 155, 'https://media.dodostatic.net/image/r:1875x1875/0197f864b10576268f6cc150c744dd69.avif', 0.5),
-       -- 72
+       -- 72 / 62
        ('Добрый Киви-Виноград', 155, 'https://media.dodostatic.net/image/r:1875x1875/0197f862fa6871cfa3d9dc39df34aff9.avif', 0.5),
-       -- 73
+       -- 73 / 63
        ('Добрый Апельсин', 155, 'https://media.dodostatic.net/image/r:1875x1875/0197f8636ad574528ad8136969ef6446.avif', 0.5),
-       -- 74
+       -- 74 / 64
        ('Добрый Лимон-Лайм', 155, 'https://media.dodostatic.net/image/r:1875x1875/0197f86321497340b0a98da0a428d7ce.avif', 0.5),
-       -- 75
+       -- 75 / 65
        ('Нектар Добрый апельсин', 279, 'https://media.dodostatic.net/image/r:1875x1875/01980d4f28e575df80d1bfe852522d32.avif', 1),
-       -- 76
+       -- 76 / 66
        ('Нектар Добрый мультифрукт', 279, 'https://media.dodostatic.net/image/r:1875x1875/0197f86779ad7937990dab2a0fb51377.avif', 1),
-       -- 77
+       -- 77 / 67
        ('Сок Добрый Яблоко', 279, 'https://media.dodostatic.net/image/r:1875x1875/0197f866677d77d580aa9f99dd242835.avif', 1);
         
 
 INSERT INTO products (title, description, price, image)
-        -- 78
+        -- 78 / 68
 VALUES ('Картофель по-деревенски', 'Дольки картофеля, запеченные в печи до хрустящей корочки', 149, 'https://media.dodostatic.net/image/r:584x584/01980e91c07075d9be384b7b94e75a8f.avif'),
-        -- 79
+        -- 79 / 69
         ('Картофель из печи с соусом', 'Запеченная в печи картошечка с пряными специями. В комплекте сырный соус', 180, 'https://media.dodostatic.net/image/r:584x584/0198ae98f5a377b4938dd4c854f1857c.avif'),
-        -- 80 
+        -- 80 / 70
         ('Картофель из печи', 'Запеченная в печи картошечка — привычный вкус и мало масла. В составе пряные специи', 149, 'https://media.dodostatic.net/image/r:584x584/019840bab7aa74cd8d4149cd161ba42d.avif');
 
 
@@ -153,8 +153,8 @@ VALUES ('Легендарное комбо', 'Вот они легенды сл�
 
 INSERT INTO combo_products (combo_id, product_id)
 VALUES (1, 22),
-       (1, 34),
-       (1, 35),
+       (1, 31),
+       (1, 32),
        (2, 1),
        (2, 2),
        (2, 3),
@@ -170,31 +170,31 @@ VALUES (1, 22),
        (2, 13),
        (2, 14),
        (2, 15),
-       (2, 69),
-       (2, 70),
-       (2, 71),
-       (2, 72),
-       (2, 73),
-       (2, 74),
-       (2, 75),
-       (2, 76),
-       (2, 77),
-       (3, 69),
-       (3, 70),
-       (3, 71),
-       (3, 72),
-       (3, 73),
-       (3, 74),
-       (3, 75),
-       (3, 76),
-       (3, 77),
-       (4, 33),
-       (4, 34),
-       (4, 35);
+       (2, 59),
+       (2, 60),
+       (2, 61),
+       (2, 62),
+       (2, 63),
+       (2, 64),
+       (2, 65),
+       (2, 66),
+       (2, 67),
+       (3, 59),
+       (3, 60),
+       (3, 61),
+       (3, 62),
+       (3, 63),
+       (3, 64),
+       (3, 65),
+       (3, 66),
+       (3, 67),
+       (4, 30),
+       (4, 31),
+       (4, 32);
 
 INSERT INTO combo_replaces (combo_id, default_product_id, product_to_replace_id)
 VALUES (1, 22, NULL),
-       (1, 34, 35),
+       (1, 31, 32),
        (2, 1, 2),
        (2, 1, 3),
        (2, 1, 4),
@@ -209,24 +209,24 @@ VALUES (1, 22, NULL),
        (2, 1, 13),
        (2, 1, 14),
        (2, 1, 15),
-       (2, 69, 70),
-       (2, 69, 71),
-       (2, 69, 72),
-       (2, 69, 73),
-       (2, 69, 74),
-       (2, 69, 75),
-       (2, 69, 76),
-       (2, 69, 77),
-       (3, 69, 70),
-       (3, 70, 69),
-       (3, 70, 72),
-       (3, 70, 73),
-       (3, 70, 74),
-       (3, 70, 75),
-       (3, 70, 76),
-       (3, 70, 77),
-       (4, 33, NULL),
-       (4, 34, 35);
+       (2, 59, 60),
+       (2, 59, 61),
+       (2, 59, 62),
+       (2, 59, 63),
+       (2, 59, 64),
+       (2, 59, 65),
+       (2, 59, 66),
+       (2, 59, 67),
+       (3, 59, 60),
+       (3, 60, 59),
+       (3, 60, 62),
+       (3, 60, 63),
+       (3, 60, 64),
+       (3, 60, 65),
+       (3, 60, 66),
+       (3, 60, 67),
+       (4, 30, NULL),
+       (4, 31, 32);
 
 INSERT INTO toppings (title, product_id, image, price)
 VALUES ('Пряная говядина', 1, 'https://cdn.dodostatic.net/static/Img/Ingredients/01991530635b73ecb1a22658b49e1653.png', 59),
@@ -751,15 +751,15 @@ VALUES ('Пряная говядина', 1, 'https://cdn.dodostatic.net/static/I
        ('Баварские колбаски', 25, 'https://cdn.dodostatic.net/static/Img/Ingredients/019915307407729e970fee55536f6dca.png', 59),
        ('Креветки', 25, 'https://cdn.dodostatic.net/static/Img/Ingredients/0199152abd577969bb76a8123d1a7ea1.png', 115),
 
-       ('Cироп черный лес', 57, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d9742537797d89fdd065f7fdc26c.png', 20),
-       ('Карамельный сироп', 57, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d974a65c75098c18ddcb1c5c79e2.png', 20),
-       ('Ореховый сироп', 57, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d97660ae711db3b77115476c84a0.png', 20),
-       ('Кокосовый сироп', 57, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d9758834768aafcb6f5ec3b28c02.png', 20),
+       ('Cироп черный лес', 47, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d9742537797d89fdd065f7fdc26c.png', 20),
+       ('Карамельный сироп', 47, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d974a65c75098c18ddcb1c5c79e2.png', 20),
+       ('Ореховый сироп', 47, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d97660ae711db3b77115476c84a0.png', 20),
+       ('Кокосовый сироп', 47, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d9758834768aafcb6f5ec3b28c02.png', 20),
 
-       ('Cироп черный лес', 58, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d9742537797d89fdd065f7fdc26c.png', 20),
-       ('Карамельный сироп', 58, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d974a65c75098c18ddcb1c5c79e2.png', 20),
-       ('Ореховый сироп', 58, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d97660ae711db3b77115476c84a0.png', 20),
-       ('Кокосовый сироп', 58, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d9758834768aafcb6f5ec3b28c02.png', 20);
+       ('Cироп черный лес', 48, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d9742537797d89fdd065f7fdc26c.png', 20),
+       ('Карамельный сироп', 48, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d974a65c75098c18ddcb1c5c79e2.png', 20),
+       ('Ореховый сироп', 48, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d97660ae711db3b77115476c84a0.png', 20),
+       ('Кокосовый сироп', 48, 'https://cdn.dodostatic.net/static/Img/Ingredients/0196d9758834768aafcb6f5ec3b28c02.png', 20);
 
 
 INSERT INTO pizza_ingredients (title, product_id, replacable)
@@ -912,7 +912,7 @@ VALUES ('Пикантная пепперони', 1, 1),
        ('Сладкий перец', 22, 1),
        ('Красный лук', 22, 1),
        ('Чеснок', 22, 1),
-       ('Фирменный соус альфредо', 22, 0),
+       ('Фирменный томатный соус', 22, 0),
 
        ('Пикантная пепперони', 23, 1),
        ('Увеличенная порция моцареллы', 23, 0),
@@ -932,198 +932,219 @@ VALUES ('Пикантная пепперони', 1, 1),
     
 
 INSERT INTO products_with_size (product_id, size, dough_type, image, weight, price)
-VALUES (1, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf5724ed79499083d867c4c5060f.avif', 230, 289),
-       (1, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf572a8f77118a19836d5f75e235.avif', 370, 339),
-       (1, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf57bc517218ab93c762f4b0193e.avif', 580, 629),
-       (1, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf574bf879bdb7fbad84b39cd3e2.avif', 780, 749),
-       (1, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf57389e72eb81e75f8fda42db70.avif', 480, 629),
-       (1, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf576c45725cac227fd81cd6abfd.avif', 670, 749),
+VALUES (1, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf5724ed79499083d867c4c5060f.avif', 230, 289),
+       (1, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf572a8f77118a19836d5f75e235.avif', 370, 339),
+       (1, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf57bc517218ab93c762f4b0193e.avif', 580, 629),
+       (1, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf574bf879bdb7fbad84b39cd3e2.avif', 780, 749),
+       (1, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf57389e72eb81e75f8fda42db70.avif', 480, 629),
+       (1, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf576c45725cac227fd81cd6abfd.avif', 670, 749),
 
-       (2, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198da9ed4d370c4b33eb837edde00b9.avif', 230, 379),
-       (2, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198da9edab47041b58610a9deb6a305.avif', 350, 519),
-       (2, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198da9ee2dd75038d9b6f7f23810d42.avif', 530, 799),
-       (2, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198da9f048273e690f16d79110f25ef.avif', 730, 979),
-       (2, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198da9ee9277855ba6f8efa56d5cd39.avif', 430, 799),
-       (2, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198da9f0ac079b6826d4278789ed657.avif', 630, 979),
+       (2, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198da9ed4d370c4b33eb837edde00b9.avif', 230, 379),
+       (2, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198da9edab47041b58610a9deb6a305.avif', 350, 519),
+       (2, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198da9ee2dd75038d9b6f7f23810d42.avif', 530, 799),
+       (2, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198da9f048273e690f16d79110f25ef.avif', 730, 979),
+       (2, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198da9ee9277855ba6f8efa56d5cd39.avif', 430, 799),
+       (2, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198da9f0ac079b6826d4278789ed657.avif', 630, 979),
 
-       (3, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf24170179679a7872f2ddf16d18.avif', 220, 289),
-       (3, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf24170179679a7872f2ddf16d18.avif', 330, 369),
-       (3, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf24170179679a7872f2ddf16d18.avif', 520, 629),
-       (3, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf243a297705b202e0d2fbcf8573.avif', 700, 849),
-       (3, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf24287773ef8556864040c2d743.avif', 400, 629),
-       (3, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2457327473ae1d45c4e1a27346.avif', 600, 849),
+       (3, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf24170179679a7872f2ddf16d18.avif', 220, 289),
+       (3, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf24170179679a7872f2ddf16d18.avif', 330, 369),
+       (3, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf24170179679a7872f2ddf16d18.avif', 520, 629),
+       (3, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf243a297705b202e0d2fbcf8573.avif', 700, 849),
+       (3, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf24287773ef8556864040c2d743.avif', 400, 629),
+       (3, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2457327473ae1d45c4e1a27346.avif', 600, 849),
 
-       (4, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf24f1737354bc05f207bfea1b05.avif', 230, 289),
-       (4, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf24f1737354bc05f207bfea1b05.avif', 350, 369),
-       (4, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf25089a74d08e08629b41ed39ee.avif', 530, 649),
-       (4, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf25089a74d08e08629b41ed39ee.avif', 710, 849),
-       (4, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf252713792e905c9fffa6acfc4b.avif', 430, 649),
-       (4, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf25a7b2719a8262c1581686d397.avif', 610, 849),
+       (4, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf24f1737354bc05f207bfea1b05.avif', 230, 289),
+       (4, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf24f1737354bc05f207bfea1b05.avif', 350, 369),
+       (4, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf25089a74d08e08629b41ed39ee.avif', 530, 649),
+       (4, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf25089a74d08e08629b41ed39ee.avif', 710, 849),
+       (4, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf252713792e905c9fffa6acfc4b.avif', 430, 649),
+       (4, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf25a7b2719a8262c1581686d397.avif', 610, 849),
 
-       (5, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf48d5637727bf280aa084e6d7e8.avif', 210, 399),
-       (5, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf48d5637727bf280aa084e6d7e8.avif', 340, 569),
-       (5, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf48e02377e9adc0b190c9676321.avif', 510, 839),
-       (5, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf48f9a872668043789597fb0afd.avif', 690, 1029),
-       (5, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf48e7ab7462be0c3748703a3157.avif', 400, 839),
-       (5, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf48ff2e78839646810e2cea20d2.avif', 570, 1029),
+       (5, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf48d5637727bf280aa084e6d7e8.avif', 210, 399),
+       (5, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf48d5637727bf280aa084e6d7e8.avif', 340, 569),
+       (5, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf48e02377e9adc0b190c9676321.avif', 510, 839),
+       (5, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf48f9a872668043789597fb0afd.avif', 690, 1029),
+       (5, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf48e7ab7462be0c3748703a3157.avif', 400, 839),
+       (5, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf48ff2e78839646810e2cea20d2.avif', 570, 1029),
 
-       (6, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf40e2987242886716627224c196.avif', 180, 289),
-       (6, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf40e2987242886716627224c196.avif', 310, 339),
-       (6, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf40eb1171aabe90b1b3ce07c0c5.avif', 470, 619),
-       (6, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4107ab727ca78f5f0a80f9966f.avif', 640, 779),
-       (6, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf40f3da72bd8d205ff00cc3613e.avif', 360, 619),
-       (6, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf410ffa72d9b35802f9f0c97c43.avif', 530, 779),
+       (6, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf40e2987242886716627224c196.avif', 180, 289),
+       (6, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf40e2987242886716627224c196.avif', 310, 339),
+       (6, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf40eb1171aabe90b1b3ce07c0c5.avif', 470, 619),
+       (6, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4107ab727ca78f5f0a80f9966f.avif', 640, 779),
+       (6, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf40f3da72bd8d205ff00cc3613e.avif', 360, 619),
+       (6, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf410ffa72d9b35802f9f0c97c43.avif', 530, 779),
 
-       (7, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf4f78be79a998f242cb593e8ed0.avif', 200, 289),
-       (7, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf4f78be79a998f242cb593e8ed0.avif', 330, 339),
-       (7, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4f806371f19d529f9e9e7dba36.avif', 470, 619),
-       (7, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4f806371f19d529f9e9e7dba36.avif', 630, 779),
-       (7, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4f8602734eaa623a2f01a35608.avif', 380, 619),
-       (7, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4fa66e7586ae5df650e36f7df6.avif', 500, 779),
+       (7, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf4f78be79a998f242cb593e8ed0.avif', 200, 289),
+       (7, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf4f78be79a998f242cb593e8ed0.avif', 330, 339),
+       (7, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4f806371f19d529f9e9e7dba36.avif', 470, 619),
+       (7, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4f806371f19d529f9e9e7dba36.avif', 630, 779),
+       (7, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4f8602734eaa623a2f01a35608.avif', 380, 619),
+       (7, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4fa66e7586ae5df650e36f7df6.avif', 500, 779),
 
-       (8, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf28326a76069673951c0086b4f8.avif', 190, 339),
-       (8, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf28326a76069673951c0086b4f8.avif', 320, 479),
-       (8, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf283b2372ea8e7cfc8adae9ea84.avif', 480, 709),
-       (8, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2859e1745d8b2bde952cf1283f.avif', 630, 839),
-       (8, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf284e0e74ffb47b0a668686351b.avif', 370, 709),
-       (8, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf28744a788e8ea8e1efa999caf6.avif', 550, 839),
+       (8, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf28326a76069673951c0086b4f8.avif', 190, 339),
+       (8, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf28326a76069673951c0086b4f8.avif', 320, 479),
+       (8, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf283b2372ea8e7cfc8adae9ea84.avif', 480, 709),
+       (8, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2859e1745d8b2bde952cf1283f.avif', 630, 839),
+       (8, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf284e0e74ffb47b0a668686351b.avif', 370, 709),
+       (8, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf28744a788e8ea8e1efa999caf6.avif', 550, 839),
 
-       (9, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf3e3bec72d2997d447502c2e3ee.avif', 190, 349),
-       (9, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf3e3bec72d2997d447502c2e3ee.avif', 360, 489),
-       (9, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3e424371b49f0b8d7dbe320a70.avif', 520, 749),
-       (9, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3e424371b49f0b8d7dbe320a70.avif', 710, 869),
-       (9, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3e48527603ae064ff5994c99f3.avif', 430, 749),
-       (9, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3e62ab78d88f34d70f2f5ba902.avif', 610, 869),
+       (9, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf3e3bec72d2997d447502c2e3ee.avif', 190, 349),
+       (9, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf3e3bec72d2997d447502c2e3ee.avif', 360, 489),
+       (9, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3e424371b49f0b8d7dbe320a70.avif', 520, 749),
+       (9, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3e424371b49f0b8d7dbe320a70.avif', 710, 869),
+       (9, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3e48527603ae064ff5994c99f3.avif', 430, 749),
+       (9, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3e62ab78d88f34d70f2f5ba902.avif', 610, 869),
 
-       (10, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf4d218b75d4a3e667fc2f6d7643.avif', 270, 519),
-       (10, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf4d218b75d4a3e667fc2f6d7643.avif', 430, 749),
-       (10, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4d218b75d4a3e667fc2f6d7643.avif', 610, 1129),
-       (10, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4d40af763397802e21641fe6c4.avif', 860, 1319),
-       (10, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4d2c25799584e880b35987fc63.avif', 490, 1129),
-       (10, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4d479a76d68d33d6e7483d59d7.avif', 710, 1319),
+       (10, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf4d218b75d4a3e667fc2f6d7643.avif', 270, 519),
+       (10, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf4d218b75d4a3e667fc2f6d7643.avif', 430, 749),
+       (10, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4d218b75d4a3e667fc2f6d7643.avif', 610, 1129),
+       (10, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4d40af763397802e21641fe6c4.avif', 860, 1319),
+       (10, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4d2c25799584e880b35987fc63.avif', 490, 1129),
+       (10, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4d479a76d68d33d6e7483d59d7.avif', 710, 1319),
 
-       (11, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf461a6b77faba36001e795e86c9.avif', 240, 399),
-       (11, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf461a6b77faba36001e795e86c9.avif', 390, 549),
-       (11, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4624de7324966f2fc62c3ca673.avif', 560, 829),
-       (11, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf46363e7291b7ee4a0da478ed03.avif', 800, 979),
-       (11, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf462d2c783da92bcb304e5f53e6.avif', 480, 829),
-       (11, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf464df17248851166428145b74f.avif', 690, 979),
+       (11, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf461a6b77faba36001e795e86c9.avif', 240, 399),
+       (11, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf461a6b77faba36001e795e86c9.avif', 390, 549),
+       (11, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4624de7324966f2fc62c3ca673.avif', 560, 829),
+       (11, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf46363e7291b7ee4a0da478ed03.avif', 800, 979),
+       (11, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf462d2c783da92bcb304e5f53e6.avif', 480, 829),
+       (11, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf464df17248851166428145b74f.avif', 690, 979),
 
-       (12, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198c659b357718f9c77ad0dc392dadf.avif', 250, 369),
-       (12, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198c659b357718f9c77ad0dc392dadf.avif', 370, 519),
-       (12, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198c659b357718f9c77ad0dc392dadf.avif', 580, 799),
-       (12, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf41c9c37894828208b0d2154647.avif', 740, 989),
-       (12, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf41a6f273148459771824eab950.avif', 450, 799),
-       (12, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf41d0d174ab9949445631f692f7.avif', 660, 989),
+       (12, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198c659b357718f9c77ad0dc392dadf.avif', 250, 369),
+       (12, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198c659b357718f9c77ad0dc392dadf.avif', 370, 519),
+       (12, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198c659b357718f9c77ad0dc392dadf.avif', 580, 799),
+       (12, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf41c9c37894828208b0d2154647.avif', 740, 989),
+       (12, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf41a6f273148459771824eab950.avif', 450, 799),
+       (12, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf41d0d174ab9949445631f692f7.avif', 660, 989),
 
-       (13, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf2e4f9c7980a5390fb80de3fb04.avif', 240, 469),
-       (13, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf2e4f9c7980a5390fb80de3fb04.avif', 370, 669),
-       (13, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2e5d2973a4bf5ec61161496f91.avif', 570, 969),
-       (13, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2e84ed7564b0265013a4e43711.avif', 760, 1159),
-       (13, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2e637f77198d981810a1d0e1bd.avif', 460, 969),
-       (13, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2e910172f1a0c13d2cd564daa7.avif', 650, 1159),
+       (13, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf2e4f9c7980a5390fb80de3fb04.avif', 240, 469),
+       (13, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf2e4f9c7980a5390fb80de3fb04.avif', 370, 669),
+       (13, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2e5d2973a4bf5ec61161496f91.avif', 570, 969),
+       (13, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2e84ed7564b0265013a4e43711.avif', 760, 1159),
+       (13, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2e637f77198d981810a1d0e1bd.avif', 460, 969),
+       (13, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2e910172f1a0c13d2cd564daa7.avif', 650, 1159),
 
-       (14, 20, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf5147f27780a3290a82692e7a36.avif', 260, 509),
-       (14, 25, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf5147f27780a3290a82692e7a36.avif', 390, 719),
-       (14, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf5147f27780a3290a82692e7a36.avif', 630, 1049),
-       (14, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf5147f27780a3290a82692e7a36.avif', 800, 1209),
-       (14, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf51514f713eb56a13a60fdf1d78.avif', 480, 1049),
-       (14, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf5185477302b275c6e03b5172ec.avif', 710, 1209),
+       (14, '20 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf5147f27780a3290a82692e7a36.avif', 260, 509),
+       (14, '25 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf5147f27780a3290a82692e7a36.avif', 390, 719),
+       (14, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf5147f27780a3290a82692e7a36.avif', 630, 1049),
+       (14, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf5147f27780a3290a82692e7a36.avif', 800, 1209),
+       (14, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf51514f713eb56a13a60fdf1d78.avif', 480, 1049),
+       (14, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf5185477302b275c6e03b5172ec.avif', 710, 1209),
 
-       (15, 25, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf51ff4c7936bf9dd75175db2734.avif', 410, 549),
-       (15, 30, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf5205fb78abb9ad479b6e47304c.avif', 570, 819),
-       (15, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf5205fb78abb9ad479b6e47304c.avif', 770, 999),
-       (15, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf521071796cb7ae90e347ea4f19.avif', 420, 819),
-       (15, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf522987735082ba849d4a9b6d11.avif', 680, 999),
+       (15, '25 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf51ff4c7936bf9dd75175db2734.avif', 410, 549),
+       (15, '30 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf5205fb78abb9ad479b6e47304c.avif', 570, 819),
+       (15, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf5205fb78abb9ad479b6e47304c.avif', 770, 999),
+       (15, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf521071796cb7ae90e347ea4f19.avif', 420, 819),
+       (15, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf522987735082ba849d4a9b6d11.avif', 680, 999),
 
-       (16, 25, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf2aec0173979677b991c86a96ac.avif', 220, 479),
-       (16, 30, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf2aec0173979677b991c86a96ac.avif', 410, 659),
-       (16, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2b03447079941f2d5ac6e986a9.avif', 590, 1009),
-       (16, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2b2f8a72938d1d3475aa698261.avif', 800, 1119),
-       (16, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2b11d17553b5ad83befb476632.avif', 520, 1009),
-       (16, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2b3be9737f94e700a75aaf786a.avif', 710, 1119),
+       (16, '25 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf2aec0173979677b991c86a96ac.avif', 220, 479),
+       (16, '30 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf2aec0173979677b991c86a96ac.avif', 410, 659),
+       (16, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2b03447079941f2d5ac6e986a9.avif', 590, 1009),
+       (16, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2b2f8a72938d1d3475aa698261.avif', 800, 1119),
+       (16, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2b11d17553b5ad83befb476632.avif', 520, 1009),
 
-       (17, 25, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf4e607f703fa5210df267488be0.avif', 260, 429),
-       (17, 30, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf4e607f703fa5210df267488be0.avif', 430, 619),
-       (17, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4e67f474f991f04a46a49af5e6.avif', 630, 929),
-       (17, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4e79bb776092f98426e15d9060.avif', 820, 1069),
-       (17, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4e7005769c860df156c9aa8c57.avif', 510, 929),
-       (17, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4e8fa177b6af11ec656d38b1d8.avif', 730, 1069),
+       (17, '25 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf4e607f703fa5210df267488be0.avif', 260, 429),
+       (17, '30 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf4e607f703fa5210df267488be0.avif', 430, 619),
+       (17, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4e67f474f991f04a46a49af5e6.avif', 630, 929),
+       (17, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4e79bb776092f98426e15d9060.avif', 820, 1069),
+       (17, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4e7005769c860df156c9aa8c57.avif', 510, 929),
 
-       (18, 25, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf4437a872c0b4538bc1485015b1.avif', 250, 459),
-       (18, 30, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf4437a872c0b4538bc1485015b1.avif', 400, 649),
-       (18, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf443ff778d0a9a9b3e628d39b95.avif', 610, 919),
-       (18, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf443ff778d0a9a9b3e628d39b95.avif', 810, 1089),
-       (18, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4445c977bc8200c6f17e63d299.avif', 490, 919),
-       (18, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4462a974ab8614a57b5cf5798f.avif', 740, 1089),
+       (18, '25 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf4437a872c0b4538bc1485015b1.avif', 250, 459),
+       (18, '30 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf4437a872c0b4538bc1485015b1.avif', 400, 649),
+       (18, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf443ff778d0a9a9b3e628d39b95.avif', 610, 919),
+       (18, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf443ff778d0a9a9b3e628d39b95.avif', 810, 1089),
+       (18, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4445c977bc8200c6f17e63d299.avif', 490, 919),
 
-       (19, 25, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf3b809a7385a84b00068db55a95.avif', 240, 479),
-       (19, 30, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf3b809a7385a84b00068db55a95.avif', 390, 609),
-       (19, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3b88d5772695c7f9e557b5b196.avif', 590, 909),
-       (19, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3b9cc6722191d136c165b2f8ac.avif', 820, 1069),
-       (19, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3b8f12764681f1151c6d406891.avif', 490, 909),
-       (19, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3ba9ec71a98a2b7099a2105c0f.avif', 700, 1069),
+       (19, '25 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf3b809a7385a84b00068db55a95.avif', 240, 479),
+       (19, '30 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf3b809a7385a84b00068db55a95.avif', 390, 609),
+       (19, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3b88d5772695c7f9e557b5b196.avif', 590, 909),
+       (19, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3b9cc6722191d136c165b2f8ac.avif', 820, 1069),
+       (19, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3b8f12764681f1151c6d406891.avif', 490, 909),
        
-       (20, 25, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf3fa48e74e68ad91d64302fd588.avif', 260, 399),
-       (20, 30, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf3fa48e74e68ad91d64302fd588.avif', 420, 559),
-       (20, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3fab7976678d811111bb2e8cb9.avif', 630, 829),
-       (20, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3fab7976678d811111bb2e8cb9.avif', 890, 1029),
-       (20, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3fb33973f78f8af9892f86df62.avif', 540, 829),
-       (20, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3fd6af726a867a1446960cbba9.avif', 780, 1029),
+       (20, '25 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf3fa48e74e68ad91d64302fd588.avif', 260, 399),
+       (20, '30 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf3fa48e74e68ad91d64302fd588.avif', 420, 559),
+       (20, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3fab7976678d811111bb2e8cb9.avif', 630, 829),
+       (20, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3fab7976678d811111bb2e8cb9.avif', 890, 1029),
+       (20, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3fb33973f78f8af9892f86df62.avif', 540, 829),
 
-       (21, 25, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf44f21b753ab8d43dada31ecee1.avif', 230, 479),
-       (21, 30, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf44f21b753ab8d43dada31ecee1.avif', 410, 669),
-       (21, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf44f21b753ab8d43dada31ecee1.avif', 620, 959),
-       (21, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4509f876378f9fb0d5d2fb16e9.avif', 860, 1119),
-       (21, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf44f81e706a9b023f4439227b0b.avif', 510, 959),
-       (21, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf45166f74f9b6b25e0db58fa207.avif', 760, 1119),
+       (21, '25 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf44f21b753ab8d43dada31ecee1.avif', 230, 479),
+       (21, '30 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf44f21b753ab8d43dada31ecee1.avif', 410, 669),
+       (21, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf44f21b753ab8d43dada31ecee1.avif', 620, 959),
+       (21, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf4509f876378f9fb0d5d2fb16e9.avif', 860, 1119),
+       (21, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf44f81e706a9b023f4439227b0b.avif', 510, 959),
 
-       (22, 25, 1, 'https://media.dodostatic.net/image/r:366x366/0198da9ffdfe782bb8d982b10c5e6b43.avif', 280, 539),
-       (22, 30, 1, 'https://media.dodostatic.net/image/r:584x584/0198da9ffdfe782bb8d982b10c5e6b43.avif', 430, 859),
-       (22, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198da9ffdfe782bb8d982b10c5e6b43.avif', 660, 1199),
-       (22, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198daa0203f79808fbb7ff432cb7bc1.avif', 950, 1399),
-       (22, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198daa0051a747d94117ff4c1aee4b8.avif', 550, 1199),
-       (22, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198daa0261e7763a006a80ca7c8de0c.avif', 840, 1399),
+       (22, '25 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198da9ffdfe782bb8d982b10c5e6b43.avif', 280, 539),
+       (22, '30 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198da9ffdfe782bb8d982b10c5e6b43.avif', 430, 859),
+       (22, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198da9ffdfe782bb8d982b10c5e6b43.avif', 660, 1199),
+       (22, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198daa0203f79808fbb7ff432cb7bc1.avif', 950, 1399),
+       (22, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198daa0051a747d94117ff4c1aee4b8.avif', 550, 1199),
        
-       (22, 25, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf39d4bb722e8908d1031ff9b626.avif', 220, 359),
-       (22, 30, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf39d4bb722e8908d1031ff9b626.avif', 340, 519),
-       (22, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf39dda97082912be8d1f3f2b233.avif', 550, 789),
-       (22, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3a0957743c9338d8083d4baec4.avif', 760, 929),
-       (22, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf39e3dd78b084d229ddcb7695a1.avif', 450, 789),
-       (22, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3a5b75773ba1a7b0335afcf4dd.avif', 630, 929),
+       (22, '25 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf39d4bb722e8908d1031ff9b626.avif', 220, 359),
+       (22, '30 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf39d4bb722e8908d1031ff9b626.avif', 340, 519),
+       (22, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf39dda97082912be8d1f3f2b233.avif', 550, 789),
+       (22, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf3a0957743c9338d8083d4baec4.avif', 760, 929),
+       (22, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf39e3dd78b084d229ddcb7695a1.avif', 450, 789),
 
-       (23, 25, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf52ecc4752d9e467974aa185ada.avif', 220, 369),
-       (23, 30, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf52ecc4752d9e467974aa185ada.avif', 390, 539),
-       (23, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf530345746e98039478001d5108.avif', 590, 829),
-       (23, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf530345746e98039478001d5108.avif', 810, 969),
-       (23, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf53118a74faa7bff011898e0afa.avif', 490, 829),
-       (23, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf53388a75debe7321cf10bff79d.avif', 680, 969),
+       (23, '25 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf52ecc4752d9e467974aa185ada.avif', 220, 369),
+       (23, '30 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf52ecc4752d9e467974aa185ada.avif', 390, 539),
+       (23, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf530345746e98039478001d5108.avif', 590, 829),
+       (23, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf530345746e98039478001d5108.avif', 810, 969),
+       (23, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf53118a74faa7bff011898e0afa.avif', 490, 829),
 
-       (24, 25, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf2cc87a79baa946c53b634615f4.avif', 260, 499),
-       (24, 30, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf2cc87a79baa946c53b634615f4.avif', 420, 679),
-       (24, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2cc87a79baa946c53b634615f4.avif', 640, 1009),
-       (24, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2cec7078db8550a624e4f8803f.avif', 900, 1129),
-       (24, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2cd0f075f1871fc1828a94ed3f.avif', 540, 1009),
-       (24, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2d0270708e802dd61c1b2ff094.avif', 780, 1129),
+       (24, '25 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf2cc87a79baa946c53b634615f4.avif', 260, 499),
+       (24, '30 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf2cc87a79baa946c53b634615f4.avif', 420, 679),
+       (24, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2cc87a79baa946c53b634615f4.avif', 640, 1009),
+       (24, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2cec7078db8550a624e4f8803f.avif', 900, 1129),
+       (24, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf2cd0f075f1871fc1828a94ed3f.avif', 540, 1009),
 
-       (25, 25, 1, 'https://media.dodostatic.net/image/r:366x366/0198bf265f7371bcb8a99321fecf2716.avif', 270, 499),
-       (25, 30, 1, 'https://media.dodostatic.net/image/r:584x584/0198bf265f7371bcb8a99321fecf2716.avif', 410, 699),
-       (25, 35, 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf265f7371bcb8a99321fecf2716.avif', 630, 1009),
-       (25, 30, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf269bc3706dadce3be68aaa7bef.avif', 880, 1179),
-       (25, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf267e1f73e9947f6b1c137bb22e.avif', 470, 1009),
-       (25, 35, 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf26ab2b741bbbc68459d5293367.avif', 720, 1179);
+       (25, '25 см', 1, 'https://media.dodostatic.net/image/r:366x366/0198bf265f7371bcb8a99321fecf2716.avif', 270, 499),
+       (25, '30 см', 1, 'https://media.dodostatic.net/image/r:584x584/0198bf265f7371bcb8a99321fecf2716.avif', 410, 699),
+       (25, '35 см', 1, 'https://media.dodostatic.net/image/r:1875x1875/0198bf265f7371bcb8a99321fecf2716.avif', 630, 1009),
+       (25, '30 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf269bc3706dadce3be68aaa7bef.avif', 880, 1179),
+       (25, '35 см', 2, 'https://media.dodostatic.net/image/r:1875x1875/0198bf267e1f73e9947f6b1c137bb22e.avif', 470, 1009);
 
 INSERT INTO products_with_size (product_id, size, image, weight, price)
-VALUES (78, 'Средняя', 'https://media.dodostatic.net/image/r:584x584/01980e91c07075d9be384b7b94e75a8f.avif', 100, 149),
-       (78, 'Большая', 'https://media.dodostatic.net/image/r:1875x1875/01980e91c716737a920a68bb2f90dd65.avif', 190, 289),
+VALUES (68, 'Средняя', 'https://media.dodostatic.net/image/r:584x584/01980e91c07075d9be384b7b94e75a8f.avif', 100, 149),
+       (68, 'Большая', 'https://media.dodostatic.net/image/r:1875x1875/01980e91c716737a920a68bb2f90dd65.avif', 190, 289),
 
-       (79, 'Средняя', 'https://media.dodostatic.net/image/r:584x584/0198ae98f5a377b4938dd4c854f1857c.avif', 100, 180),
-       (79, 'Большая', 'https://media.dodostatic.net/image/r:1875x1875/01956ba6122877128bd6bb67a66ccc59.avif', 180, 329),
+       (69, 'Средняя', 'https://media.dodostatic.net/image/r:584x584/0198ae98f5a377b4938dd4c854f1857c.avif', 100, 180),
+       (69, 'Большая', 'https://media.dodostatic.net/image/r:1875x1875/01956ba6122877128bd6bb67a66ccc59.avif', 180, 329),
 
-       (80, 'Средняя', 'https://media.dodostatic.net/image/r:1875x1875/019840bab7aa74cd8d4149cd161ba42d.avif', 80, 149),
-       (80, 'Большая', 'https://media.dodostatic.net/image/r:1875x1875/019840babe5a75b99481401e94b8f6a8.avif', 160, 289);
+       (70, 'Средняя', 'https://media.dodostatic.net/image/r:1875x1875/019840bab7aa74cd8d4149cd161ba42d.avif', 80, 149),
+       (70, 'Большая', 'https://media.dodostatic.net/image/r:1875x1875/019840babe5a75b99481401e94b8f6a8.avif', 160, 289);
+
+INSERT INTO products_with_size (product_id, size, image, weight, price)
+VALUES (27, '2 шт', 'https://media.dodostatic.net/image/r:1875x1875/01981875a1c1762893de32cb1e0cf197.avif', 80, 139),
+       (27, '3 шт', 'https://media.dodostatic.net/image/r:1875x1875/01981875a7d7761981860bad1e849e26.avif', 120, 189),
+       (27, '4 шт', 'https://media.dodostatic.net/image/r:1875x1875/01981875ae8e75239a409d63775530d8.avif', 160, 239),
+
+       (26, '5 шт', 'https://media.dodostatic.net/image/r:1875x1875/0198556badcf772484ba8ef325c9f09f.avif', 80, 379),
+       (26, '9 шт', 'https://media.dodostatic.net/image/r:1875x1875/0198556bb50b74009740b7a4a1b3f7ae.avif', 140, 639),
+
+       (33, '3 шт', 'https://media.dodostatic.net/image/r:1875x1875/01980e9151ba7805945d99e607b80ad8.avif', 40, 229),
+       (33, '5 шт', 'https://media.dodostatic.net/image/r:1875x1875/01980e9159aa74ca93e7daaa7db3e9fd.avif', 70, 359),
+       (33, '9 шт', 'https://media.dodostatic.net/image/r:1875x1875/01980e916510756482c2125234dd0359.avif', 140, 609),
+
+       (38, '0,3 л', 'https://media.dodostatic.net/image/r:1875x1875/0199864e0cc3757a8f0663493f42625d.avif', 310, 269),
+       (38, '0,6 л', 'https://media.dodostatic.net/image/r:1875x1875/0199864e1a6f799bbe0428fad277a323.avif', 500, 439),
+
+       (39, '0,3 л', 'https://media.dodostatic.net/image/r:1875x1875/0199864a6c2276a4bf909bc4dc9eab27.avif', 320, 269),
+       (39, '0,6 л', 'https://media.dodostatic.net/image/r:1875x1875/0199864a79d2784eb56eb20ab9a6258b.avif', 500, 439),
+
+       (40, '0,3 л', 'https://media.dodostatic.net/image/r:1875x1875/0199864949d07686b75d384a09a0e5a2.avif', 320, 269),
+       (40, '0,6 л', 'https://media.dodostatic.net/image/r:1875x1875/01998649577b7467a550c4c4b0caaaac.avif', 500, 439),
+
+       (41, '0,3 л', 'https://media.dodostatic.net/image/r:1875x1875/0198227af85e7443b2a25aa7e79aea7a.avif', 270, 225),
+       (41, '0,6 л', 'https://media.dodostatic.net/image/r:1875x1875/0198080d45e9723ebb6653256241820b.avif', 430, 329),
+       
+       (42, '0,3 л', 'https://media.dodostatic.net/image/r:1875x1875/0199ae713e017191b59a24adbffca4f6.avif', 310, 269),
+       (42, '0,6 л', 'https://media.dodostatic.net/image/r:1875x1875/0199ae71581b72a09b8354562dc08e32.avif', 480, 439);
 
 
+INSERT INTO products_with_size (product_id, size, image, weight, price)
+VALUES (48, '0.3 л', 'https://media.dodostatic.net/image/r:1875x1875/0198227e7648741ead340c4c96da45a4.avif', 310, 119),
+       (48, '0.4 л', 'https://media.dodostatic.net/image/r:1875x1875/0198227e7bd6747dba99b60e75697c75.avif', 400, 129);
+
+       
 INSERT INTO categories (category_id, product_id) 
 VALUES (1, 1),
        (1, 2),
@@ -1151,60 +1172,63 @@ VALUES (1, 1),
        (1, 24),
        (1, 25),
        (3, 26),
+--        (3, 27),
        (3, 27),
+--        (3, 29),
+--        (3, 30),
        (3, 28),
        (3, 29),
        (3, 30),
        (3, 31),
        (3, 32),
        (3, 33),
+--        (3, 37),
+--        (3, 38),
        (3, 34),
        (3, 35),
        (3, 36),
        (3, 37),
-       (3, 38),
-       (3, 39),
-       (3, 40),
-       (3, 41),
-       (3, 42),
-       (3, 78),
-       (3, 79),
-       (3, 80),
-       (4, 43),
-       (4, 44),
-       (4, 45),
-       (4, 46),
-       (4, 47),
-       (4, 48),
-       (4, 49),
-       (4, 50),
-       (4, 51),
-       (4, 52),
-       (5, 53),
-       (5, 54),
-       (5, 55),
-       (5, 56),
-       (5, 57),
-       (5, 58),
+--        (3, 48),
+--        (3, 49),
+--        (3, 50),
+       (4, 38),
+--        (4, 44),
+       (4, 39),
+--        (4, 46),
+       (4, 40),
+--        (4, 48),
+       (4, 41),
+--        (4, 50),
+       (4, 42),
+--        (4, 52),
+       (5, 43),
+       (5, 44),
+       (5, 45),
+       (5, 46),
+       (5, 47),
+       (5, 48),
+       (7, 49),
+       (7, 50),
+       (7, 51),
+       (7, 52),
+       (7, 53),
+       (8, 54),
+       (8, 55),
+       (8, 56),
+       (8, 57),
+       (8, 58),
        (6, 59),
        (6, 60),
        (6, 61),
        (6, 62),
        (6, 63),
-       (7, 64),
-       (7, 65),
-       (7, 66),
-       (7, 67),
-       (7, 68),
-       (8, 69),
-       (8, 70),
-       (8, 71),
-       (8, 72),
-       (8, 73),
-       (8, 74),
-       (8, 75),
-       (8, 76),
-       (8, 77);
+       (6, 64),
+       (6, 65),
+       (6, 66),
+       (6, 67),
+       (3, 68),
+       (3, 69),
+       (3, 70);
 
 INSERT INTO categories (category_id) 
 VALUES (2);

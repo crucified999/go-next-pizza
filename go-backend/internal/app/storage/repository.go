@@ -42,9 +42,12 @@ type ProductRepository interface {
 	GetProducts() ([]*model.Product, error)
 	GetProductById(int) (*model.Product, error)	
 	GetProductsByCategory(int) ([]*model.Product, error)
+	GetProductsVariants(int) ([]*model.ProductVariant, error)
 	GetProductCategory(int) (string, error)
 	ConvertIdToCategory(int) string
 	ConvertCategorToId(string) int
+	GetProductIngredients(int) ([]*model.Ingredient, error)
+	GetProductToppings(int) ([]*model.Topping, error)
 }
 
 type ComboRepository interface {

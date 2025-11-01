@@ -31,14 +31,12 @@ func (ur *UserRepository) CreateUser(u *model.User) (*model.User, error) {
 		return nil, err
 	}
 
-	// Создаем корзину для пользователя
 	u.Cart = &model.Cart{}
 	if err := tx.QueryRow("INSERT INTO carts (user_id) VALUES ($1) RETURNING id", u.Id).Scan(&u.Cart.Id); err != nil {
 		return nil, err
 	}
 	u.Cart.UserId = u.Id
 
-	// Подтверждаем транзакцию
 	if err := tx.Commit(); err != nil {
 		return nil, err
 	}

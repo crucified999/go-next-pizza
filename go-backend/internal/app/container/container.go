@@ -82,6 +82,9 @@ func New(cfg *config.Config) (*Container, error) {
 	authMiddleware := middleware.NewAuthMiddleware(authService)
 
 	router := mux.NewRouter()
+	
+	// Добавляем CORS middleware для всех маршрутов
+	router.Use(middleware.CORS)
 
 	return &Container{
 		Config:             cfg,
@@ -133,7 +136,7 @@ func (c *Container) SetupRoutes() {
 
 	c.Router.HandleFunc("/api/products", c.ProductHandler.GetProducts).Methods("GET")
 	c.Router.HandleFunc("/api/products/{id}", c.ProductHandler.GetProductById).Methods("GET")
-	c.Router.HandleFunc("/api/products/category/{category}", c.ProductHandler.GetProdyctsByCategory).Methods("GET")
+	c.Router.HandleFunc("/api/products/category/{category}", c.ProductHandler.GetProductsByCategory).Methods("GET")
 
 	c.Router.HandleFunc("/api/combos", c.ComboHandler.GetCombos).Methods("GET")
 	c.Router.HandleFunc("/api/combos/{comboId}", c.ComboHandler.GetComboById).Methods("GET")

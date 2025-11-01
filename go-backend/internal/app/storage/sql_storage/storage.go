@@ -17,6 +17,7 @@ type SQLStorage struct {
 	ingredientRepository *IngredientRepository
 	comboRepository *ComboRepository
 	categoryRepository *CategoryRepository
+	// productVariantRepository *ProductVariantRepository
 }
 
 func NewSQLStorage(db *sql.DB) *SQLStorage {
@@ -120,3 +121,13 @@ func (s *SQLStorage) Category() storage.CategoryRepository {
 
 	return s.categoryRepository
 }
+
+// func (s *SQLStorage) ProductVariant() *ProductVariantRepository {
+// 	if s.productVariantRepository != nil {
+// 		return s.productVariantRepository
+// 	}
+
+// 	s.productVariantRepository = NewProductVariantRepository(s.db)
+
+// 	return s.productVariantRepository
+// }

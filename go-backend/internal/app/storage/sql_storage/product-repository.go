@@ -89,6 +89,77 @@ func (pr *ProductRepository) GetProductCategory(productId int) (string, error) {
 	return pr.ConvertIdToCategory(categoryId), nil
 }
 
+func (pr *ProductRepository) GetProductsVariants(productId int) ([]*model.ProductVariant, error) {
+
+	rows, err := pr.storage.db.Query("SELECT product_id, size, dough_type, image, weight, price FROM products_with_size WHERE product_id = $1", productId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	var variants []*model.ProductVariant
+
+	for rows.Next() {
+		variant := &model.ProductVariant{}
+
+		if err := rows.Scan(&variant.ProductId, &variant.Size, &variant.DoughType, &variant.Image, &variant.Weight, &variant.Price); err != nil {
+			return nil, err
+		}
+
+		variants = append(variants, variant)
+	}
+
+	return variants, nil
+}
+
+func (pr *ProductRepository) GetProductIngredients(productId int) ([]*model.Ingredient, error) {
+	rows, err := pr.storage.db.Query("SELECT id, title, product_id, replacable FROM pizza_ingredients WHERE product_id = $1", productId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	var ingredients []*model.Ingredient
+
+	for rows.Next() {
+		ingredient := &model.Ingredient{}
+
+		if err := rows.Scan(&ingredient.Id, &ingredient.Title, &ingredient.ProductID, &ingredient.Replacable); err != nil {
+			return nil, err
+		}
+
+		ingredients = append(ingredients, ingredient)
+	}
+
+	return ingredients, nil
+}
+
+func (pr *ProductRepository) GetProductToppings(productId int) ([]*model.Topping, error) {
+	rows, err := pr.storage.db.Query("SELECT id, title, product_id, image, price FROM toppings WHERE product_id = $1", productId)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	
+	var toppings []*model.Topping
+
+	for rows.Next() {
+		topping := &model.Topping{}
+		if err := rows.Scan(&topping.Id, &topping.Title, &topping.ProductID, &topping.Image, &topping.Price); err != nil {
+			return nil, err
+		}
+		
+    toppings = append(toppings, topping)
+	}
+
+	return toppings, nil
+}
+
+
 func (pr *ProductRepository) ConvertIdToCategory(categoryId int) string {
 
 	var category string

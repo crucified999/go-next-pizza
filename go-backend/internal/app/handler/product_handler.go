@@ -12,14 +12,17 @@ import (
 )
 
 type ProductResponse struct {
-	ID          int     `json:"id"`
-	Category    string  `json:"category"`
-	Title       string  `json:"title"`
-	Description string  `json:"description,omitempty"`
-	Price       int64   `json:"price"`
-	Image       string  `json:"image"`
-	Amount      float64 `json:"amount,omitempty"`
-	Weight      int64   `json:"weight"`
+	ID          int                     `json:"id"`
+	Category    string                  `json:"category"`
+	Title       string                  `json:"title"`
+	Description string                  `json:"description,omitempty"`
+	Price       int64                   `json:"price"`
+	Image       string                  `json:"image"`
+	Amount      float64                 `json:"amount,omitempty"`
+	Weight      int64                   `json:"weight"`
+	Variants    []*model.ProductVariant `json:"variants,omitempty"`
+	Ingredients []*model.Ingredient     `json:"ingredients,omitempty"`
+	Toppings    []*model.Topping        `json:"toppings,omitempty"`
 }
 
 type ProductHandler struct {
@@ -77,7 +80,7 @@ func (ph *ProductHandler) GetProductById(w http.ResponseWriter, r *http.Request)
 	json.NewEncoder(w).Encode(response)
 }
 
-func (ph *ProductHandler) GetProdyctsByCategory(w http.ResponseWriter, r *http.Request) {
+func (ph *ProductHandler) GetProductsByCategory(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	category := vars["category"]
 
@@ -130,6 +133,10 @@ func (ph *ProductHandler) convertToResponse(product *model.Product) *ProductResp
 	if product.Weight.Valid {
 		response.Weight = product.Weight.Int64
 	}
+
+	response.Variants = product.Variants
+	response.Ingredients = product.Ingredients
+	response.Toppings = product.Toppings
 	
 	return response
 }

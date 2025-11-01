@@ -23,13 +23,38 @@ func (ps *ProductService) GetProducts() ([]*model.Product, error) {
 		return nil, err
 	}
 
-	for _, product := range products {
+	for index, product := range products {
 		product.Category, err = ps.productRepo.GetProductCategory(product.Id)
 
 		if err != nil {
 			return nil, err
 		}
+
+		variants, err := ps.productRepo.GetProductsVariants(product.Id)
+
+		if err != nil {
+			return nil, err
+		}
+
+		products[index].Variants = variants
+
+		toppings, err := ps.productRepo.GetProductToppings(product.Id)
+
+		if err != nil {
+			return nil, err
+		}
+
+		products[index].Toppings = toppings
+
+		if product.Category == "pizza" {
+			product.Ingredients, err = ps.productRepo.GetProductIngredients(product.Id)
+
+			if err != nil {
+				return nil, err
+			}
+		}
 	}
+
 
 	return products, nil
 }
@@ -42,6 +67,24 @@ func (ps *ProductService) GetProductById(id int) (*model.Product, error) {
 	}
 
 	product.Category, err = ps.productRepo.GetProductCategory(product.Id)
+
+	if err != nil {
+		return nil, err
+	}
+
+	product.Variants, err = ps.productRepo.GetProductsVariants(product.Id)
+
+	if err != nil {
+		return nil, err
+	}
+
+	product.Ingredients, err = ps.productRepo.GetProductIngredients(product.Id)
+
+	if err != nil {
+		return nil, err
+	}
+
+	product.Toppings, err = ps.productRepo.GetProductToppings(product.Id)
 
 	if err != nil {
 		return nil, err
@@ -63,7 +106,16 @@ func (ps *ProductService) GetProductsByCategory(category string) ([]*model.Produ
 		if err != nil {
 			return nil, err
 		}
+
+		product.Variants, err = ps.productRepo.GetProductsVariants(product.Id)
+
+		if err != nil {
+			return nil, err
+		}
+
 	}
 
 	return products, nil
 }
+
+

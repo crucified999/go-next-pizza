@@ -10,7 +10,7 @@ type CustomPizza struct {
 	BasePizzaID int                      `json:"base_pizza_id"`
 	Name        string                   `json:"name"`
 	TotalPrice  float64                  `json:"total_price"`
-	Ingredients []CustomPizzaIngredient `json:"ingredients"`
+	Ingredients []CustomPizzaIngredient  `json:"ingredients"`
 	CreatedAt   time.Time                `json:"created_at"`
 	UpdatedAt   time.Time                `json:"updated_at"`
 }
@@ -31,7 +31,7 @@ type CreateCustomPizzaRequest struct {
 
 type CustomPizzaIngredientRequest struct {
 	IngredientID int    `json:"ingredient_id"`
-	Action       string `json:"action"` // "add" или "remove"
+	Action       string `json:"action"`
 }
 
 type UpdateCustomPizzaRequest struct {

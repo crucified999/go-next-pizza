@@ -30,10 +30,59 @@ func (cs *ComboService) GetCombos() ([]*model.Combo, error) {
 			return nil, err
 		}
 
+		for _, product := range products {
+			product.Category, err = cs.productRepo.GetProductCategory(product.Id)
+
+			if err != nil {
+				return nil, err
+			}
+
+			product.Variants, err = cs.productRepo.GetProductsVariants(product.Id)
+			if err != nil {
+				return nil, err
+			}
+
+			product.Ingredients, err = cs.productRepo.GetProductIngredients(product.Id)
+			if err != nil {
+				return nil, err
+			}
+
+			product.Toppings, err = cs.productRepo.GetProductToppings(product.Id)
+			if err != nil {
+				return nil, err
+			}
+		}
+
 		defaultProducts, err := cs.comboRepo.GetComboDefaultProducts(combo.Id)
 
 		if err != nil {
 			return nil, err
+		}
+
+		for _, product := range defaultProducts {
+			product.Category, err = cs.productRepo.GetProductCategory(product.Id)
+			if err != nil {
+				return nil, err
+			}
+
+			variants, err := cs.productRepo.GetProductsVariants(product.Id)
+			if err != nil {
+				return nil, err
+			}
+
+			if variants != nil {
+				product.Variants = append(product.Variants, variants[2])
+			}
+
+			product.Ingredients, err = cs.productRepo.GetProductIngredients(product.Id)
+			if err != nil {
+				return nil, err
+			}
+
+			product.Toppings, err = cs.productRepo.GetProductToppings(product.Id)
+			if err != nil {
+				return nil, err
+			}
 		}
 
 		combos[index].DefaultProducts = defaultProducts
@@ -50,10 +99,69 @@ func (cs *ComboService) GetComboById(id int) (*model.Combo, error) {
 	}
 
 	products, err := cs.comboRepo.GetComboProducts(combo.Id)
-	
-	combo.Products = products
 
-	return combo, nil
+	for _, product := range products {
+			product.Category, err = cs.productRepo.GetProductCategory(product.Id)
+			if err != nil {
+				return nil, err
+			}
+
+			variants, err := cs.productRepo.GetProductsVariants(product.Id)
+			if err != nil {
+				return nil, err
+			}
+
+			if variants != nil {
+				product.Variants = append(product.Variants, variants[2])
+			}
+
+			product.Ingredients, err = cs.productRepo.GetProductIngredients(product.Id)
+			if err != nil {
+				return nil, err
+			}
+
+			product.Toppings, err = cs.productRepo.GetProductToppings(product.Id)
+			if err != nil {
+				return nil, err
+			}
+		}
+
+		combo.Products = products
+
+		defaultProducts, err := cs.comboRepo.GetComboDefaultProducts(combo.Id)
+		if err != nil {
+			return nil, err
+		}
+
+		for _, product := range defaultProducts {
+			product.Category, err = cs.productRepo.GetProductCategory(product.Id)
+			if err != nil {
+				return nil, err
+			}
+
+			variants, err := cs.productRepo.GetProductsVariants(product.Id)
+			if err != nil {
+				return nil, err
+			}
+
+			if variants != nil {
+				product.Variants = append(product.Variants, variants[2])
+			}
+
+			product.Ingredients, err = cs.productRepo.GetProductIngredients(product.Id)
+			if err != nil {
+				return nil, err
+			}
+
+			product.Toppings, err = cs.productRepo.GetProductToppings(product.Id)
+			if err != nil {
+				return nil, err
+			}
+		}
+
+		combo.DefaultProducts = defaultProducts
+
+		return combo, nil
 }
 
 func (cs *ComboService) ReplaceProduct(productToReplaceId int, replacerId int, combo *model.Combo) (*model.Combo, error) {
