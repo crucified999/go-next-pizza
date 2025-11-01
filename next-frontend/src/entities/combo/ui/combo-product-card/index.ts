@@ -1,0 +1,1 @@
+export { ComboProductCard } from "./combo-product-card";

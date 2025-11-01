@@ -3,6 +3,7 @@
 import { X } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -15,6 +16,13 @@ export const Modal = ({ children, className }: ModalProps) => {
   const handleClose = async () => {
     router.back();
   };
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   return (
     <div className={cn("fixed inset-0 flex justify-center items-center z-100 bg-black/30")}>

@@ -6,6 +6,6 @@ export type Combo = {
   description: string;
   price: number;
   image: string;
-  defaultProducts: Product[];
   products: Product[];
+  defaultProducts: Product[];
 }
