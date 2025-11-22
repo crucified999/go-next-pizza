@@ -1,9 +1,16 @@
 CREATE TABLE users (
   id bigserial PRIMARY KEY,
-  email varchar NOT NULL UNIQUE,
-  encrypted_password varchar NOT NULL,
+  email varchar UNIQUE,
+  -- encrypted_password varchar NOT NULL,
+  phone varchar UNIQUE,
+  name varchar
+);
+
+CREATE TABLE sms_codes (
+  id bigserial PRIMARY KEY,
   phone varchar NOT NULL,
-  name varchar NOT NULL
+  code varchar NOT NULL,
+  expires_at timestamp NOT NULL
 );
 
 CREATE TABLE carts (

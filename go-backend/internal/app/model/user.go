@@ -1,16 +1,16 @@
 package model
 
 import (
+	"database/sql"
+
 	"github.com/go-playground/validator/v10"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
 	Id int `json:"id"`
-	Email string `json:"email" validate:"required,email"`
-	Password string `json:"password,omitempty" validate:"required_with_fallback=EncryptedPassword"`
-	EncryptedPassword string `json:"-"`
-	Name string `json:"name" validate:"required"`
+	Email sql.NullString `json:"email"`
+	Name sql.NullString `json:"name"`
 	Phone string `json:"phone" validate:"required,e164"`
 	Cart *Cart `json:"cart"`
 	Orders []*Order `json:"orders"`
@@ -24,19 +24,19 @@ func (u *User) Validate() error {
 	return v.Struct(u)
 }
  
-func (u *User) BeforeCreate() error {
-	if len(u.Password) != 0 {
-		enc, err := encryptString(u.Password)
+// func (u *User) BeforeCreate() error {
+// 	if len(u.Password) != 0 {
+// 		enc, err := encryptString(u.Password)
 
-		if err != nil {
-			return err
-		}
+// 		if err != nil {
+// 			return err
+// 		}
 
-		u.EncryptedPassword = enc
-	}
+// 		u.EncryptedPassword = enc
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
 
 func encryptString(s string) (string, error) {
 	b, err := bcrypt.GenerateFromPassword([]byte(s), bcrypt.MinCost)
@@ -48,10 +48,10 @@ func encryptString(s string) (string, error) {
 	return string(b), nil
 }
 
-func (u *User) Sanitize() {
-	u.Password = ""
-}
+// func (u *User) Sanitize() {
+// 	u.Password = ""
+// }
 
-func (u *User) ComparePassword(password string) bool {
-	return bcrypt.CompareHashAndPassword([]byte(u.EncryptedPassword), []byte(password)) == nil
-}
+// func (u *User) ComparePassword(password string) bool {
+// 	return bcrypt.CompareHashAndPassword([]byte(u.EncryptedPassword), []byte(password)) == nil
+// }
