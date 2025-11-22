@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { productReducer } from "@/entities/product/store";
 import { categoryReducer } from "@/entities/category/store";
 import { comboReducer } from "@/entities/combo/store";
+import { userReducer } from "@/entities/user/store";
 import appReducer from "./appSlice";
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     products: productReducer,
     categories: categoryReducer,
     combos: comboReducer,
+    user: userReducer,
     app: appReducer,
   },
 });

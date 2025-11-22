@@ -67,6 +67,7 @@ export const Variants = ({ options, value, onChange }: VariantsProps) => {
             if (option.available) {
               onChange ? onChange(idx) : setInternalIndex(idx);
             }
+            
           }}
           className={cn("relative z-[1] w-full text-center font-[700] text-xs border-none text-black px-3 py-1.5 rounded-md select-none", !option.available && "opacity-50 cursor-not-allowed")}
         >

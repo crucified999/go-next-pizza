@@ -10,7 +10,7 @@ interface CategoryState {
   isManuallySelected: boolean;
 }
 
-const CATEGORY = typeof window !== "undefined" && sessionStorage.getItem("category") || "";
+const CATEGORY = typeof window !== "undefined" && localStorage.getItem("category") || "";
 
 const initialState: CategoryState = {
   categories: [],

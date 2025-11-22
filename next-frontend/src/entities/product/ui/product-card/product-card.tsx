@@ -5,7 +5,7 @@ import React from "react";
 import { Variant } from "@/entities/product/model/types";
 import Link from "next/link";
 import { setIsModalOpened } from "@/app/appSlice";
-import { useAppDispatch } from "@/app/store";
+import { useAppDispatch, useAppSelector } from "@/app/store";
 
 type ProductCardProps = {
   id: number;
@@ -23,6 +23,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   image,
   variants,
 }) => {
+  const isAuth = useAppSelector((state) => state.user.isAuth);
+  const href = isAuth ? `/product/${id}` : '/auth';
   const dispatch = useAppDispatch();
 
   const handleOpenModal = () => {
@@ -31,7 +33,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <article className="flex flex-col gap-2 shrink-1 max-w-[300px] h-full">
-      <Link href={`/product/${id}`} onClick={handleOpenModal}>
+      <Link href={href} onClick={handleOpenModal}>
         <img
           src={image}
           alt={title}
@@ -45,7 +47,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <span className="text-lg font-[700]">
           {variants.length > 0 ? `от ${price}` : price} ₽
         </span>
-        <Link href={`/product/${id}`} onClick={handleOpenModal}>
+        <Link href={href} onClick={handleOpenModal}>
           <Button
             variant="outline"
             className="border-none bg-[#FFFAF4] hover:bg-[#ffe7cb]"
