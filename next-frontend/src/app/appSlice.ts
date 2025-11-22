@@ -4,6 +4,7 @@ const initialState = {
   isModalOpened: false,
 };
 
+
 export const appSlice = createSlice({
   name: "app",
   initialState,

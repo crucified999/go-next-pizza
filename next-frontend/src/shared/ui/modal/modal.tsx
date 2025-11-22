@@ -13,7 +13,7 @@ interface ModalProps {
 export const Modal = ({ children, className }: ModalProps) => {
   const router = useRouter();
 
-  const handleClose = async () => {
+  const handleClose = () => {
     router.back();
   };
 

@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { fetchCombos } from "@/entities/combo/store/comboSlice";
 import { useRestoreCategory } from "@/shared/lib/hooks/useRestoreCategory";
 import { useScrollToCategory } from "@/shared/lib/hooks/useScrollToCategory";
+import { checkUserAuth } from "@/entities/user/store/userSlice";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -23,11 +24,10 @@ export const HomePage = () => {
   );
 
   useRestoreCategory();
-  useScrollToCategory();
+  // useScrollToCategory();
 
   useEffect(() => {
-    dispatch(fetchProducts());
-    dispatch(fetchCombos());
+    Promise.all([dispatch(checkUserAuth()), dispatch(fetchProducts()), dispatch(fetchCombos())]);
   }, [dispatch]);
   
   useEffect(() => {
@@ -37,7 +37,7 @@ export const HomePage = () => {
           behavior: "smooth",
           block: "start",
         });
-      }, 100);
+      }, 200);
     }
   }, [dispatch]);
 

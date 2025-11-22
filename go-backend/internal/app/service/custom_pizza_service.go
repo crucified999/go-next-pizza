@@ -103,6 +103,15 @@ func (cps *CustomPizzaService) UpdateCustomPizza(id int, userID int, req model.U
 	
 	customPizza.Name = req.Name
 	customPizza.TotalPrice = basePrice
+
+	if req.Dough != "" {
+		return cps.customPizzaRepo.UpdateDough(customPizza, req.Dough)
+	}
+
+	if req.Size != "" {
+		return cps.customPizzaRepo.UpdateSize(customPizza, req.Size)
+	}
+
 	customPizza.Ingredients = []model.CustomPizzaIngredient{}
 
 	for _, ingredientReq := range req.Ingredients {
@@ -131,6 +140,27 @@ func (cps *CustomPizzaService) UpdateCustomPizza(id int, userID int, req model.U
 
 	return cps.customPizzaRepo.UpdateCustomPizza(customPizza)
 }
+
+func (cps *CustomPizzaService) SetDough(id int, dough string) (*model.CustomPizza, error) {
+	customPizza, err := cps.GetCustomPizzaByID(id)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return cps.customPizzaRepo.UpdateDough(customPizza, dough)
+}
+
+func (cps *CustomPizzaService) SetSize(id int, size string) (*model.CustomPizza, error) {
+	customPizza, err := cps.GetCustomPizzaByID(id)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return cps.customPizzaRepo.UpdateSize(customPizza, size)
+}
+
 
 func (cps *CustomPizzaService) DeleteCustomPizza(id int, userID int) error {
 	customPizza, err := cps.customPizzaRepo.GetCustomPizzaByID(id)

@@ -6,7 +6,16 @@ type UserRepository interface {
 	CreateUser(*model.User) (*model.User, error)
 	FindByEmail(string) (*model.User, error)
 	FindById(int) (*model.User, error)
+	FindByPhone(string) (*model.User, error)
 	GetOrders(int) ([]*model.Order, error)
+	ChangeName(int, string) (error)
+	ChangeEmail(int, string) (error)
+}
+
+type SMSCodeRepository interface {
+    SaveCode(phone string, codeHash string, expiresAt int64) error
+    GetLatestCodeHash(phone string) (codeHash string, expiresAt int64, err error)
+    DeleteCodes(phone string) error
 }
 
 type CartRepository interface {
@@ -32,6 +41,8 @@ type OrderRepository interface {
 
 type CustomPizzaRepository interface {
 	CreateCustomPizza(*model.CustomPizza) (*model.CustomPizza, error)
+	UpdateDough(*model.CustomPizza,string) (*model.CustomPizza, error)
+	UpdateSize(*model.CustomPizza,string) (*model.CustomPizza, error)
 	GetCustomPizzaByID(int) (*model.CustomPizza, error)
 	GetCustomPizzasByUserID(int) ([]*model.CustomPizza, error)
 	UpdateCustomPizza(*model.CustomPizza) (*model.CustomPizza, error)

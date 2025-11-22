@@ -65,6 +65,34 @@ func (cph *CustomPizzaHandler) GetCustomPizza(w http.ResponseWriter, r *http.Req
 	json.NewEncoder(w).Encode(customPizza)
 }
 
+func (cph *CustomPizzaHandler) SetDough(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+
+	if err != nil {
+		http.Error(w, "Invalid ID", http.StatusBadRequest)
+		return
+	}
+
+	// userID, ok := r.Context().Value("userID").(int)
+	// if !ok {
+	// 	http.Error(w, "Unauthorized", http.StatusUnauthorized)
+	// 	return
+	// }
+
+	var req model.CustomPizzaDoughRequest
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid JSON", http.StatusBadRequest)
+		return
+	}
+
+	customPizza, err := cph.customPizzaService.SetDough(id, req.Dough)
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(customPizza)
+}
+
 // GetCustomPizzas получает все кастомные пиццы пользователя
 func (cph *CustomPizzaHandler) GetCustomPizzas(w http.ResponseWriter, r *http.Request) {
 	userID, ok := r.Context().Value("userID").(int)
@@ -94,7 +122,6 @@ func (cph *CustomPizzaHandler) UpdateCustomPizza(w http.ResponseWriter, r *http.
 		return
 	}
 
-	// Получаем userID из контекста
 	userID, ok := r.Context().Value("userID").(int)
 	if !ok {
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)

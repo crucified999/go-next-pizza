@@ -17,6 +17,7 @@ type SQLStorage struct {
 	ingredientRepository *IngredientRepository
 	comboRepository *ComboRepository
 	categoryRepository *CategoryRepository
+    smsCodeRepository *SMSCodeRepository
 	// productVariantRepository *ProductVariantRepository
 }
 
@@ -120,6 +121,18 @@ func (s *SQLStorage) Category() storage.CategoryRepository {
 	}
 
 	return s.categoryRepository
+}
+
+func (s *SQLStorage) SMSCode() storage.SMSCodeRepository {
+    if s.smsCodeRepository != nil {
+        return s.smsCodeRepository
+    }
+
+    s.smsCodeRepository = &SMSCodeRepository{
+        storage: s,
+    }
+
+    return s.smsCodeRepository
 }
 
 // func (s *SQLStorage) ProductVariant() *ProductVariantRepository {

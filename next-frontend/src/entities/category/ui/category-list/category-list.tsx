@@ -7,7 +7,6 @@ import {
 } from "../../store/categorySlice";
 import { useEffect } from "react";
 import { cn } from "@/shared/lib/utils";
-import { useRestoreCategory } from "@/shared/lib/hooks/useRestoreCategory";
 
 export const CategoryList = () => {
   const categories = useAppSelector((state) => state.categories.categories);
@@ -16,11 +15,9 @@ export const CategoryList = () => {
   );
   const dispatch = useAppDispatch();
 
-  // useRestoreCategory();
-
   const handleActiveCategory = (category: string) => {
     dispatch(setCurrentCategoryManually(category));
-    sessionStorage.setItem("category", category);
+    localStorage.setItem("category", category);
   };
 
   useEffect(() => {
@@ -41,7 +38,7 @@ export const CategoryList = () => {
             key={category.id}
             onClick={() => handleActiveCategory(category.title)}
           >
-            <a href={`#${category.title}`}>{category.title}</a>
+            <a href={`/#${category.title}`}>{category.title}</a>
           </li>
         ))}
       </ul>

@@ -16,18 +16,19 @@ func (ur *UserRepository) CreateUser(u *model.User) (*model.User, error) {
 	if err != nil {
 		return nil, err
 	}
+	
 	defer tx.Rollback()
 
 	if err := u.Validate(); err != nil {
 		return nil, err
 	}
 
-	if err := u.BeforeCreate(); err != nil {
-		return nil, err
-	}
+	// if err := u.BeforeCreate(); err != nil {
+	// 	return nil, err
+	// }
 
-	if err := tx.QueryRow("INSERT INTO users (email, encrypted_password, name, phone) VALUES ($1, $2, $3, $4) RETURNING id", 
-		u.Email, u.EncryptedPassword, u.Name, u.Phone).Scan(&u.Id); err != nil {
+	if err := tx.QueryRow("INSERT INTO users (phone) VALUES ($1) RETURNING id", 
+		u.Phone).Scan(&u.Id); err != nil {
 		return nil, err
 	}
 
@@ -35,6 +36,7 @@ func (ur *UserRepository) CreateUser(u *model.User) (*model.User, error) {
 	if err := tx.QueryRow("INSERT INTO carts (user_id) VALUES ($1) RETURNING id", u.Id).Scan(&u.Cart.Id); err != nil {
 		return nil, err
 	}
+
 	u.Cart.UserId = u.Id
 
 	if err := tx.Commit(); err != nil {
@@ -48,7 +50,7 @@ func (ur *UserRepository) FindByEmail(email string) (*model.User, error) {
 	u := &model.User{}
 	u.Cart = &model.Cart{}
 
-	if err := ur.storage.db.QueryRow("SELECT id, email, encrypted_password, name, phone FROM users WHERE email = $1", email).Scan(&u.Id, &u.Email, &u.EncryptedPassword, &u.Name, &u.Phone); err != nil {
+	if err := ur.storage.db.QueryRow("SELECT id, email, name, phone FROM users WHERE email = $1", email).Scan(&u.Id, &u.Email, &u.Name, &u.Phone); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, storage.ErrRecordNotFound
 		}
@@ -63,7 +65,7 @@ func (ur *UserRepository) FindById(id int) (*model.User, error) {
 	u := &model.User{}
 	u.Cart = &model.Cart{}
 
-	if err := ur.storage.db.QueryRow("SELECT id, email, encrypted_password, name, phone FROM users WHERE id = $1", id).Scan(&u.Id, &u.Email, &u.EncryptedPassword, &u.Name, &u.Phone); err != nil {
+	if err := ur.storage.db.QueryRow("SELECT id, email, name, phone FROM users WHERE id = $1", id).Scan(&u.Id, &u.Email, &u.Name, &u.Phone); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, storage.ErrRecordNotFound
 		}
@@ -97,49 +99,32 @@ func (ur *UserRepository) GetOrders(userId int) ([]*model.Order, error) {
 	return orders, nil
 }
 
-// func (ur *UserRepository) GetCart(userId int) (*model.Cart, error) {
+func (ur *UserRepository) FindByPhone(phone string) (*model.User, error) {
+	u := &model.User{}
+	u.Cart = &model.Cart{}
 
-// 	var cartId int
+    if err := ur.storage.db.QueryRow("SELECT id, email, name, phone FROM users WHERE phone = $1", phone).Scan(&u.Id, &u.Email, &u.Name, &u.Phone); err != nil {
+        if err == sql.ErrNoRows {
+            return nil, storage.ErrRecordNotFound
+        }
+        return nil, err
+    }
 
-// 	if err := ur.storage.db.QueryRow("SELECT id FROM carts WHERE user_id = $1", userId).Scan(&cartId); err != nil {
-// 		return nil, err
-// 	}
+    return u, nil
+}
 
-// 	cart := &model.Cart{
-// 		Id: cartId,
-// 	}
+func (ur *UserRepository) ChangeName(userId int, name string) (error) {
+	if _, err := ur.storage.db.Exec("UPDATE users SET name = $1 WHERE id = $2", name, userId); err != nil {
+		return err
+	}
 
-// 	rows, err := ur.storage.db.Query("SELECT product_id, COUNT(product_id) FROM products_in_cart WHERE cart_id = $1 GROUP BY product_id", cart.Id)
-// 	if err != nil {
-// 		return nil, err
-// 	}
+	return nil
+}
 
-// 	for rows.Next() {
-// 		var productId int
-// 		var amount int
+func (ur *UserRepository) ChangeEmail(userId int, email string) (error) {
+	if _, err := ur.storage.db.Exec("UPDATE users SET email = $1 WHERE id = $2", email, userId); err != nil {
+		return err
+	}
 
-// 		if err := rows.Scan(&productId, &amount); err != nil {
-// 			return nil, err
-// 		}
-
-// 		cart.Products[productId] = amount
-// 	}
-
-// 	rows, err = ur.storage.db.Query("SELECT combo_id, COUNT(combo_id) FROM combos_in_cart WHERE cart_id = $1 GROUP BY combo_id", cart.Id)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-	
-// 	for rows.Next() {
-// 		var comboId int
-// 		var amount int
-
-// 		if err := rows.Scan(&comboId, &amount); err != nil {
-// 			return nil, err
-// 		}
-
-// 		cart.Combos[comboId] = amount
-// 	}
-
-// 	return cart, nil
-// }
+	return nil
+}

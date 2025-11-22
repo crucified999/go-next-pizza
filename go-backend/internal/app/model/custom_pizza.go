@@ -11,6 +11,8 @@ type CustomPizza struct {
 	Name        string                   `json:"name"`
 	TotalPrice  float64                  `json:"total_price"`
 	Ingredients []CustomPizzaIngredient  `json:"ingredients"`
+	Dough				string									 `json:"dough"`
+	Size 				string									 `json:"size"`
 	CreatedAt   time.Time                `json:"created_at"`
 	UpdatedAt   time.Time                `json:"updated_at"`
 }
@@ -27,6 +29,8 @@ type CreateCustomPizzaRequest struct {
 	BasePizzaID int                           `json:"base_pizza_id"`
 	Name        string                        `json:"name"`
 	Ingredients []CustomPizzaIngredientRequest `json:"ingredients"`
+	Dough				string									 `json:"dough"`
+	Size 				string									 `json:"size"`
 }
 
 type CustomPizzaIngredientRequest struct {
@@ -34,7 +38,17 @@ type CustomPizzaIngredientRequest struct {
 	Action       string `json:"action"`
 }
 
+type CustomPizzaDoughRequest struct {
+	Dough string `json:"dough"`
+}
+
+type CustomPizzaSizeRequest struct {
+	Size string `json:"size"`
+}
+
 type UpdateCustomPizzaRequest struct {
-	Name        string                        `json:"name"`
-	Ingredients []CustomPizzaIngredientRequest `json:"ingredients"`
+	Name        string                          `json:"name"`
+	Ingredients []CustomPizzaIngredientRequest  `json:"ingredients,omitempty"`
+	Dough       string 													`json:"dough,omitempty"`
+	Size 				string													`json:"size,omitempty"`
 }

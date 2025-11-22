@@ -39,33 +39,25 @@ export const ProductCategoryList: React.FC<ProductCategoryListProps> = ({
   }, [isFirstCategory]);
 
   useEffect(() => {
-    const timer = setTimeout(
-      () => {
-        if (isFirstCategory && isInitialized) {
-          dispatch(setCurrentCategoryAutomatically(getCategoryName(category)));
-          sessionStorage.setItem('category', getCategoryName(category));
-        }
-      },
-      200
-    );
+    const timer = setTimeout(() => {
+      if (isFirstCategory && isInitialized) {
+        dispatch(setCurrentCategoryAutomatically(getCategoryName(category)));
+        localStorage.setItem("category", getCategoryName(category));
+      }
+    }, 200);
 
     return () => clearTimeout(timer);
-    
   }, [isFirstCategory, isInitialized, category, dispatch]);
 
   useEffect(() => {
-    const timer = setTimeout(
-      () => {
-        if (isInitialized && inView) {
-          dispatch(setCurrentCategoryAutomatically(getCategoryName(category)));
-          sessionStorage.setItem('category', getCategoryName(category));
-        }
-      },
-      200
-    )
+    const timer = setTimeout(() => {
+      if (isInitialized && inView) {
+        dispatch(setCurrentCategoryAutomatically(getCategoryName(category)));
+        localStorage.setItem("category", getCategoryName(category));
+      }
+    }, 200);
 
     return () => clearTimeout(timer);
-    
   }, [inView, category, dispatch, isInitialized]);
 
   useEffect(() => {

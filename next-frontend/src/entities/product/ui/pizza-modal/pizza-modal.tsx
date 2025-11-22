@@ -3,7 +3,7 @@
 import { Pizza } from "../../model/types";
 import { PizzaIngredient } from "../pizza-ingredient/pizza-ingredient";
 import { Variants } from "../variants/variants";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { PizzaImage } from "../pizza-image/pizza-image";
 import { BaseProductModal } from "../product-modal/base-product-modal";
 
@@ -24,6 +24,7 @@ const getDoughTypeValue = (doughType: any): number | null => {
 
 export const PizzaModal = ({ pizza }: PizzaModalProps) => {
   const sizeVariants = Array.from(new Set(pizza.variants?.map((v) => v.size)));
+  const initializedRef = useRef(false);
 
   const uniqueDoughTypeValues = useMemo(() => {
     const values = new Set<number>();
@@ -36,10 +37,19 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
     return Array.from(values).sort((a, b) => a - b);
   }, [pizza.variants]);
 
-  const [activeDoughIndex, setActiveDoughIndex] = useState(0);
-  const activeDoughValue = uniqueDoughTypeValues[activeDoughIndex] ?? null;
+  const [activeDoughIndex, setActiveDoughIndex] = useState<number | null>(null);
+  const [currentSize, setCurrentSize] = useState<string | null>(null);
 
-  const [currentSize, setCurrentSize] = useState(sizeVariants[0] || "");
+  const currentSizeIndex = useMemo(() => {
+    if (currentSize === null) return 0;
+    const index = sizeVariants.findIndex(size => size === currentSize);
+    return index !== -1 ? index : 0;
+  }, [currentSize, sizeVariants]);
+
+  const activeDoughValue = useMemo(() => {
+    if (activeDoughIndex === null) return null;
+    return uniqueDoughTypeValues[activeDoughIndex] ?? null;
+  }, [activeDoughIndex, uniqueDoughTypeValues]);
 
   const doughTypes = useMemo(() => {
     return uniqueDoughTypeValues.map((doughType) =>
@@ -52,6 +62,54 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
   }, [uniqueDoughTypeValues]);
 
   useEffect(() => {
+    if (initializedRef.current) return;
+
+    const savedDough = localStorage.getItem('dough');
+    const savedSize = localStorage.getItem('size');
+
+    if (savedSize && sizeVariants.includes(savedSize)) {
+      setCurrentSize(savedSize);
+    } else if (sizeVariants.length > 0) {
+      setCurrentSize(sizeVariants[0]);
+    }
+
+    if (savedDough) {
+      const doughIndex = Number(savedDough);
+      if (!isNaN(doughIndex) && doughIndex >= 0 && doughIndex < uniqueDoughTypeValues.length) {
+        setActiveDoughIndex(doughIndex);
+      } else {
+        setActiveDoughIndex(0);
+      }
+    } else {
+      setActiveDoughIndex(0);
+    }
+
+    initializedRef.current = true;
+  }, [sizeVariants, uniqueDoughTypeValues.length]);
+
+  useEffect(() => {
+    if (!initializedRef.current || activeDoughIndex === null) return;
+    console.log('PizzaModal: Saving dough to localStorage:', activeDoughIndex);
+    localStorage.setItem('dough', activeDoughIndex.toString());
+  }, [activeDoughIndex]);
+
+  useEffect(() => {
+    if (!initializedRef.current || !currentSize) return;
+    console.log('PizzaModal: Saving size to localStorage:', currentSize);
+    localStorage.setItem('size', currentSize);
+  }, [currentSize]);
+
+  useEffect(() => {
+    return () => {
+      console.log('PizzaModal: Cleaning up localStorage');
+      localStorage.removeItem('size');
+      localStorage.removeItem('dough');
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!initializedRef.current || !currentSize || activeDoughIndex === null) return;
+    
     const doughOptions = doughTypes.map((d) => {
       const isThinDough = d === "Тонкое";
       const isSmallSize = currentSize === "20 см" || currentSize === "25 см";
@@ -67,6 +125,7 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
         (opt) => opt.available
       );
       if (firstAvailableIndex !== -1) {
+        console.log('PizzaModal: Switching dough due to size constraint');
         setActiveDoughIndex(firstAvailableIndex);
       }
     }
@@ -77,6 +136,8 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
   }, [sizeVariants]);
 
   const getActiveVariant = (size: string) => {
+    if (activeDoughValue === null) return undefined;
+    
     return pizza.variants?.find((v) => {
       return (
         v.size === size && getDoughTypeValue(v.doughType) === activeDoughValue
@@ -85,7 +146,7 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
   };
 
   const getActiveImage = (size: string) => {
-    if (!pizza.variants || !size) return pizza.image;
+    if (!pizza.variants || !size || activeDoughValue === null) return pizza.image;
 
     const match = pizza.variants.find((v) => {
       const variantDoughValue = getDoughTypeValue(v.doughType);
@@ -99,9 +160,21 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
 
   const getBasePrice = () => 0;
 
+  // Не рендерим модалку пока не инициализировались оба состояния
+  if (currentSize === null || activeDoughIndex === null) {
+    console.log('PizzaModal: Waiting for initialization...', { currentSize, activeDoughIndex });
+    return null;
+  }
+
+  const handleDoughChange = (index: number) => {
+    console.log('PizzaModal: Dough changed to', index);
+    setActiveDoughIndex(index);
+  };
+
   return (
     <BaseProductModal
       product={pizza}
+      initialSizeIndex={currentSizeIndex}
       renderImage={({ activeImage, activeSize: size }) => {
         const baseSize = 30;
         const parsedSize = parseInt(size, 10) || baseSize;
@@ -143,7 +216,7 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
           <Variants
             options={doughOptions}
             value={activeDoughIndex}
-            onChange={setActiveDoughIndex}
+            onChange={handleDoughChange}
           />
         ) : null;
       }}
@@ -151,7 +224,10 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
       getActiveVariant={getActiveVariant}
       getActiveImage={getActiveImage}
       getBasePrice={getBasePrice}
-      onSizeChange={setCurrentSize}
+      onSizeChange={(size) => {
+        console.log('PizzaModal: Size changed to', size);
+        setCurrentSize(size);
+      }}
     />
   );
 };

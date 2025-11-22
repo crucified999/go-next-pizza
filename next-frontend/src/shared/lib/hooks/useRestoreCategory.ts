@@ -7,7 +7,7 @@ export const useRestoreCategory = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const savedCategory = sessionStorage.getItem("category");
+      const savedCategory = localStorage.getItem("category");
       
       if (savedCategory) {
         dispatch(setCurrentCategoryManually(savedCategory));

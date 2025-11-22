@@ -9,6 +9,14 @@ type Config struct {
 	Server   ServerConfig
 	Database DatabaseConfig
 	JWT      JWTConfig
+	SMSAuth SMSAuthConfig
+}
+
+type SMSAuthConfig struct {
+	CodeLength int
+	ExpiresIn int
+	Key string
+	URL string
 }
 
 type ServerConfig struct {
@@ -21,8 +29,9 @@ type DatabaseConfig struct {
 }
 
 type JWTConfig struct {
-	Secret           string
-	TTLSeconds       int
+	Secret            string
+	RefreshSecret     string
+	TTLSeconds        int
 	RefreshTTLSeconds int
 }
 
@@ -37,8 +46,15 @@ func Load() *Config {
 		},
 		JWT: JWTConfig{
 			Secret:           getEnv("JWT_SECRET", "your-secret-key"),
+			RefreshSecret: getEnv("JWT_REFRESH_SECRET", "your-refresh-secret-key"),
 			TTLSeconds:       getEnvAsInt("JWT_TTL_SECONDS", 3600),
 			RefreshTTLSeconds: getEnvAsInt("JWT_REFRESH_TTL_SECONDS", 604800),
+		},
+		SMSAuth: SMSAuthConfig{
+			CodeLength: getEnvAsInt("VERIFICATION_CODE_LENGTH", 6),
+			ExpiresIn: getEnvAsInt("VERIFICATION_CODE_EXPIRES_IN", 60),
+			Key: getEnv("VERIFICATION_CODE_KEY", "your-api-key"),
+			URL: getEnv("VERIFICATION_CODE_URL", "https://api.exolve.ru/messaging/v1/SendSMS"),
 		},
 	}
 }

@@ -4,27 +4,56 @@ import (
 	"net/http"
 )
 
-// CORS middleware для разрешения доступа всем клиентам
 func CORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Разрешаем все источники
-		w.Header().Set("Access-Control-Allow-Origin", "*")
+		origin := r.Header.Get("Origin")
 		
-		// Разрешаем все методы
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		if origin == "http://localhost:3000" {
+			w.Header().Set("Access-Control-Allow-Origin", origin)
+			w.Header().Set("Access-Control-Allow-Credentials", "true")
+		} else if origin != "" {
+			w.Header().Set("Access-Control-Allow-Origin", origin)
+		} else {
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+		}
 		
-		// Разрешаем все заголовки
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS")
 		
-		// Разрешаем кеширование preflight запросов на 24 часа
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, Accept, Origin")
+		
 		w.Header().Set("Access-Control-Max-Age", "86400")
 		
-		// Обрабатываем preflight запросы
 		if r.Method == "OPTIONS" {
-			w.WriteHeader(http.StatusOK)
+			w.WriteHeader(http.StatusNoContent)
 			return
 		}
 		
 		next.ServeHTTP(w, r)
+	})
+}
+
+func CORSOptions(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if r.Method == "OPTIONS" {
+					origin := r.Header.Get("Origin")
+					
+					if origin == "http://localhost:3000" {
+							w.Header().Set("Access-Control-Allow-Origin", origin)
+							w.Header().Set("Access-Control-Allow-Credentials", "true")
+					} else if origin != "" {
+							w.Header().Set("Access-Control-Allow-Origin", origin)
+					} else {
+							w.Header().Set("Access-Control-Allow-Origin", "*")
+					}
+					
+					w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS")
+					w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, Accept, Origin")
+					w.Header().Set("Access-Control-Max-Age", "86400")
+					
+					w.WriteHeader(http.StatusNoContent)
+					return
+			}
+			
+			next.ServeHTTP(w, r)
 	})
 }

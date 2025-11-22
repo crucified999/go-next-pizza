@@ -33,16 +33,15 @@ func (cpr *CustomPizzaRepository) GetCustomPizzaByID(id int) (*model.CustomPizza
 	cp := &model.CustomPizza{}
 	
 	if err := cpr.storage.db.QueryRow(
-		"SELECT id, user_id, base_pizza_id, name, total_price, created_at, updated_at FROM custom_pizzas WHERE id = $1",
+		"SELECT id, user_id, base_pizza_id, name, total_price, size, dough, created_at, updated_at FROM custom_pizzas WHERE id = $1",
 		id,
-	).Scan(&cp.ID, &cp.UserID, &cp.BasePizzaID, &cp.Name, &cp.TotalPrice, &cp.CreatedAt, &cp.UpdatedAt); err != nil {
+	).Scan(&cp.ID, &cp.UserID, &cp.BasePizzaID, &cp.Name, &cp.TotalPrice, &cp.Size, &cp.Dough, &cp.CreatedAt, &cp.UpdatedAt); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, storage.ErrRecordNotFound
 		}
 		return nil, err
 	}
 
-	// Загружаем ингредиенты
 	ingredients, err := cpr.getIngredientsByCustomPizzaID(cp.ID)
 	if err != nil {
 		return nil, err
@@ -69,7 +68,6 @@ func (cpr *CustomPizzaRepository) GetCustomPizzasByUserID(userID int) ([]*model.
 			return nil, err
 		}
 
-		// Загружаем ингредиенты
 		ingredients, err := cpr.getIngredientsByCustomPizzaID(cp.ID)
 		if err != nil {
 			return nil, err
@@ -83,15 +81,13 @@ func (cpr *CustomPizzaRepository) GetCustomPizzasByUserID(userID int) ([]*model.
 }
 
 func (cpr *CustomPizzaRepository) UpdateCustomPizza(cp *model.CustomPizza) (*model.CustomPizza, error) {
-	// Обновляем основную информацию
 	if _, err := cpr.storage.db.Exec(
-		"UPDATE custom_pizzas SET name = $1, total_price = $2, updated_at = NOW() WHERE id = $3",
+		"UPDATE custom_pizzas SET name = $1, total_price = $2 updated_at = NOW() WHERE id = $3",
 		cp.Name, cp.TotalPrice, cp.ID,
 	); err != nil {
 		return nil, err
 	}
 
-	// Удаляем старые ингредиенты
 	if _, err := cpr.storage.db.Exec(
 		"DELETE FROM custom_pizza_ingredients WHERE custom_pizza_id = $1",
 		cp.ID,
@@ -99,13 +95,32 @@ func (cpr *CustomPizzaRepository) UpdateCustomPizza(cp *model.CustomPizza) (*mod
 		return nil, err
 	}
 
-	// Добавляем новые ингредиенты
 	for _, ingredient := range cp.Ingredients {
 		ingredient.CustomPizzaID = cp.ID
 		if err := cpr.addIngredient(&ingredient); err != nil {
 			return nil, err
 		}
 	}
+
+	return cp, nil
+}
+
+func (cpr *CustomPizzaRepository) UpdateDough(cp *model.CustomPizza, dough string) (*model.CustomPizza, error) {
+	if _, err := cpr.storage.db.Exec("UPDATE custom_pizzas SET dough = $1 WHERE id = $2", dough, cp.ID); err != nil {
+		return nil, err
+	}
+
+	cp.Dough = dough
+
+	return cp, nil
+}
+
+func (cpr *CustomPizzaRepository) UpdateSize(cp *model.CustomPizza, size string) (*model.CustomPizza, error) {
+	if _, err := cpr.storage.db.Exec("UPDATE custom_pizzas SET size = $1 WHERE id = $2", size, cp.ID); err != nil {
+		return nil, err
+	}
+
+	cp.Size = size
 
 	return cp, nil
 }
@@ -118,6 +133,13 @@ func (cpr *CustomPizzaRepository) DeleteCustomPizza(id int) error {
 func (cpr *CustomPizzaRepository) addIngredient(ingredient *model.CustomPizzaIngredient) error {
 	return cpr.storage.db.QueryRow(
 		"INSERT INTO custom_pizza_ingredients (custom_pizza_id, ingredient_id, is_added) VALUES ($1, $2, $3) RETURNING id, created_at",
+		ingredient.CustomPizzaID, ingredient.IngredientID, ingredient.IsAdded,
+	).Scan(&ingredient.ID, &ingredient.CreatedAt)
+}
+
+func (cpr *CustomPizzaRepository) addExtraIngredient(ingredient *model.CustomPizzaIngredient) error {
+	return cpr.storage.db.QueryRow(
+		"INSERT INTO custom_pizza_extra_ingredients (custom_pizza_id, ingredient_id, is_added) VALUES ($1, $2, $3) RETURNING id, created_at",
 		ingredient.CustomPizzaID, ingredient.IngredientID, ingredient.IsAdded,
 	).Scan(&ingredient.ID, &ingredient.CreatedAt)
 }

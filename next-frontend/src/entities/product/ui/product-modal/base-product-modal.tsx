@@ -5,7 +5,7 @@ import { Product, Variant } from "../../model/types";
 import { ToppingsList } from "../toppings-list";
 import { Button } from "@/shared/ui/button";
 import { Variants } from "../variants/variants";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { useToppings } from "@/shared/lib/hooks/useToppings";
 
 type VariantOption = {
@@ -24,6 +24,7 @@ type BaseProductModalProps = {
   getBasePrice: () => number;
   className?: string;
   onSizeChange?: (size: string) => void;
+  initialSizeIndex?: number;
 };
 
 export const BaseProductModal = ({
@@ -37,9 +38,26 @@ export const BaseProductModal = ({
   getBasePrice,
   className = "grid grid-rows-[1fr_auto] flex-col align-center bg-gray-50 pt-5 px-5 rounded-r-xl gap-5",
   onSizeChange,
+  initialSizeIndex = 0,
 }: BaseProductModalProps) => {
-  const [activeSizeIndex, setActiveSizeIndex] = useState(0);
+  const initializedRef = useRef<boolean>(false);
+  const [activeSizeIndex, setActiveSizeIndex] = useState(initialSizeIndex);
   const activeSize = variantOptions[activeSizeIndex]?.value || "";
+
+  useEffect(() => {
+    if (initializedRef.current) return;
+
+    initializedRef.current = true;
+
+    const savedSize = localStorage.getItem('size');
+
+    if (savedSize) {
+      const savedSizeIndex = variantOptions.findIndex(option => option.value === savedSize);
+      if (savedSizeIndex !== -1) {
+        setActiveSizeIndex(savedSizeIndex);
+      }
+    }
+  }, [variantOptions]);
 
   useEffect(() => {
     if (onSizeChange && activeSize) {
@@ -65,14 +83,6 @@ export const BaseProductModal = ({
     }, 0);
     return basePrice + toppingsPrice;
   }, [activeVariant?.price, getBasePrice, selectedToppings, product.toppings]);
-
-    // const toggleTopping = (toppingId: number) => {
-    //   setSelectedToppings((prev) =>
-    //     prev.includes(toppingId)
-    //       ? prev.filter((id) => id !== toppingId)
-    //       : [...prev, toppingId]
-    //   );
-    // };
 
   return (
     <Modal className="grid grid-cols-[2fr_1.5fr] z-100">
@@ -114,4 +124,3 @@ export const BaseProductModal = ({
     </Modal>
   );
 };
-
