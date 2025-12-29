@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isModalOpened: false,
+  isCartOpened: false,
 };
 
 
@@ -9,12 +9,12 @@ export const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
-    setIsModalOpened: (state, action) => {
-      state.isModalOpened = action.payload;
+    setIsCartOpened: (state) => {
+      state.isCartOpened = !state.isCartOpened;
     },
   },
 });
 
-export const { setIsModalOpened } = appSlice.actions;
+export const { setIsCartOpened } = appSlice.actions;
 
 export default appSlice.reducer;

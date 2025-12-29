@@ -8,6 +8,7 @@ type DataInputProps = {
   label: string;
   value: string;
   canChange: boolean;
+  inputClassname?: string;
   onSave?: (id: number, value: string) => void;
 };
 
@@ -15,6 +16,7 @@ export const DataInput: React.FC<DataInputProps> = ({
   label,
   value,
   canChange,
+  inputClassname,
   onSave,
 }) => {
   const userId = useAppSelector((state) => state.user.id);
@@ -52,23 +54,23 @@ export const DataInput: React.FC<DataInputProps> = ({
         <label className="text-sm" htmlFor={label}>
           {label}
         </label>
-        <div className={cn("bg-gray-100 p-3 rounded-2xl border-1 border-transparent transition-colors duration-100 linea", isFocused && "border-orange-500")}>
+        <div className={cn("bg-gray-100 dark:bg-[#101113] p-3 rounded-2xl border-1 border-transparent transition-colors duration-100 linear", isFocused && "border-orange-500")}>
           <input
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             onChange={handleChange}
+            required
             className={cn(
-              !canChange && "pointer-events-none text-black/50",
+              "dark:text-gray-200",
+              !canChange && "pointer-events-none text-black/50 dark:text-gray-400",
               !isInChangeMode && "pointer-events-none text-black/50",
-              "border-none focus:outline-none"
+              "border-none focus:outline-none",
+              inputClassname,
             )}
             type="text"
             name={label}
             value={inputValue}
           />
-          {/* <button onClick={handleSave} type={isFocused || inputValue !== "" ? "submit" : "button"} className={cn(!canChange && "opacity-0 pointer-events-none", "cursor-pointer border-none text-orange-500 text-md")}>
-            {isFocused || inputValue !== "" ? "Сохранить" : "Изменить"}
-          </button> */}
           {isInChangeMode ? (
             <button
               onClick={handleSave}
@@ -76,7 +78,7 @@ export const DataInput: React.FC<DataInputProps> = ({
               type="submit"
               className={cn(
                 !canChange && "opacity-0 pointer-events-none",
-                "cursor-pointer border-none text-orange-500 text-md",
+                "cursor-pointer border-none text-orange-500 text-[15px]",
                 inputValue === value && "text-black/50 cursor-disabled",
               )}
             >
@@ -88,7 +90,7 @@ export const DataInput: React.FC<DataInputProps> = ({
               type="button"
               className={cn(
                 !canChange && "opacity-0 pointer-events-none",
-                "cursor-pointer border-none text-orange-500 text-md"
+                "cursor-pointer border-none text-orange-500 text-[15px]"
               )}
             >
               Изменить

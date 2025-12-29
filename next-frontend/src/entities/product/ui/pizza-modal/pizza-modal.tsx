@@ -6,6 +6,11 @@ import { Variants } from "../variants/variants";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { PizzaImage } from "../pizza-image/pizza-image";
 import { BaseProductModal } from "../product-modal/base-product-modal";
+import { addPizza } from "@/entities/cart/lib/api";
+import { toppingsToMask } from "../../lib/utils";
+import { useToppings } from "@/shared/lib/hooks/useToppings";
+import { useAppDispatch } from "@/app/store";
+import { addNewPizza } from "@/entities/cart/store/cartSlice";
 
 type PizzaModalProps = {
   pizza: Pizza;
@@ -23,6 +28,8 @@ const getDoughTypeValue = (doughType: any): number | null => {
 };
 
 export const PizzaModal = ({ pizza }: PizzaModalProps) => {
+  const dispatch = useAppDispatch();
+  const { selectedToppings, toggleTopping } = useToppings([]);
   const sizeVariants = Array.from(new Set(pizza.variants?.map((v) => v.size)));
   const initializedRef = useRef(false);
 
@@ -42,7 +49,7 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
 
   const currentSizeIndex = useMemo(() => {
     if (currentSize === null) return 0;
-    const index = sizeVariants.findIndex(size => size === currentSize);
+    const index = sizeVariants.findIndex((size) => size === currentSize);
     return index !== -1 ? index : 0;
   }, [currentSize, sizeVariants]);
 
@@ -64,8 +71,8 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
   useEffect(() => {
     if (initializedRef.current) return;
 
-    const savedDough = localStorage.getItem('dough');
-    const savedSize = localStorage.getItem('size');
+    const savedDough = localStorage.getItem("dough");
+    const savedSize = localStorage.getItem("size");
 
     if (savedSize && sizeVariants.includes(savedSize)) {
       setCurrentSize(savedSize);
@@ -75,7 +82,11 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
 
     if (savedDough) {
       const doughIndex = Number(savedDough);
-      if (!isNaN(doughIndex) && doughIndex >= 0 && doughIndex < uniqueDoughTypeValues.length) {
+      if (
+        !isNaN(doughIndex) &&
+        doughIndex >= 0 &&
+        doughIndex < uniqueDoughTypeValues.length
+      ) {
         setActiveDoughIndex(doughIndex);
       } else {
         setActiveDoughIndex(0);
@@ -89,27 +100,25 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
 
   useEffect(() => {
     if (!initializedRef.current || activeDoughIndex === null) return;
-    console.log('PizzaModal: Saving dough to localStorage:', activeDoughIndex);
-    localStorage.setItem('dough', activeDoughIndex.toString());
+    localStorage.setItem("dough", activeDoughIndex.toString());
   }, [activeDoughIndex]);
 
   useEffect(() => {
     if (!initializedRef.current || !currentSize) return;
-    console.log('PizzaModal: Saving size to localStorage:', currentSize);
-    localStorage.setItem('size', currentSize);
+    localStorage.setItem("size", currentSize);
   }, [currentSize]);
 
   useEffect(() => {
     return () => {
-      console.log('PizzaModal: Cleaning up localStorage');
-      localStorage.removeItem('size');
-      localStorage.removeItem('dough');
+      localStorage.removeItem("size");
+      localStorage.removeItem("dough");
     };
   }, []);
 
   useEffect(() => {
-    if (!initializedRef.current || !currentSize || activeDoughIndex === null) return;
-    
+    if (!initializedRef.current || !currentSize || activeDoughIndex === null)
+      return;
+
     const doughOptions = doughTypes.map((d) => {
       const isThinDough = d === "Тонкое";
       const isSmallSize = currentSize === "20 см" || currentSize === "25 см";
@@ -125,7 +134,6 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
         (opt) => opt.available
       );
       if (firstAvailableIndex !== -1) {
-        console.log('PizzaModal: Switching dough due to size constraint');
         setActiveDoughIndex(firstAvailableIndex);
       }
     }
@@ -137,7 +145,7 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
 
   const getActiveVariant = (size: string) => {
     if (activeDoughValue === null) return undefined;
-    
+
     return pizza.variants?.find((v) => {
       return (
         v.size === size && getDoughTypeValue(v.doughType) === activeDoughValue
@@ -146,7 +154,8 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
   };
 
   const getActiveImage = (size: string) => {
-    if (!pizza.variants || !size || activeDoughValue === null) return pizza.image;
+    if (!pizza.variants || !size || activeDoughValue === null)
+      return pizza.image;
 
     const match = pizza.variants.find((v) => {
       const variantDoughValue = getDoughTypeValue(v.doughType);
@@ -160,15 +169,26 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
 
   const getBasePrice = () => 0;
 
-  // Не рендерим модалку пока не инициализировались оба состояния
   if (currentSize === null || activeDoughIndex === null) {
-    console.log('PizzaModal: Waiting for initialization...', { currentSize, activeDoughIndex });
     return null;
   }
 
   const handleDoughChange = (index: number) => {
-    console.log('PizzaModal: Dough changed to', index);
     setActiveDoughIndex(index);
+  };
+
+  const handleAddPizza = async () => {
+    console.log('Добавляем пиццу...')
+    const addedPizza = await addPizza({
+      pizzaId: pizza.id,
+      dough: activeDoughIndex + 1,
+      size: currentSize,
+      toppingsMask: toppingsToMask(selectedToppings),
+    });
+
+    dispatch(addNewPizza(addedPizza));
+
+    console.log('Пицца добавлена...');
   };
 
   return (
@@ -224,10 +244,10 @@ export const PizzaModal = ({ pizza }: PizzaModalProps) => {
       getActiveVariant={getActiveVariant}
       getActiveImage={getActiveImage}
       getBasePrice={getBasePrice}
-      onSizeChange={(size) => {
-        console.log('PizzaModal: Size changed to', size);
-        setCurrentSize(size);
-      }}
+      onSizeChange={setCurrentSize}
+      selectedToppings={selectedToppings}
+      onToggleTopping={toggleTopping}
+      onAdd={handleAddPizza}
     />
   );
 };

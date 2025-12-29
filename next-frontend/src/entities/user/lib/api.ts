@@ -1,4 +1,3 @@
-import { User } from "../model/types";
 import {
   SMS_NOT_SENT,
   SMS_SENT,
@@ -6,7 +5,7 @@ import {
   SMS_VERIFICATION_SUCCED,
 } from "./constants";
 
-const BASE_AUTh_URL = process.env.NEXT_PUBLIC_API_URL + "/auth";
+const BASE_AUTH_URL = process.env.NEXT_PUBLIC_API_URL + "/auth";
 const BASE_USER_URL = process.env.NEXT_PUBLIC_API_URL + "/users";
 
 type SMSAuth = {
@@ -41,7 +40,7 @@ const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 
 export const refreshToken = async () => {
-  return await fetch(`${BASE_AUTh_URL}/refresh`, {
+  return await fetch(`${BASE_AUTH_URL}/refresh`, {
     method: "POST",
     credentials: "include"
   })
@@ -63,27 +62,20 @@ export const fetchWithRefresh = async <T>(
     const res = await fetch(url, options);
     return await checkResponse<T>(res);
   } catch (err) {
-    // if ((err as { message: string }).message === 'jwt expired') {
       const refreshData = await refreshToken();
-      // if (options.headers) {
-      //   (options.headers as { [key: string]: string }).authorization =
-      //     refreshData.accessToken;
-      // }
+
       if (refreshData.message === "Success!") {
         const res = await fetch(url, options);
         return await checkResponse<T>(res);
       } else {
         return Promise.reject(err);
       }
-      
-    // } else {
-    //   return Promise.reject(err);
-    // }
+   
   }
 };
 
 export const sendCode = async (phone: string) => {
-  return await fetch(`${BASE_AUTh_URL}/sms/send`, {
+  return await fetch(`${BASE_AUTH_URL}/sms/send`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -106,7 +98,7 @@ export const sendCode = async (phone: string) => {
 };
 
 export const verifyCode = async (code: string) => {
-  return await fetch(`${BASE_AUTh_URL}/sms/verify`, {
+  return await fetch(`${BASE_AUTH_URL}/sms/verify`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -134,26 +126,18 @@ export const verifyCode = async (code: string) => {
 };
 
 export const checkAuth = async () => {
-  return await fetchWithRefresh<IsAuthResponse>(`${BASE_AUTh_URL}/check`, {
+  return await fetchWithRefresh<IsAuthResponse>(`${BASE_AUTH_URL}/check`, {
     method: "GET",
     credentials: "include"
-  })
-
-  // return await fetch(`${BASE_URL}/check`, {
-  //   method: "GET",
-  //   credentials: "include",
-  // })
-  //   .then((res) => checkResponse<IsAuthResponse>(res))
-  //   .then((data) => {
-  //     return {
-  //       authenticated: data.authenticated || false,
-  //     };
-  //   })
-  //   .catch(() => {
-  //     return { authenticated: false };
-  //   });
+  });
 };
 
+export const logout = async () => {
+  return await fetch(`${BASE_AUTH_URL}/logout`, {
+    method: "POST",
+    credentials: "include"
+  });
+};
 
 export const changeName = async (id: number, name: string) => {
   return await fetch(`${BASE_USER_URL}/${id}/name`, {
@@ -174,10 +158,3 @@ export const changeEmail = async (id: number, email: string) => {
     })
   })
 }
-
-
-// {
-//   "expires_in": 3600,
-//   "token_type": "Bearer",
-//   "verified": true
-// }

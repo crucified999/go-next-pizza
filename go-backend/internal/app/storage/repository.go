@@ -13,25 +13,31 @@ type UserRepository interface {
 }
 
 type SMSCodeRepository interface {
-    SaveCode(phone string, codeHash string, expiresAt int64) error
-    GetLatestCodeHash(phone string) (codeHash string, expiresAt int64, err error)
-    DeleteCodes(phone string) error
+  SaveCode(phone string, codeHash string, expiresAt int64) error
+  GetLatestCodeHash(phone string) (codeHash string, expiresAt int64, err error)
+  DeleteCodes(phone string) error
 }
 
 type CartRepository interface {
 	CreateCart(int, *model.Cart) (*model.Cart, error)
 	GetCartByUserId(int) (*model.Cart, error)
 	GetCartProducts(int) ([]*model.CartProduct, error)
+	GetCartToppings(int) ([]*model.Topping, error)
+	GetCartPizzas(int) ([]*model.CartPizza, error)
 	GetCartCombos(int) ([]*model.CartCombo, error)
-	AddProduct(int, int) error 
+	AddProduct(int, string, int) error
+	AddPizza(*model.PizzaVariant, int, int) error 
 	AddCombo(int, int) error
-	DeleteProduct(int, int) error
+	DeleteProduct(int, int, string) error
+	DeletePizza(*model.PizzaVariant, int, int) error
+	DeleteProductCompletely(int, int, string) error
+	DeletePizzaCompletely(*model.PizzaVariant, int, int) error
 	DeleteCombo(int, int) error
 	Refresh(int) error
 }
 
 type OrderRepository interface {
-	CreateOrder(*model.Cart,*model.Order) (*model.Order, error)
+	CreateOrder(*model.Order) (error)
 	AddProduct(int, int, *model.Order) error
 	AddCombo(int, int, *model.Order) error
 	GetOrderById(int) (*model.Order, error)
@@ -54,6 +60,8 @@ type ProductRepository interface {
 	GetProductById(int) (*model.Product, error)	
 	GetProductsByCategory(int) ([]*model.Product, error)
 	GetProductsVariants(int) ([]*model.ProductVariant, error)
+	GetProductVariant(int, string) (*model.ProductVariant, error)
+	GetPizzaVariant(*model.PizzaVariant) (*model.PizzaVariant, error)
 	GetProductCategory(int) (string, error)
 	ConvertIdToCategory(int) string
 	ConvertCategorToId(string) int

@@ -1,12 +1,16 @@
 "use client";
 
 import { Modal } from "@/shared/ui/modal";
-import { Product, Variant } from "../../model/types";
+import { Pizza, Product, Variant } from "../../model/types";
 import { ToppingsList } from "../toppings-list";
 import { Button } from "@/shared/ui/button";
 import { Variants } from "../variants/variants";
-import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { useToppings } from "@/shared/lib/hooks/useToppings";
+import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/app/store";
+import { showNotification } from "@/shared/ui/alert/alertSlice";
+import { cn } from "@/shared/lib/utils";
 
 type VariantOption = {
   value: string;
@@ -24,7 +28,11 @@ type BaseProductModalProps = {
   getBasePrice: () => number;
   className?: string;
   onSizeChange?: (size: string) => void;
+  onAmountChange?: (amount: string) => void;
+  onAdd?: () => void;
   initialSizeIndex?: number;
+  selectedToppings?: number[];
+  onToggleTopping: (toppingId: number) => void;
 };
 
 export const BaseProductModal = ({
@@ -38,26 +46,46 @@ export const BaseProductModal = ({
   getBasePrice,
   className = "grid grid-rows-[1fr_auto] flex-col align-center bg-gray-50 pt-5 px-5 rounded-r-xl gap-5",
   onSizeChange,
+  onAmountChange,
+  onAdd,
+  onToggleTopping,
   initialSizeIndex = 0,
+  selectedToppings = [],
 }: BaseProductModalProps) => {
-  const initializedRef = useRef<boolean>(false);
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const [activeSizeIndex, setActiveSizeIndex] = useState(initialSizeIndex);
   const activeSize = variantOptions[activeSizeIndex]?.value || "";
 
-  useEffect(() => {
-    if (initializedRef.current) return;
-
-    initializedRef.current = true;
-
-    const savedSize = localStorage.getItem('size');
-
-    if (savedSize) {
-      const savedSizeIndex = variantOptions.findIndex(option => option.value === savedSize);
-      if (savedSizeIndex !== -1) {
-        setActiveSizeIndex(savedSizeIndex);
-      }
+  const handleAddToCart = async () => {
+    if (onAdd) {
+      await onAdd();
     }
-  }, [variantOptions]);
+
+    dispatch(
+      showNotification({
+        message: `Добавлено:\n
+        ${product.title}`,
+        type: "success",
+      })
+    );
+
+    router.back();
+  };
+
+  useEffect(() => {
+    if (initialSizeIndex >= 0 && initialSizeIndex < variantOptions.length) {
+      setActiveSizeIndex(initialSizeIndex);
+    }
+  }, [initialSizeIndex, variantOptions.length]);
+
+  useEffect(() => {
+    if (onAmountChange && variantOptions[activeSizeIndex]?.value) {
+      const variantValue = variantOptions[activeSizeIndex].value;
+
+      onAmountChange(variantValue);
+    }
+  }, [activeSizeIndex, variantOptions, onAmountChange]);
 
   useEffect(() => {
     if (onSizeChange && activeSize) {
@@ -65,7 +93,9 @@ export const BaseProductModal = ({
     }
   }, [activeSize, onSizeChange]);
 
-  const { selectedToppings, toggleTopping } = useToppings([]);
+  const handleVariantChange = (index: number) => {
+    setActiveSizeIndex(index);
+  };
 
   const activeVariant = useMemo(() => {
     return getActiveVariant(activeSize);
@@ -85,10 +115,10 @@ export const BaseProductModal = ({
   }, [activeVariant?.price, getBasePrice, selectedToppings, product.toppings]);
 
   return (
-    <Modal className="grid grid-cols-[2fr_1.5fr] z-100">
+    <Modal className="grid grid-cols-[2fr_1.5fr] z-200">
       {renderImage({ activeImage, activeSize })}
 
-      <div className={className}>
+      <div className={cn(className, "dark:bg-[#101113]")}>
         <div className="flex-1 overflow-auto">
           <h1 className="text-2xl font-bold">{product.title}</h1>
           {renderContent()}
@@ -97,7 +127,7 @@ export const BaseProductModal = ({
             <Variants
               options={variantOptions}
               value={activeSizeIndex}
-              onChange={setActiveSizeIndex}
+              onChange={handleVariantChange}
             />
           )}
 
@@ -107,7 +137,7 @@ export const BaseProductModal = ({
             <ToppingsList
               toppings={product.toppings}
               selectedToppings={selectedToppings}
-              onToggleTopping={toggleTopping}
+              onToggleTopping={onToggleTopping}
             />
           )}
         </div>
@@ -116,6 +146,7 @@ export const BaseProductModal = ({
           <Button
             variant="outline"
             className="text-lg h-12 border-none bg-[#FE5F00] text-white hover:bg-[#e55400] w-full"
+            onClick={handleAddToCart}
           >
             В корзину за {totalPrice} ₽
           </Button>

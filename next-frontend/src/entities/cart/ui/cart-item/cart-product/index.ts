@@ -1,0 +1,1 @@
+export { CartProduct } from "./cart-product";

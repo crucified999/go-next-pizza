@@ -2,7 +2,7 @@ import { Search } from "lucide-react";
 
 export const SearchInput = () => {
   return (
-    <div className="p-3 flex items-center gap-2 bg-[#F9F9F9] rounded-[15px] grow-1">
+    <div className="p-3 flex items-center gap-2 bg-[#F9F9F9] rounded-[15px] grow-1 dark:bg-[#101113] border-1 dark:border-white">
       <Search width={16} className="opacity-[0.5]" />
       <input type="text" placeholder="Поиск пиццы..." className="focus:outline-none w-full" />
     </div>

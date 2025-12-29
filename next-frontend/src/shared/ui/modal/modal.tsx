@@ -28,12 +28,12 @@ export const Modal = ({ children, className }: ModalProps) => {
     <div className={cn("fixed inset-0 flex justify-center items-center z-100 bg-black/30")}>
       <div
         className={cn(
-          "relative w-[1000px] h-[700px] max-h-4xl bg-white rounded-xl",
+          "relative w-[1000px] h-[700px] max-h-4xl bg-white rounded-xl dark:bg-[#101113]",
           className
         )}
       >
         <button
-          className="transition-transform duration-300 linear cursor-pointer absolute top-5 -right-20 p-4 rounded-full bg-white hover:scale-110 transition-colors"
+          className="transition-transform dark:bg-[#101113] duration-300 linear cursor-pointer absolute top-5 -right-20 p-4 rounded-full bg-white hover:scale-110"
           onClick={handleClose}
         >
           <X className="w-6 h-6" />

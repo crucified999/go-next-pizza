@@ -50,10 +50,10 @@ export const Variants = ({ options, value, onChange }: VariantsProps) => {
   return (
     <ul
       ref={containerRef}
-      className="relative cursor-pointer flex bg-[#ECECEC] rounded-xl py-1 px-2 mt-2 gap-2 w-full justify-around"
+      className="relative cursor-pointer flex bg-[#ECECEC] rounded-xl py-1 px-2 mt-2 gap-2 w-full justify-around dark:bg-[#101113]"
     >
       <div
-        className="pointer-events-none absolute inset-y-1 bg-white rounded-xl transition-all duration-300 ease-in-out z-0"
+        className="pointer-events-none absolute inset-y-1 bg-white dark:bg-[#101113] dark:border-1 dark:border-white rounded-xl transition-all duration-300 ease-in-out z-0"
         style={{ width: `${indicator.width}px`, left: `${indicator.left}px` }}
       />
 
@@ -69,7 +69,7 @@ export const Variants = ({ options, value, onChange }: VariantsProps) => {
             }
             
           }}
-          className={cn("relative z-[1] w-full text-center font-[700] text-xs border-none text-black px-3 py-1.5 rounded-md select-none", !option.available && "opacity-50 cursor-not-allowed")}
+          className={cn("relative z-[1] w-full text-center font-[700] text-xs border-none text-black dark:text-white px-3 py-1.5 rounded-md select-none", !option.available && "opacity-50 cursor-not-allowed")}
         >
           {option.value}
         </li>

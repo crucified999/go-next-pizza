@@ -2,8 +2,8 @@ package handler
 
 import (
 	"encoding/json"
-	"io"
 	"net/http"
+	"time"
 
 	"github.com/go-next-pizza/internal/app/model"
 	"github.com/go-next-pizza/internal/app/storage"
@@ -11,6 +11,10 @@ import (
 
 type OrderHandler struct {
 	orderRepo storage.OrderRepository
+}
+
+type CreateOrderRequest struct {
+	TotalPrice int `json:"totalPrice"`
 }
 
 func NewOrderHandler(orderRepo storage.OrderRepository) *OrderHandler {
@@ -21,22 +25,19 @@ func NewOrderHandler(orderRepo storage.OrderRepository) *OrderHandler {
 
 func (oh *OrderHandler) CreateOrder(w http.ResponseWriter, r *http.Request) {
 	o := &model.Order{}
-	o.UserId = r.Context().Value("user_id").(int)
+	o.UserId = r.Context().Value("userID").(int)
+	o.CreatedAt = time.Now()
 
-	var cart *model.Cart
+	var req CreateOrderRequest
 
-	body, err := io.ReadAll(r.Body)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid JSON", http.StatusBadRequest)
 		return
 	}
 
-	err = json.Unmarshal(body, &cart)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-	}
+	o.TotalPrice = req.TotalPrice
 
-	order, err := oh.orderRepo.CreateOrder(cart, o)
+	err := oh.orderRepo.CreateOrder(o)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -44,5 +45,4 @@ func (oh *OrderHandler) CreateOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(order)
 }

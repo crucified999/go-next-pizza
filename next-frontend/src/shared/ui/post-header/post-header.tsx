@@ -12,7 +12,7 @@ export const PostHeader = () => {
   return (
     <div
         ref={stickyRef}
-        className={`flex justify-between py-2 my-10 sticky top-0 left-0 right-0 z-10 transition-all duration-300 ${
+        className={`dark:bg-[#101113] flex justify-between py-2 my-10 sticky top-0 left-0 right-0 z-10 transition-all duration-300 ${
           isSticky ? "bg-gray-200 px-50" : "bg-white"
         }`}
         style={

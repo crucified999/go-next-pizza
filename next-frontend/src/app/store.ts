@@ -4,6 +4,9 @@ import { productReducer } from "@/entities/product/store";
 import { categoryReducer } from "@/entities/category/store";
 import { comboReducer } from "@/entities/combo/store";
 import { userReducer } from "@/entities/user/store";
+import { cartReducer } from "@/entities/cart/store";
+import { notificationReducer } from "@/shared/ui/alert";
+import { orderReducer } from "@/entities/order/store";
 import appReducer from "./appSlice";
 
 export const store = configureStore({
@@ -13,6 +16,9 @@ export const store = configureStore({
     combos: comboReducer,
     user: userReducer,
     app: appReducer,
+    cart: cartReducer,
+    order: orderReducer,
+    notification: notificationReducer,
   },
 });
 

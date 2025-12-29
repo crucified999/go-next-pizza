@@ -30,11 +30,10 @@ func TestOrderRepository_CreateOrder(t *testing.T) {
 	err = db.QueryRow("INSERT INTO combos (title, description) VALUES ($1, $2) RETURNING id", "Test Combo", "Test Description").Scan(&comboId)
 	assert.NoError(t, err)
 
-	// Добавляем продукт в корзину
-	err = s.Cart().AddProduct(productId, cart.Id)
+	err = s.Cart().AddProduct(productId, "1 шт", cart.Id)
 	assert.NoError(t, err)
 
-	err = s.Cart().AddProduct(productId, cart.Id)
+	err = s.Cart().AddProduct(productId, "1 шт", cart.Id)
 	assert.NoError(t, err)
 
 	err = s.Cart().AddCombo(comboId, cart.Id)
@@ -42,10 +41,9 @@ func TestOrderRepository_CreateOrder(t *testing.T) {
 
 	order := model.TestOrder(createdUser.Id, t)
 
-	order, err = s.Order().CreateOrder(cart, order)
+	err = s.Order().CreateOrder(order)
 
 	assert.NoError(t, err)
-	assert.NotNil(t, order)
 
 	var cnt int
 	
@@ -53,7 +51,7 @@ func TestOrderRepository_CreateOrder(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, 1, cnt)
 
-	err = db.QueryRow("SELECT amount FROM products_in_order WHERE order_id = $1 AND product_id = $2", order.Id, productId).Scan(&cnt)
+	err = db.QueryRow("SELECT count FROM products_in_order WHERE order_id = $1 AND product_id = $2 AND amount = $3", order.Id, productId, "1 шт").Scan(&cnt)
 
 	assert.NoError(t, err)
 	assert.Equal(t, 2, cnt)

@@ -10,8 +10,6 @@ export type Order = {
   combos?: Combo[];
   totalPrice: number;
   status: OrderStatus;
-  createdAt: Date;
+  createdAt: string;
   updatedAt: Date;
 };
-
-export type OrderModal = {};

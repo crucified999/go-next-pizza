@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"slices"
 	"strconv"
@@ -18,11 +19,16 @@ type ProductResponse struct {
 	Description string                  `json:"description,omitempty"`
 	Price       int64                   `json:"price"`
 	Image       string                  `json:"image"`
-	Amount      float64                 `json:"amount,omitempty"`
+	Amount      string                  `json:"amount,omitempty"`
 	Weight      int64                   `json:"weight"`
 	Variants    []*model.ProductVariant `json:"variants,omitempty"`
 	Ingredients []*model.Ingredient     `json:"ingredients,omitempty"`
 	Toppings    []*model.Topping        `json:"toppings,omitempty"`
+}
+
+type GetProductVariantRequest struct {
+	ProductId int    `json:"productId"`
+	Amount    string `json:"amount"`
 }
 
 type ProductHandler struct {
@@ -88,6 +94,8 @@ func (ph *ProductHandler) GetProductsByCategory(w http.ResponseWriter, r *http.R
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Ошибка получения продуктов по категории в хендлере")
+		return
 	}
 
 	response := make([]*ProductResponse, len(products))
@@ -102,6 +110,25 @@ func (ph *ProductHandler) GetProductsByCategory(w http.ResponseWriter, r *http.R
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
+}
+
+func (ph *ProductHandler) GetProductVariant(w http.ResponseWriter, r *http.Request) {
+	var req GetProductVariantRequest
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid JSON", http.StatusBadRequest)
+		return
+	}
+
+	pv, err := ph.productService.GetProductVariant(req.ProductId, req.Amount)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(pv)
 }
 
 func (ph *ProductHandler) convertToResponse(product *model.Product) *ProductResponse {
@@ -127,7 +154,7 @@ func (ph *ProductHandler) convertToResponse(product *model.Product) *ProductResp
 	}
 	
 	if product.Amount.Valid {
-		response.Amount = product.Amount.Float64
+		response.Amount = product.Amount.String
 	}
 	
 	if product.Weight.Valid {

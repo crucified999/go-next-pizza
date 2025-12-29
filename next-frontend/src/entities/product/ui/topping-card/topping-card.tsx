@@ -19,7 +19,7 @@ export const ToppingCard = ({
     <button
       onClick={onToggle}
       className={cn(
-        "relative text-sm cursor-pointer h-[160px] bg-white flex flex-col justify-between items-center gap-2 shadow-[1px_1px_10px_rgba(0,0,0,0.15)] rounded-lg p-2 hover:shadow-sm transition-all duration-150 linear w-full border-1 border-white",
+        "relative text-sm cursor-pointer h-[160px] dark:bg-[#101113] bg-white flex flex-col justify-between items-center gap-2 shadow-[1px_1px_10px_rgba(0,0,0,0.15)] rounded-lg p-2 hover:shadow-sm transition-all duration-150 linear w-full border-1 border-white",
         isSelected && "border-orange-500 border-1"
       )}
     >

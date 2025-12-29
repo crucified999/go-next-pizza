@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { sendCode, verifyCode, checkAuth } from "../lib/api";
+import { sendCode, verifyCode, checkAuth, logout } from "../lib/api";
 import { Order } from "@/entities/order/model/types";
+import { formatPhoneFromE164 } from "@/shared/lib/utils";
 
 export const fetchAuth = createAsyncThunk(
   "user/auth",
@@ -8,6 +9,10 @@ export const fetchAuth = createAsyncThunk(
     return await sendCode(phone);
   }
 );
+
+export const fetchLogout = createAsyncThunk("user/logout", async () => {
+  return await logout();
+});
 
 export const verifyAuth = createAsyncThunk(
   "user/verify",
@@ -28,6 +33,7 @@ type UserState = {
   email: string;
   orders: Order[];
   isLoading: boolean;
+  error: string | null;
 };
 
 const initialState: UserState = {
@@ -38,6 +44,7 @@ const initialState: UserState = {
   email: "",
   orders: [],
   isLoading: false,
+  error: null,
 };
 
 const userSlice = createSlice({
@@ -46,10 +53,6 @@ const userSlice = createSlice({
   reducers: {
     setAuth: (state, action) => {
       state.isAuth = action.payload;
-    },
-    logout: (state) => {
-      state.isAuth = false;
-      state.orders = [];
     },
   },
   extraReducers: (builder) => {
@@ -79,8 +82,8 @@ const userSlice = createSlice({
       })
       .addCase(checkUserAuth.fulfilled, (state, action) => {
         state.isAuth = action.payload.authenticated;
-        state.id = action.payload.id
-        state.phone = action.payload.phone;
+        state.id = action.payload.id;
+        state.phone = formatPhoneFromE164(action.payload.phone);
         state.name = action.payload.name;
         state.email = action.payload.email;
         state.isLoading = false;
@@ -89,9 +92,22 @@ const userSlice = createSlice({
       .addCase(checkUserAuth.rejected, (state) => {
         state.isAuth = false;
         state.isLoading = false;
+      })
+      .addCase(fetchLogout.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchLogout.fulfilled, (state) => {
+        state.isAuth = false;
+        state.orders = [];
+      })
+      .addCase(fetchLogout.rejected, (state) => {
+        state.isAuth = false;
+        state.orders = [];
+        state.isLoading = false;
+        state.error = "Failed to logout";
       });
   },
 });
 
-export const { setAuth, logout } = userSlice.actions;
+export const { setAuth } = userSlice.actions;
 export default userSlice.reducer;

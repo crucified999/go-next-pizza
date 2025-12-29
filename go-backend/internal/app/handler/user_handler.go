@@ -33,14 +33,14 @@ func NewUserHandler(userRepo storage.UserRepository) *UserHandler {
 }
 
 func (uh *UserHandler) GetOrders(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	userId, err := strconv.Atoi(vars["id"])
+	userId := r.Context().Value("userID").(int)
+
+	userOrders, err := uh.userRepo.GetOrders(userId)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
-
-	userOrders, err := uh.userRepo.GetOrders(userId)
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(userOrders)

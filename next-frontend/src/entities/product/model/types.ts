@@ -5,7 +5,7 @@ export type Product = {
   price: number;
   image: string;
   category: string;
-  amount: number;
+  amount: string;
   weight: number;
   variants?: Variant[];
   ingredients?: PizzaIngredient[];
@@ -14,7 +14,7 @@ export type Product = {
 
 export type Pizza = Product & {
   ingredients: PizzaIngredient[];
-}
+};
 
 export type Variant = {
   productId: number;
@@ -23,20 +23,20 @@ export type Variant = {
   size: string;
   image: string;
   weight: number;
-}
+};
 
 export type PizzaIngredient = {
   id: number;
   title: string;
   replacable: boolean;
-}
+};
 
 export type Topping = {
   id: number;
   title: string;
   price: number;
   image: string;
-}
+};
 
 // type CustomPizzaIngredient struct {
 // 	ID           int     `json:"id"`
@@ -51,7 +51,7 @@ export type CustomPizzaIngredient = {
   customPizzaId: number;
   ingredientId: number;
   isAdded: boolean;
-}
+};
 
 export type CustomPizza = {
   id: number;
@@ -59,7 +59,7 @@ export type CustomPizza = {
   ingredients: CustomPizzaIngredient[];
   dough: string;
   size: string;
-}
+};
 
 // type CustomPizza struct {
 // 	ID          int                      `json:"id"`
@@ -80,21 +80,56 @@ export type CreateCustomPizzaRequest = {
   ingredients: CustomPizzaIngredientRequest[];
   dough: string;
   size: string;
-}
+};
 
 export type CreateCustomPizzaResponse = {
-  id: number,
-
-}
+  id: number;
+};
 
 export type CustomPizzaIngredientRequest = {
   ingredientId: number;
-  action: string; 
-}
+  action: string;
+};
 
 export type CustomPizzaUpdateRequest = {
   id: number;
   ingredients?: CustomPizzaIngredient[];
   dough?: string;
   size?: string;
-}
+};
+
+export type ProductVariant = {
+  productId: number;
+  title: string;
+  size: string;
+  image: string;
+  weight: number;
+  price: number;
+};
+
+export type PizzaVariant = {
+  pizzaId: number;
+  title: string;
+  dough: number;
+  size: string;
+  image: string;
+  weight: string;
+  price: number;
+  toppings: {
+    id: number;
+    title: string;
+    price: number;
+  }[];
+};
+
+// {
+//   "productId": 0,
+//   "doughType": {
+//       "Int64": 0,
+//       "Valid": false
+//   },
+//   "size": "9 шт",
+//   "image": "https://media.dodostatic.net/image/r:1875x1875/0198556bb50b74009740b7a4a1b3f7ae.avif",
+//   "weight": 140,
+//   "price": 639
+// }
