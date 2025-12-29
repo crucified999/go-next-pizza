@@ -21,8 +21,8 @@ import { normalizePhoneNumber } from "../../lib/utils";
 import { Timer } from "@/shared/widgets/timer";
 import { useAppDispatch } from "@/app/store";
 import { verifyAuth } from "../../store/userSlice";
-import { setIsModalOpened } from "@/app/appSlice";
 import { useRouter } from "next/navigation";
+import { fetchCart } from "@/entities/cart/store/cartSlice";
 
 export const SMSForm = () => {
   const [code, setCode] = useState("");
@@ -42,9 +42,9 @@ export const SMSForm = () => {
 
       if (verifyAuth.fulfilled.match(result)) {
         if (result.payload.verified) {
-          dispatch(setIsModalOpened(false));
           localStorage.setItem("isLoggedIn", "true");
-          router.back();
+          router.push("/");
+          dispatch(fetchCart());
         } else {
           setShouldResetTimer((prev) => prev + 1);
           setIsTimerActive(true);
@@ -53,6 +53,7 @@ export const SMSForm = () => {
         setShouldResetTimer((prev) => prev + 1);
         setIsTimerActive(true);
       }
+
     },
     [dispatch, router]
   );

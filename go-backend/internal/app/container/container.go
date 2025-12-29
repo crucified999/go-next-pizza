@@ -52,6 +52,7 @@ func New(cfg *config.Config) (*Container, error) {
 
 	authService := service.NewAuthService(
 		storage.User(),
+		storage.Cart(),
 		[]byte(cfg.JWT.Secret),
 		cfg.JWT.TTLSeconds,
 		cfg.JWT.RefreshTTLSeconds,
@@ -65,7 +66,6 @@ func New(cfg *config.Config) (*Container, error) {
 
 	productService := service.NewProductService(storage.Product())
 
-	// SMS auth service (with postgres-backed codes)
   smsAuthService := service.NewSMSAuthServiceWithCodes(storage.User(), storage.SMSCode())
 
 	cartService := service.NewCartService(
@@ -82,14 +82,13 @@ func New(cfg *config.Config) (*Container, error) {
 	productHandler := handler.NewProductHandler(productService)
 	userHandler := handler.NewUserHandler(storage.User())
 	orderHandler := handler.NewOrderHandler(storage.Order())
-	cartHandler := handler.NewCartHandler(cartService)
+	cartHandler := handler.NewCartHandler(cartService, productService)
 	comboHandler := handler.NewComboHandler(comboService)
 	categoryHandler := handler.NewCategoryHandler(storage.Category())
 	authMiddleware := middleware.NewAuthMiddleware(authService)
 
 	router := mux.NewRouter()
 	
-	// Добавляем CORS middleware для всех маршрутов
 	router.Use(middleware.CORS)
 	router.Use(middleware.CORSOptions)
 
@@ -131,6 +130,7 @@ func (c *Container) SetupRoutes() {
   c.Router.HandleFunc("/api/products", optionsHandler).Methods("OPTIONS")
   c.Router.HandleFunc("/api/products/{id}", optionsHandler).Methods("OPTIONS")
   c.Router.HandleFunc("/api/products/category/{category}", optionsHandler).Methods("OPTIONS")
+	c.Router.HandleFunc("/api/products/variant", optionsHandler).Methods("OPTIONS")
   c.Router.HandleFunc("/api/combos", optionsHandler).Methods("OPTIONS")
   c.Router.HandleFunc("/api/combos/{comboId}", optionsHandler).Methods("OPTIONS")
   c.Router.HandleFunc("/api/combos/{comboId}/replace", optionsHandler).Methods("OPTIONS")
@@ -145,30 +145,35 @@ func (c *Container) SetupRoutes() {
 	protected := c.Router.PathPrefix("/api").Subrouter()
 	protected.Use(c.AuthMiddleware.RequireAuth)
 
-	protected.HandleFunc("/cart/{id}", optionsHandler).Methods("OPTIONS")
-  protected.HandleFunc("/cart/{id}/product", optionsHandler).Methods("OPTIONS")
+	protected.HandleFunc("/cart", optionsHandler).Methods("OPTIONS")
+  protected.HandleFunc("/cart/add-product", optionsHandler).Methods("OPTIONS")
+	protected.HandleFunc("/cart/add-pizza", optionsHandler).Methods("OPTIONS")
   protected.HandleFunc("/cart/{id}/combo", optionsHandler).Methods("OPTIONS")
-  protected.HandleFunc("/cart/{id}/product", optionsHandler).Methods("OPTIONS")
+  protected.HandleFunc("/cart/delete-product", optionsHandler).Methods("OPTIONS")
+	protected.HandleFunc("/cart/delete-pizza", optionsHandler).Methods("OPTIONS")
   protected.HandleFunc("/cart/{id}/combo", optionsHandler).Methods("OPTIONS")
-  protected.HandleFunc("/cart/{id}/refresh", optionsHandler).Methods("OPTIONS")
+  protected.HandleFunc("/cart/refresh", optionsHandler).Methods("OPTIONS")
+  protected.HandleFunc("/auth/logout", optionsHandler).Methods("OPTIONS")
   protected.HandleFunc("/orders", optionsHandler).Methods("OPTIONS")
-  protected.HandleFunc("/users/{id}/orders", optionsHandler).Methods("OPTIONS")
+  protected.HandleFunc("/users/orders", optionsHandler).Methods("OPTIONS")
 	protected.HandleFunc("/users/{id}/name", optionsHandler).Methods("OPTIONS")
 	protected.HandleFunc("/users/{id}/email", optionsHandler).Methods("OPTIONS")
   protected.HandleFunc("/custom-pizzas", optionsHandler).Methods("OPTIONS")
   protected.HandleFunc("/custom-pizzas/{id}", optionsHandler).Methods("OPTIONS")
 	protected.HandleFunc("/custom-pizzas/{id}/dough", optionsHandler).Methods("OPTIONS")
 
-	protected.HandleFunc("/cart/{id}", c.CartHandler.GetCart).Methods("GET")
-	protected.HandleFunc("/cart/{id}/product", c.CartHandler.AddProduct).Methods("POST")
+	protected.HandleFunc("/cart", c.CartHandler.GetCart).Methods("GET")
+	protected.HandleFunc("/cart/add-product", c.CartHandler.AddProduct).Methods("POST")
+	protected.HandleFunc("/cart/add-pizza", c.CartHandler.AddPizza).Methods("POST")
 	protected.HandleFunc("/cart/{id}/combo", c.CartHandler.AddCombo).Methods("POST")
-	protected.HandleFunc("/cart/{id}/product", c.CartHandler.DeleteProduct).Methods("DELETE")
+	protected.HandleFunc("/cart/delete-product", c.CartHandler.DeleteProduct).Methods("DELETE")
+	protected.HandleFunc("/cart/delete-pizza", c.CartHandler.DeletePizza).Methods("DELETE")
 	protected.HandleFunc("/cart/{id}/combo", c.CartHandler.DeleteCombo).Methods("DELETE")
-	protected.HandleFunc("/cart/{id}/refresh", c.CartHandler.Refresh).Methods("PUT")
+	protected.HandleFunc("/cart/refresh", c.CartHandler.Refresh).Methods("PUT")
 
 	protected.HandleFunc("/orders", c.OrderHandler.CreateOrder).Methods("POST")
 
-	protected.HandleFunc("/users/{id}/orders", c.UserHandler.GetOrders).Methods("GET")
+	protected.HandleFunc("/users/orders", c.UserHandler.GetOrders).Methods("GET")
 	protected.HandleFunc("/users/{id}/name", c.UserHandler.ChangeName).Methods("PATCH")
 	protected.HandleFunc("/users/{id}/email", c.UserHandler.ChangeEmail).Methods("PATCH")
 
@@ -180,6 +185,7 @@ func (c *Container) SetupRoutes() {
 	protected.HandleFunc("/custom-pizzas/{id}", c.CustomPizzaHandler.DeleteCustomPizza).Methods("DELETE")
 
 	c.Router.HandleFunc("/api/products", c.ProductHandler.GetProducts).Methods("GET")
+	c.Router.HandleFunc("/api/products/variant", c.ProductHandler.GetProductVariant).Methods("GET")
 	c.Router.HandleFunc("/api/products/{id}", c.ProductHandler.GetProductById).Methods("GET")
 	c.Router.HandleFunc("/api/products/category/{category}", c.ProductHandler.GetProductsByCategory).Methods("GET")
 
@@ -189,6 +195,8 @@ func (c *Container) SetupRoutes() {
 
 	c.Router.HandleFunc("/api/auth/sms/send", c.SMSAuthHandler.SendCode).Methods("POST")
 	c.Router.HandleFunc("/api/auth/sms/verify", c.SMSAuthHandler.VerifyCode).Methods("POST")
+
+	protected.HandleFunc("/auth/logout", c.AuthHandler.Logout).Methods("POST")
 }
 
 func (c *Container) Start() error {

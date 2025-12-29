@@ -11,12 +11,19 @@ type CartService struct {
 	comboRepo storage.ComboRepository
 }
 
+type ProductInCart struct {
+	ProductId int
+	Amount string
+}
+
 type CartWithItems struct {
-	ID         int                 `json:"id"`
-	UserID     int                 `json:"userId"`
+	ID         int                   `json:"id"`
+	UserID     int                  `json:"userId"`
 	Products   []*model.CartProduct `json:"products"`
+	Pizzas     []*model.CartPizza   `json:"pizzas"` 
 	Combos     []*model.CartCombo   `json:"combos"`
-	TotalPrice float64             `json:"totalPrice"`
+	TotalPrice int                   `json:"totalPrice"`
+	TotalCount int                  `json:"totalCount"`
 }
 
 func NewCartService(
@@ -44,6 +51,12 @@ func (cs *CartService) GetCartByUserId(userId int) (*CartWithItems, error) {
 		return nil, err
 	}
 
+	pizzas, err := cs.cartRepo.GetCartPizzas(cart.Id)
+
+	if err != nil {
+		return nil, err
+	}
+
 	combos, err := cs.cartRepo.GetCartCombos(cart.Id)
 
 	if err != nil {
@@ -54,25 +67,57 @@ func (cs *CartService) GetCartByUserId(userId int) (*CartWithItems, error) {
 		ID:       cart.Id,
 		UserID:   cart.UserId,
 		Products: products,
+		Pizzas: pizzas,
 		Combos:   combos,
+		TotalCount: 0,
 	}
 
-	cartWithItems.TotalPrice = cs.calculateTotal(products, combos)
+	// var prs []*model.ProductVariant
+
+	// for _, p := range cartWithItems.Products {
+	// 	prs = append(prs, p.Product)
+	// }
+
+	cartWithItems.TotalPrice = cs.calculateTotal(products, combos, pizzas)
+
+	for _, p := range cartWithItems.Products {
+		cartWithItems.TotalCount += p.Count
+	}
+
+	for _, p := range cartWithItems.Pizzas {
+		cartWithItems.TotalCount += p.Count
+	}
 
 	return cartWithItems, nil
 }
 
-func (cs *CartService) AddProduct(userId int, productId int) error {
+func (cs *CartService) GetCartToppings(mask int) ([]*model.Topping, error) {
+	return cs.cartRepo.GetCartToppings(mask)
+}
+
+func (cs *CartService) AddProduct(userId int, productId int, amount string) error {
 	cart, err := cs.cartRepo.GetCartByUserId(userId)
 	if err != nil {
 		return err
 	}
 
-
-	if err := cs.cartRepo.AddProduct(productId, cart.Id); err != nil {
+	if err := cs.cartRepo.AddProduct(productId, amount, cart.Id); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+func (cs *CartService) AddPizza(userId int, pizza *model.PizzaVariant, mask int) error {
+	cart, err := cs.cartRepo.GetCartByUserId(userId)
+
+	if err != nil {
+		return err
+	}
+
+	if err := cs.cartRepo.AddPizza(pizza, mask, cart.Id); err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -93,10 +138,56 @@ func (cs *CartService) AddCombo(userId int, comboId int) error {
 	return nil
 }
 
-func (cs *CartService) DeleteProduct(productId int, cartId int) error {
-	err := cs.cartRepo.DeleteProduct(productId, cartId)
+func (cs *CartService) DeleteProduct(userId int, productId int, amount string) error {
+	cart, err := cs.cartRepo.GetCartByUserId(userId)
 
 	if err != nil {
+		return err
+	}
+
+	if err := cs.cartRepo.DeleteProduct(productId, cart.Id, amount); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (cs *CartService) DeletePizza(userId int, pizza *model.PizzaVariant, mask int) error {
+	cart, err := cs.cartRepo.GetCartByUserId(userId)
+
+	if err != nil {
+		return err
+	}
+
+	if err := cs.cartRepo.DeletePizza(pizza, mask, cart.Id); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (cs *CartService) DeleteProductCompletely(userId int, productId int, amount string) error {
+	cart, err := cs.cartRepo.GetCartByUserId(userId)
+
+	if err != nil {
+		return err
+	}
+
+	if err := cs.cartRepo.DeleteProductCompletely(productId, cart.Id, amount); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (cs *CartService) DeletePizzaCompletely(userId int, pizza *model.PizzaVariant, mask int) error {
+	cart, err := cs.cartRepo.GetCartByUserId(userId)
+
+	if err != nil {
+		return err
+	}
+
+	if err := cs.cartRepo.DeletePizzaCompletely(pizza, mask, cart.Id); err != nil {
 		return err
 	}
 
@@ -123,21 +214,24 @@ func (cs *CartService) Refresh(cartId int) error {
 	return nil
 }
 
-func (cs *CartService) calculateTotal(products []*model.CartProduct, combos []*model.CartCombo) float64 {
-	total := 0.0
+func (cs *CartService) calculateTotal(products []*model.CartProduct, combos []*model.CartCombo, pizzas []*model.CartPizza) int {
+	total := 0
 
 	for _, cartProduct := range products {
-		if cartProduct.Product != nil && cartProduct.Product.Price.Valid {
-			productPrice := float64(cartProduct.Product.Price.Int64)
-			total += productPrice * float64(cartProduct.Amount)
+		total += cartProduct.Product.Price * cartProduct.Count
+	}
+
+	for _, cartPizza := range pizzas {
+		total += cartPizza.Pizza.Price * cartPizza.Count
+		
+		for _, t := range cartPizza.Pizza.Toppings {
+			total += t.Price
 		}
+
 	}
 
 	for _, cartCombo := range combos {
-		if cartCombo.Combo != nil && cartCombo.Combo.Price != 0 {
-			comboPrice := float64(cartCombo.Combo.Price)
-			total += comboPrice * float64(cartCombo.Amount)
-		}
+		total += cartCombo.Combo.Price
 	}
 
 	return total

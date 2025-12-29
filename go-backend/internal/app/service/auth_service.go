@@ -13,6 +13,7 @@ import (
 
 type AuthService struct {
 	userRepo         storage.UserRepository
+	cartRepo 				 storage.CartRepository
 	jwtSecret        []byte
 	jwtRefreshSecret []byte
 	jwtTTLSeconds    int
@@ -28,12 +29,14 @@ type AuthTokens struct {
 
 func NewAuthService(
 	userRepo storage.UserRepository,
+	cartRepo storage.CartRepository,
 	jwtSecret []byte,
 	jwtTTLSeconds int,
 	refreshTTLSeconds int,
 ) *AuthService {
 	return &AuthService{
 		userRepo:          userRepo,
+		cartRepo: 				 cartRepo,
 		jwtSecret:         jwtSecret,
 		jwtTTLSeconds:     jwtTTLSeconds,
 		refreshTTLSeconds: refreshTTLSeconds,
@@ -49,6 +52,16 @@ func (as *AuthService) Register(user *model.User) (*model.User, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	cart := &model.Cart{}
+
+	userCart, err := as.cartRepo.CreateCart(createdUser.Id, cart)
+
+	if err != nil {
+		return nil, err
+	}
+
+	createdUser.Cart = userCart
 
 	// createdUser.Sanitize()
 	return createdUser, nil

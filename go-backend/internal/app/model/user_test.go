@@ -21,21 +21,10 @@ func TestUser_Validate(t *testing.T) {
 			isValid: true,
 		},
 		{
-			name: "with encrypted password",
-			user: func() *model.User {
-				u := model.TestUser(t)
-				u.Password = ""
-				u.EncryptedPassword = "encrypted_password"
-				
-				return u
-			},
-			isValid: true,
-		},
-		{
 			name: "empty email",
 			user: func() *model.User {
 				u := model.TestUser(t)
-				u.Email = ""
+				u.Email.Valid = false
 
 				return u
 			},
@@ -45,64 +34,7 @@ func TestUser_Validate(t *testing.T) {
 			name: "invalid email",
 			user: func() *model.User {
 				u := model.TestUser(t)
-				u.Email = "invalid_email"
-
-				return u
-			},
-			isValid: false,
-		},
-		{
-			name: "valid password",
-			user: func() *model.User {
-				return model.TestUser(t)
-			},
-			isValid: true,
-		},
-		{
-			name: "uncomplex password",
-			user: func() *model.User {
-				u := model.TestUser(t)
-				u.Password = "2007coolo"
-
-				return u
-			},
-			isValid: false,
-		},
-		{
-			name: "empty password",
-			user: func() *model.User {
-				u := model.TestUser(t)
-				u.Password = ""
-
-				return u
-			},
-			isValid: false,
-		},
-		{
-			name: "uncomplex password",
-			user: func() *model.User {
-				u := model.TestUser(t)
-				u.Password = "Coolo!_ww"
-
-				return u
-			},
-			isValid: false,
-		},
-		{
-			name: "uncomplex password",
-			user: func() *model.User {
-				u := model.TestUser(t)
-				u.Password = "2007Coolo"
-
-				return u
-			},
-			isValid: false,
-		},
-		{
-			name: "short password",
-			user: func() *model.User {
-				u := model.TestUser(t)
-				u.Password = "2007_Co"
+				u.Email.String = "invalid_email"
 
 				return u
 			},
@@ -147,11 +79,4 @@ func TestUser_Validate(t *testing.T) {
 			}
 		})
 	}
-}
-
-func TestUser_BeforeCreate(t *testing.T) {
-	u := model.TestUser(t)
-
-	assert.NoError(t, u.BeforeCreate())
-	assert.NotEmpty(t, u.Password)
 }

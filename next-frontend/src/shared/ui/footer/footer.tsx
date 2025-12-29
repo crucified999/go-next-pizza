@@ -1,5 +1,3 @@
-import { Link } from "lucide-react";
-
 export const Footer = () => {
   return (
     <footer className="bg-black text-white absolute right-0 left-0 flex justify-between p-10">

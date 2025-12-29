@@ -17,7 +17,7 @@ type SQLStorage struct {
 	ingredientRepository *IngredientRepository
 	comboRepository *ComboRepository
 	categoryRepository *CategoryRepository
-    smsCodeRepository *SMSCodeRepository
+  smsCodeRepository *SMSCodeRepository
 	// productVariantRepository *ProductVariantRepository
 }
 

@@ -15,7 +15,8 @@ CREATE TABLE sms_codes (
 
 CREATE TABLE carts (
   id bigserial PRIMARY KEY,
-  user_id bigint NOT NULL
+  user_id bigint NOT NULL,
+  total_count int
 );
 
 CREATE TABLE products (
@@ -24,7 +25,7 @@ CREATE TABLE products (
   description varchar,
   price int,
   image varchar,
-  amount real,
+  amount varchar,
   weight int
 );
 
@@ -82,7 +83,23 @@ CREATE TABLE combo_replaces (
 CREATE TABLE products_in_cart (
   cart_id bigint,
   product_id bigint,
-  amount int
+  amount varchar,
+  count int
+);
+
+CREATE TABLE pizzas_in_cart (
+  cart_id bigint,
+  pizza_id bigint,
+  size varchar,
+  dough varchar,
+  toppings_mask bigint,
+  count int
+);
+
+CREATE TABLE toppings_in_cart (
+  cart_id bigint,
+  product_id bigint,
+  topping_id bigint
 );
 
 CREATE TABLE combos_in_cart (

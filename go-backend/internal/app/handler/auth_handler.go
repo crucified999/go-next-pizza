@@ -85,7 +85,6 @@ func (ah *AuthHandler) CheckAuth(w http.ResponseWriter, r *http.Request) {
 	var tokenString string
 	var res CheckAuthResponse
 
-	// Проверяем access token из разных источников
 	if cookie, err := r.Cookie("access"); err == nil && cookie != nil {
 		tokenString = cookie.Value
 		log.Printf("Found access token in cookie")
@@ -99,7 +98,6 @@ func (ah *AuthHandler) CheckAuth(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Пытаемся использовать access token
 	if tokenString != "" {
 		userID, err := ah.authService.ValidateToken(tokenString)
 		if err == nil {
@@ -135,7 +133,6 @@ func (ah *AuthHandler) CheckAuth(w http.ResponseWriter, r *http.Request) {
 		log.Printf("No access token provided")
 	}
 
-	// Пытаемся обновить токены через refresh token
 	refreshCookie, err := r.Cookie("refresh")
 	if err == nil && refreshCookie != nil {
 		log.Printf("Attempting token refresh")
@@ -144,7 +141,6 @@ func (ah *AuthHandler) CheckAuth(w http.ResponseWriter, r *http.Request) {
 		if err == nil {
 			tokens, err := ah.authService.GenerateTokensForUserID(userID)
 			if err == nil {
-				// Устанавливаем новые cookies
 				http.SetCookie(w, &http.Cookie{
 					Name:     "access",
 					Value:    tokens.AccessToken,
@@ -199,7 +195,6 @@ func (ah *AuthHandler) CheckAuth(w http.ResponseWriter, r *http.Request) {
 		log.Printf("No refresh token provided: %v", err)
 	}
 
-	// Не аутентифицирован
 	log.Printf("User not authenticated")
 	res.Phone = ""
 	res.Email = ""
@@ -209,100 +204,6 @@ func (ah *AuthHandler) CheckAuth(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
-// func (ah *AuthHandler) CheckAuth(w http.ResponseWriter, r *http.Request) {
-// 	var tokenString string
-// 	var res CheckAuthResponse
-
-// 	// Проверяем сначала cookie, потом заголовок Authorization
-// 	if cookie, err := r.Cookie("access"); err == nil && cookie != nil {
-// 		tokenString = cookie.Value
-// 	} else {
-// 		authHeader := r.Header.Get("Authorization")
-// 		if authHeader != "" {
-// 			tokenString = strings.TrimPrefix(authHeader, "Bearer ")
-// 			if tokenString == authHeader {
-// 				http.Error(w, "Invalid authorization format", http.StatusUnauthorized)
-// 				return
-// 			}
-// 		}
-// 	}
-
-// 	if tokenString == "" {
-// 		http.Error(w, "Authorization required", http.StatusUnauthorized)
-// 		return
-// 	}
-
-// 	userID, err := ah.authService.ValidateToken(tokenString)
-// 	if err == nil {
-// 		user, err := ah.userRepo.FindById(userID)
-// 			if err == nil {
-// 				res.User = user
-// 				res.Authenticated = true
-// 				w.Header().Set("Content-Type", "application/json")
-// 				json.NewEncoder(w).Encode(res)
-// 				return
-// 			}
-// 	}
-
-// 	refreshCookie, err := r.Cookie("refresh")
-// 	if err == nil && refreshCookie != nil {
-// 		// Пытаемся обновить токены используя refresh token
-// 		userID, err := ah.authService.ValidateRefreshToken(refreshCookie.Value)
-// 		if err == nil {
-// 			// Генерируем новые токены
-// 			tokens, err := ah.authService.GenerateTokensForUserID(userID)
-// 			if err == nil {
-// 				// Устанавливаем новые cookies
-// 				http.SetCookie(w, &http.Cookie{
-// 					Name:     "access",
-// 					Value:    tokens.AccessToken,
-// 					Path:     "/",
-// 					HttpOnly: true,
-// 					Secure:   true,
-// 					SameSite: http.SameSiteLaxMode,
-// 					MaxAge:   tokens.ExpiresIn,
-// 				})
-
-// 				http.SetCookie(w, &http.Cookie{
-// 					Name:     "refresh",
-// 					Value:    tokens.RefreshToken,
-// 					Path:     "/",
-// 					HttpOnly: true,
-// 					Secure:   true,
-// 					SameSite: http.SameSiteLaxMode,
-// 					MaxAge:   60 * 60 * 24, // 24 часа
-// 				})
-
-// 				// Возвращаем пользователя
-// 				user, err := ah.userRepo.FindById(userID)
-// 				if err == nil {
-// 					res.User = user
-// 					res.Authenticated = true
-// 					w.Header().Set("Content-Type", "application/json")
-// 					json.NewEncoder(w).Encode(res)
-// 					return
-// 				}
-// 			}
-// 		}
-// 	}
-
-// 	user, err := ah.userRepo.FindById(userID)
-// 	if err != nil {
-// 		http.Error(w, "User not found", http.StatusNotFound)
-// 		res.User = nil
-// 		res.Authenticated = false
-// 		w.Header().Set("Content-Type", "application/json")
-// 		json.NewEncoder(w).Encode(res)
-// 		return
-// 	}
-
-// 	res.User = user
-// 	res.Authenticated = true
-
-// 	w.Header().Set("Content-Type", "application/json")
-// 	json.NewEncoder(w).Encode(res)
-// }
-
 func (ah *AuthHandler) RefreshToken(w http.ResponseWriter, r *http.Request) {
 	refreshCookie, err := r.Cookie("refresh")
 	if err != nil {
@@ -310,21 +211,18 @@ func (ah *AuthHandler) RefreshToken(w http.ResponseWriter, r *http.Request) {
 			return
 	}
 
-	// Валидируем refresh token
 	userID, err := ah.authService.ValidateToken(refreshCookie.Value)
 	if err != nil {
 			http.Error(w, "Invalid refresh token", http.StatusUnauthorized)
 			return
 	}
 
-	// Генерируем новые токены
 	tokens, err := ah.authService.GenerateTokensForUserID(userID)
 	if err != nil {
 			http.Error(w, "Failed to generate tokens", http.StatusInternalServerError)
 			return
 	}
 
-	// Устанавливаем новые cookies
 	http.SetCookie(w, &http.Cookie{
 			Name:     "access",
 			Value:    tokens.AccessToken,
@@ -350,4 +248,27 @@ func (ah *AuthHandler) RefreshToken(w http.ResponseWriter, r *http.Request) {
 			"refreshed": true,
 			"expires_in": tokens.ExpiresIn,
 	})
+}
+
+func (ah *AuthHandler) Logout(w http.ResponseWriter, r *http.Request) {
+	http.SetCookie(w, &http.Cookie{
+		Name:     "access",
+		Value:    "",
+		Path:     "/",
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteLaxMode,
+	})
+
+	http.SetCookie(w, &http.Cookie{
+		Name:     "refresh",
+		Value:    "",
+		Path:     "/",
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteLaxMode,
+	})
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{"message": "Logged out successfully"})
 }

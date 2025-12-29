@@ -13,7 +13,7 @@ func TestMain(m *testing.M) {
 	databaseURL = os.Getenv("DATABASE_URL")
 
 	if databaseURL == "" {
-		databaseURL = "host=localhost dbname=go_next_pizza sslmode=disable"
+		databaseURL = "host=localhost dbname=go_next_pizza_test sslmode=disable"
 		os.Setenv("DATABASE_URL", databaseURL)
 	}
 

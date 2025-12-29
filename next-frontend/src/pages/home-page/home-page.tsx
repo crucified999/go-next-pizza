@@ -12,6 +12,9 @@ import { fetchCombos } from "@/entities/combo/store/comboSlice";
 import { useRestoreCategory } from "@/shared/lib/hooks/useRestoreCategory";
 import { useScrollToCategory } from "@/shared/lib/hooks/useScrollToCategory";
 import { checkUserAuth } from "@/entities/user/store/userSlice";
+import { Cart } from "../../entities/cart/ui/cart";
+import { fetchCart } from "@/entities/cart/store/cartSlice";
+import React from "react";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -27,9 +30,14 @@ export const HomePage = () => {
   // useScrollToCategory();
 
   useEffect(() => {
-    Promise.all([dispatch(checkUserAuth()), dispatch(fetchProducts()), dispatch(fetchCombos())]);
+    Promise.all([
+      dispatch(checkUserAuth()),
+      dispatch(fetchProducts()),
+      dispatch(fetchCombos()),
+      dispatch(fetchCart()),
+    ]);
   }, [dispatch]);
-  
+
   useEffect(() => {
     if (currentCategory !== "Пиццы") {
       setTimeout(() => {
@@ -44,13 +52,14 @@ export const HomePage = () => {
   return (
     <>
       <Header />
+      <Cart />
       <PostHeader />
       <ProductCategoryList
         category="pizza"
         products={products}
         isFirstCategory={true}
       />
-      <ComboList combos={combos} />
+      {/* <ComboList combos={combos} /> */}
       <ProductCategoryList category="snack" products={products} />
       <ProductCategoryList category="shake" products={products} />
       <ProductCategoryList category="coffee" products={products} />

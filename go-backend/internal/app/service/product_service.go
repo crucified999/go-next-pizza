@@ -118,4 +118,26 @@ func (ps *ProductService) GetProductsByCategory(category string) ([]*model.Produ
 	return products, nil
 }
 
+func (ps *ProductService) GetProductVariant(productId int, size string) (*model.ProductVariant, error) {
+	productVariant, err := ps.productRepo.GetProductVariant(productId, size)
 
+	if err != nil {
+		return nil, err
+	}
+
+	return productVariant, nil
+}
+
+func (ps *ProductService) GetPizzaVariant(pizza *model.PizzaVariant) (*model.PizzaVariant, error) {
+	pizzaVariant, err := ps.productRepo.GetPizzaVariant(pizza)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return pizzaVariant, err
+}
+
+func (ps *ProductService) GetProductToppings(productId int) ([]*model.Topping, error) {
+	return ps.productRepo.GetProductToppings(productId)
+}

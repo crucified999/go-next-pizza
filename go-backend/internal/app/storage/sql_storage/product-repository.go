@@ -2,6 +2,7 @@ package sql_storage
 
 import (
 	"database/sql"
+	"log"
 
 	"github.com/go-next-pizza/internal/app/model"
 	"github.com/go-next-pizza/internal/app/storage"
@@ -40,6 +41,7 @@ func (pr *ProductRepository) GetProducts() ([]*model.Product, error) {
 	for rows.Next() {
 		product := &model.Product{}
 		if err := rows.Scan(&product.Id, &product.Title, &product.Description, &product.Price, &product.Image, &product.Weight, &product.Amount); err != nil {
+			log.Printf("Ошибка получения продуктов")
 			return nil, err
 		}
 		products = append(products, product)
@@ -69,6 +71,7 @@ func (pr *ProductRepository) GetProductsByCategory(cId int) ([]*model.Product, e
 		product := &model.Product{}
 
 		if err := rows.Scan(&product.Id, &product.Title, &product.Description, &product.Price, &product.Image, &product.Weight, &product.Amount); err != nil {
+			log.Printf("Ошибка получения продуктов по категории")
 			return nil, err
 		}
 
@@ -157,6 +160,61 @@ func (pr *ProductRepository) GetProductToppings(productId int) ([]*model.Topping
 	}
 
 	return toppings, nil
+}
+
+func (pr *ProductRepository) GetProductVariant(productId int, size string) (*model.ProductVariant, error) {
+	pv := &model.ProductVariant{
+		ProductId: productId,
+	}
+
+	if err := pr.storage.db.QueryRow("SELECT size, image, weight, price FROM products_with_size WHERE product_id = $1 AND size = $2", productId, size).Scan(&pv.Size, &pv.Image, &pv.Weight, &pv.Price); err != nil {
+		if err == sql.ErrNoRows {
+			err = pr.storage.db.QueryRow("SELECT title, image, amount, weight, price FROM products WHERE id = $1", pv.ProductId).Scan(&pv.Title, &pv.Image, &pv.Size, &pv.Weight, &pv.Price)
+
+			return pv, err
+		}
+	}
+
+	if err := pr.storage.db.QueryRow("SELECT title FROM products WHERE id = $1", pv.ProductId).Scan(&pv.Title); err != nil {
+		return nil, err
+	}
+
+	return pv, nil
+}
+
+func (pr *ProductRepository) GetPizzaVariant(pizza *model.PizzaVariant) (*model.PizzaVariant, error) {
+	pv := &model.PizzaVariant{
+		PizzaId: pizza.PizzaId,
+	}
+
+	if err := pr.storage.db.QueryRow("SELECT dough_type, size, image, weight, price FROM products_with_size WHERE product_id = $1 AND size = $2 AND dough_type = $3", pizza.PizzaId, pizza.Size, pizza.Dough).Scan(&pv.Dough, &pv.Size, &pv.Image, &pv.Weight, &pv.Price); err != nil {
+		return nil, err
+	}
+
+	if err := pr.storage.db.QueryRow("SELECT title FROM products WHERE id = $1", pv.PizzaId).Scan(&pv.Title); err != nil {
+		return nil, err
+	}
+
+	// rows, err := pr.storage.db.Query("SELECT * FROM toppings WHERE product_id = $1", pv.Id)
+
+	// if err != nil {
+	// 	return nil, err
+	// }
+
+	// defer rows.Close()
+
+	// for rows.Next() {
+	// 	topping := &model.Topping{}
+
+	// 	if err := rows.Scan(&topping.Id, &topping.Title, &topping.Price, &topping.ProductID, &topping.Image); err != nil {
+	// 		return nil, err
+	// 	}
+
+	// 	pv.Toppings = append(pv.Toppings, topping)
+		
+	// }
+
+	return pv, nil
 }
 
 

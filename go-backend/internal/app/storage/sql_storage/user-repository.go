@@ -77,7 +77,7 @@ func (ur *UserRepository) FindById(id int) (*model.User, error) {
 }
 
 func (ur *UserRepository) GetOrders(userId int) ([]*model.Order, error) {
-	rows, err := ur.storage.db.Query("SELECT id, user_id, payment_method, delivery_address, delivery_time, status, total_price, created_at FROM orders WHERE user_id = $1", userId)
+	rows, err := ur.storage.db.Query("SELECT id, user_id, total_price, created_at FROM orders WHERE user_id = $1", userId)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ func (ur *UserRepository) GetOrders(userId int) ([]*model.Order, error) {
 	for rows.Next() {
 		order := &model.Order{}
 
-		if err := rows.Scan(&order.Id, &order.UserId, &order.PaymentMethod, &order.DeliveryAddress, &order.DeliveryTime, &order.Status, &order.TotalPrice, &order.CreatedAt); err != nil {
+		if err := rows.Scan(&order.Id, &order.UserId, &order.TotalPrice, &order.CreatedAt); err != nil {
 			return nil, err
 		}
 
